@@ -114,3 +114,63 @@ nav ul li a:hover {
 .search-box button:hover {
   background-color: #0097a7;
 }
+.contact-section {
+  background: linear-gradient(to right, #0097a7, #00bcd4);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 50px;
+}
+
+.contact-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 30px 50px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.contact-container h1 {
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+.contact-container p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+nav ul li a.active {
+  color: yellow;
+}
+.about-section {
+  background: linear-gradient(to right, #6a11cb, #6d8cc0);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  color: white;
+  text-align: center;
+}
+
+.about-container {
+  max-width: 800px;
+  background-color: rgba(187, 161, 161, 0.5);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(211, 5, 5, 0.3);
+}
+
+.about-container h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.about-container p {
+  font-size: 18px;
+  line-height: 1.6;
+}
