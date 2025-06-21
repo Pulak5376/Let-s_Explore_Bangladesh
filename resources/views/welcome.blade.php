@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+<!-- welcome.blade.php -->
+@extends('layout.master')
+@section('title', 'Welcome')
+@section('content')
+<section class="welcome-section">
+    <div class="welcome-banner">
+        <h1>Let's Explore Bangladesh</h1>
+        <p>Discover the land of rivers, culture, and hospitality</p>
+        <a href="/home" class="btn">Start Exploring</a>
+    </div>
+</section>
+@endsection

@@ -1,0 +1,6 @@
+{
+  "name": "turzo/my-project",
+  "description": "My first Composer project",
+  "type": "project",
+  "require": {}
+}
