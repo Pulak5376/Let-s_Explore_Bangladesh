@@ -1,10 +1,12 @@
+@extends('layouts.app')
 
-<!-- about.blade.php -->
-@extends('layout.master')
-@section('title', 'About Us')
+@section('title', 'About')
+
 @section('content')
-<section class="section about">
-    <h2>About Let's Explore Bangladesh</h2>
-    <p>This project is a tourism web app that introduces the diverse cultural, historical, and natural beauty of Bangladesh by district.</p>
+<section class="about-section">
+  <h1>About Us</h1>
+  <p>Let's Explore Bangladesh is dedicated to showcasing the breathtaking natural beauty, rich culture, and amazing travel experiences Bangladesh offers.</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Flag_of_Bangladesh.svg" alt="Bangladesh Flag" />
+  <p>Our mission is to help travelers explore the best destinations with trusted packages and personalized services.</p>
 </section>
 @endsection
