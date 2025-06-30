@@ -13,7 +13,7 @@ Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 
 // Add these GET routes for other pages:
-Route::get('/culture', [CartController::class, 'culture'])->name('culture');
+Route::get('/stories', [CartController::class, 'stories'])->name('stories');
 Route::get('/about', [CartController::class, 'about'])->name('about');
 Route::get('/gallery', [CartController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [CartController::class, 'contact'])->name('contact');

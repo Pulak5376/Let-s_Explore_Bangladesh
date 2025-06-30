@@ -81,9 +81,9 @@ class CartController extends Controller
 
     // Add these new methods for missing pages:
 
-    public function culture()
+    public function stories()
     {
-        return view('culture');
+        return view('stories');
     }
 
     public function about()
