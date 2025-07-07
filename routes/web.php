@@ -17,4 +17,7 @@ Route::get('/stories', [CartController::class, 'stories'])->name('stories');
 Route::get('/about', [CartController::class, 'about'])->name('about');
 Route::get('/gallery', [CartController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [CartController::class, 'contact'])->name('contact');
+Route::get('/weather', function () {
+    return view('weather');
+})->name('weather');
 
