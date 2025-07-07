@@ -13,15 +13,23 @@
     margin: auto;
   ">
     <div style="background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Sundarbans_Mangrove_Forest_-_Bangladesh_-_DSC05234.JPG" alt="Sundarbans" style="width: 100%; height: 200px; object-fit: cover;">
+      <img src="https://www.travelandexplorebd.com/storage/app/public/posts/April2020/41.jpg" alt="Jaflong" style="width: 100%; height: 200px; object-fit: cover;">
       <div style="padding: 15px;">
-        <h3 style="margin: 0 0 10px;">Sundarbans Mangrove Forest</h3>
+        <h3 style="margin: 0 0 10px;">Jaflong</h3>
+        <p style="color: #555;">Jaflong is a hill station and tourist destination in the Division of Sylhet, Bangladesh.</p>
+      </div>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Sundarban_Tiger.jpg/330px-Sundarban_Tiger.jpg" alt="Sundarbans" style="width: 100%; height: 200px; object-fit: cover;">
+      <div style="padding: 15px;">
+        <h3 style="margin: 0 0 10px;">Sundarbans Forest</h3>
         <p style="color: #555;">Explore the world's largest mangrove forest, home to the majestic Royal Bengal Tiger and a UNESCO World Heritage Site.</p>
       </div>
     </div>
 
     <div style="background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Cox%27s_Bazar_Beach_2.jpg" alt="Cox's Bazar" style="width: 100%; height: 200px; object-fit: cover;">
+      <img src="https://images.hive.blog/768x0/https://cdn.pixabay.com/photo/2018/03/20/14/00/sea-3243357_960_720.jpg" alt="Cox's Bazar" style="width: 100%; height: 200px; object-fit: cover;">
       <div style="padding: 15px;">
         <h3 style="margin: 0 0 10px;">Cox's Bazar Beach</h3>
         <p style="color: #555;">Visit the longest natural sea beach in the world and enjoy the serene view of the Bay of Bengal.</p>
@@ -29,23 +37,23 @@
     </div>
 
     <div style="background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Traditional_dance_in_Bangladesh.jpg" alt="Cultural Dance" style="width: 100%; height: 200px; object-fit: cover;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Sajek_Valley_20161205.jpg" alt="Sajek Valley" style="width: 100%; height: 200px; object-fit: cover;">
       <div style="padding: 15px;">
-        <h3 style="margin: 0 0 10px;">Traditional Cultural Dance</h3>
-        <p style="color: #555;">Immerse yourself in the vibrant traditions and folklore of Bangladesh through its rich dance heritage.</p>
+        <h3 style="margin: 0 0 10px;">Sajek Valley</h3>
+        <p style="color: #555;">Sajek Valley is the "Queen of Hills and the "Roof of Rangamati, the valley is known for its greenery and dense forests.</p>
       </div>
     </div>
 
     <div style="background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/Rangamati_Lake_01.jpg" alt="Rangamati Lake" style="width: 100%; height: 200px; object-fit: cover;">
+      <img src="https://cosmosgroup.sgp1.digitaloceanspaces.com/news/details/5967770_Kaptai%20Lake%20Rangamati%20Travel%20guide.jpg" alt="Kaptai Lake" style="width: 100%; height: 200px; object-fit: cover;">
       <div style="padding: 15px;">
-        <h3 style="margin: 0 0 10px;">Rangamati Lake</h3>
+        <h3 style="margin: 0 0 10px;">Kaptai Lake</h3>
         <p style="color: #555;">A tranquil lake surrounded by green hills—perfect for boat rides and exploring indigenous cultures.</p>
       </div>
     </div>
 
     <div style="background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Bandarban_Morning_view.jpg" alt="Bandarban Hills" style="width: 100%; height: 200px; object-fit: cover;">
+      <img src="https://ttg.com.bd/uploads/tours/plans/204_36376273530_3c9a0335f5_b-copyjpg.webp" alt="Bandarban Hills" style="width: 100%; height: 200px; object-fit: cover;">
       <div style="padding: 15px;">
         <h3 style="margin: 0 0 10px;">Bandarban Hills</h3>
         <p style="color: #555;">Experience breathtaking mountain views, waterfalls, and tribal life in this hill district paradise.</p>
@@ -53,7 +61,7 @@
     </div>
 
     <div style="background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Srimangal_Countryside.JPG" alt="Srimangal Countryside" style="width: 100%; height: 200px; object-fit: cover;">
+      <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0a/32/be/dc.jpg" alt="Srimangal Countryside" style="width: 100%; height: 200px; object-fit: cover;">
       <div style="padding: 15px;">
         <h3 style="margin: 0 0 10px;">Srimangal Countryside</h3>
         <p style="color: #555;">Known as the tea capital of Bangladesh, Srimangal offers rolling green tea gardens and peaceful rural charm.</p>
