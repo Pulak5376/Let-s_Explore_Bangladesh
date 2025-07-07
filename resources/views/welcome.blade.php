@@ -13,13 +13,19 @@
 <section class="carousel-section" aria-label="Image carousel of popular destinations">
   <div class="carousel-container" id="carousel">
     <div class="carousel-slide active">
-      <img src="https://th.bing.com/th/id/OIP.PxGv6Xc7rI5ZU1NgDTG0fwHaEo?w=276&h=180" alt="Cox's Bazar beach view" />
+      <img src="https://ttg.com.bd/uploads/tours/plans/204_36376273530_3c9a0335f5_b-copyjpg.webp" alt="Cox's Bazar beach view" />
     </div>
     <div class="carousel-slide">
-      <img src="https://th.bing.com/th/id/OIP.tOxT05hSKDmO2bwI2WfpRwHaFj?w=236&h=180" alt="Bandarban landscape" />
+      <img src="https://cosmosgroup.sgp1.digitaloceanspaces.com/news/details/5967770_Kaptai%20Lake%20Rangamati%20Travel%20guide.jpg" alt="Bandarban landscape" />
     </div>
     <div class="carousel-slide">
-      <img src="https://th.bing.com/th/id/OIP.vaBk0HxSSfZmkpVS2_s72wHaFE?w=268&h=183" alt="Srimangal tea gardens" />
+      <img src="https://images.hive.blog/768x0/https://cdn.pixabay.com/photo/2018/03/20/14/00/sea-3243357_960_720.jpg" alt="Srimangal tea gardens" />
+    </div>
+    <div class="carousel-slide">
+      <img src="https://www.travelandexplorebd.com/storage/app/public/posts/April2020/41.jpg" alt="Srimangal tea gardens" />
+    </div>
+    <div class="carousel-slide">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Sundarban_Tiger.jpg/330px-Sundarban_Tiger.jpg" alt="Srimangal tea gardens" />
     </div>
     <button class="carousel-btn prev" id="prevBtn" aria-label="Previous slide">&#10094;</button>
     <button class="carousel-btn next" id="nextBtn" aria-label="Next slide">&#10095;</button>
@@ -57,8 +63,19 @@
   </p>
 </section>
 
+<style>
+  .carousel-slide {
+    display: none;
+  }
+  .carousel-slide.active {
+    display: block;
+  }
+  .intro-packages {
+    margin-bottom: 70px;
+  }
+</style>
+
 <script>
-  // Typed text animation
   const textEl = document.getElementById('typed-text');
   const phrases = [
     "Welcome to Let's Explore Bangladesh!",
@@ -101,7 +118,6 @@
       type();
     }
 
-    // Carousel functionality
     const carousel = document.getElementById('carousel');
     const slides = carousel.querySelectorAll('.carousel-slide');
     const prevBtn = document.getElementById('prevBtn');
@@ -109,7 +125,9 @@
     let currentSlide = 0;
 
     function updateCarousel() {
-      carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === currentSlide);
+      });
     }
 
     prevBtn.addEventListener('click', () => {
@@ -122,6 +140,7 @@
       updateCarousel();
     });
 
+    updateCarousel();
   });
 </script>
 @endsection
