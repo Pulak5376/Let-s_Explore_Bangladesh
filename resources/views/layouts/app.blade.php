@@ -28,7 +28,8 @@
         <li><a href="/about" class="{{ request()->is('about') ? 'active' : '' }}">About</a></li>
         <li><a href="/gallery" class="{{ request()->is('gallery') ? 'active' : '' }}">Gallery</a></li>
         <li><a href="/contact" class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a></li>
-        <li><a href="/weather" class="{{ request()->is('weather') ? 'active' : '' }}">Weather Check</a></li>
+        <li><a href="/cart" class="{{ request()->is('cart') ? 'active' : '' }}">View Cart</a></li>
+        <li><a href="/weather" class="{{ request()->is('weather') ? 'active' : '' }}">Check Weather</a></li>
       </ul>
     </nav>
   </header>
