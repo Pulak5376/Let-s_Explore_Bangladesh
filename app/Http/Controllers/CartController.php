@@ -7,23 +7,76 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
     private $places = [
-        [
-            'id' => 1,
-            'name' => "Cox's Bazar",
-            'description' => 'Longest natural sea beach in the world.',
-            'price' => 200,
-            'duration' => '5 days / 4 nights',
-            'image' => 'https://th.bing.com/th/id/OIP.PxGv6Xc7rI5ZU1NgDTG0fwHaEo?w=276&h=180&c=7&r=0&o=7&pid=1.7&rm=3',
-        ],
-        [
-            'id' => 2,
-            'name' => "Bandarban",
-            'description' => 'Scenic hills, waterfalls, and tribal culture.',
-            'price' => 180,
-            'duration' => '4 days / 3 nights',
-            'image' => 'https://th.bing.com/th/id/OIP.tOxT05hSKDmO2bwI2WfpRwHaFj?w=236&h=180&c=7&r=0&o=7&pid=1.7&rm=3',
-        ],
-        // add more places if you want
+         [
+    'id' => 1,
+    'name' => "Cox's Bazar",
+    'duration' => '3 Days',
+    'price' => 4500,
+    'image' => 'https://upload.wikimedia.org/wikipedia/commons/d/db/Saint_Martins_Island_with_boats_in_foreground.jpg'
+  ],
+  [
+    'id' => 2,
+    'name' => 'Sundarban',
+    'duration' => '2 Days',
+    'price' => 3500,
+    'image' => 'https://sundarbantravel.com/wp-content/uploads/2023/02/River_in_Sundarban.jpg'
+  ],
+  [
+    'id' => 3,
+    'name' => 'Sreemangal',
+    'duration' => '2 Days',
+    'price' => 2500,
+    'image' => 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Sreemangal_tea_garden_2017-08-20.jpg'
+  ],
+  [
+    'id' => 4,
+    'name' => 'Rangamati',
+    'duration' => '3 Days',
+    'price' => 2000,
+    'image' => 'https://lh3.googleusercontent.com/gps-cs-s/AC9h4nqMMZ83iuq1LLPmgkmXDrnyMZZyJC4zbRHkxK3BmfwfSL2jL3dTVTkTN9WDLgDCIJ4KAhOyPbs2Uk0V5UP7ScaD02PzxlAdeHKS7hse5ACNYMenq0JeBBQPfCZt6uf81L3P88CT=s680-w680-h510-rw'
+  ],
+  [
+    'id' => 5,
+    'name' => 'Bandarban',
+    'duration' => '3 Days',
+    'price' => 6000,
+    'image' => 'https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrfKrjXKId8O-EqVuAurYfalgeAHOBT4iwE3HysRUhaPPb_o35nrpRfoPTVOjwZwzwvtr6JzxtWShTdeP1uXaQwvyHbRbtooQ67bwWtlOgCP13sSh_XuGYRtJVRuY1syKC62EAA=s680-w680-h510-rw'
+  ],
+  [
+    'id' => 6,
+    'name' => 'Sylhet',
+    'duration' => '2 Days',
+    'price' => 1000,
+    'image' => 'https://upload.wikimedia.org/wikipedia/commons/7/77/Keane_Bridge_and_Ali_Amjad%27s_Clock%2C_Sylhet.jpg'
+  ],
+  [
+    'id' => 7,
+    'name' => 'Sajek Valley',
+    'duration' => '2 Days',
+    'price' => 2500,
+    'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Sajek_Valley_Bangladesh.jpg/800px-Sajek_Valley_Bangladesh.jpg'
+  ],
+  [
+    'id' => 8,
+    'name' => 'Kaptai Lake',
+    'duration' => '3 Day',
+    'price' => 250,
+    'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Kaptai_Lake_05.jpg/1024px-Kaptai_Lake_05.jpg'
+  ],
+  [
+    'id' => 9,
+    'name' => 'Paharpur',
+    'duration' => '1 Day',
+    'price' => 1000,
+    'image' => 'https://upload.wikimedia.org/wikipedia/commons/4/42/Paharpur_Buddhist_Bihar.jpg'
+  ],
+  [
+    'id' => 10,
+    'name' => 'Khagrachari',
+    'duration' => '2 Day',
+    'price' => 4000,
+    'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Midway_to_Konglak_Hill%2C_Khagrachari%2C_Bangladesh.jpg/800px-Midway_to_Konglak_Hill%2C_Khagrachari%2C_Bangladesh.jpg'
+  ]
     ];
 
     public function places()
@@ -55,7 +108,7 @@ class CartController extends Controller
 
         session()->put('cart', $cart);
 
-        return redirect()->route('cart')->with('success', $place['name'] . ' added to your cart!');
+        return redirect()->route('cart')->with('success', $place['name'] . ' package added to your cart!');
     }
 
     public function cart()
@@ -79,7 +132,6 @@ class CartController extends Controller
         return redirect()->route('cart')->with('success', 'Item removed from cart');
     }
 
-    // Add these new methods for missing pages:
 
     public function stories()
     {

@@ -26,24 +26,25 @@
         @foreach($cart as $item)
         <tr>
           <td>{{ $item['name'] }}</td>
-          <td>${{ $item['price'] }}</td>
+          <td> BDT {{ $item['price'] }}</td> 
           <td>{{ $item['quantity'] }}</td>
-          <td>${{ $item['price'] * $item['quantity'] }}</td>
+          <td>BDT {{ $item['price'] * $item['quantity'] }}</td>
           <td>
             <form action="{{ route('cart.remove') }}" method="POST">
               @csrf
               <input type="hidden" name="place_id" value="{{ $item['id'] }}" />
-              <button type="submit" class="remove-btn" style="background:#e74c3c; color:#fff; border:none; padding:6px 14px; border-radius:4px; cursor:pointer;">Remove</button>
+              <button type="submit" class="remove-btn" style="background:rgb(185, 180, 180); border:none; padding:6px 14px; border-radius:4px; cursor:pointer;">
+                ❌</button>
             </form>
           </td>
         </tr>
         @endforeach
         <tr>
-          <td colspan="3" style="text-align: right; font-weight: bold;">Total:</td>
-          <td colspan="2" style="font-weight: bold;">${{ $total }}</td>
+          <td colspan="3" style="font-weight: bold; font-size: 25px">Total:</td>
+          <td colspan="2" style="font-weight: bold;font-size: 25px; text-align: center;">BDT {{$total}}  </td>
         </tr>
       </tbody>
-    </table>
+      </table>
   </div>
   @else
     <p style="text-align:center; color:#888;">Your cart is empty.</p>
@@ -63,7 +64,7 @@
     border-bottom: none;
   }
   .remove-btn:hover {
-    background: #c0392b !important;
+    background:rgb(201, 63, 47);
   }
   @media (max-width: 700px) {
     .cart-table-wrapper {
@@ -91,3 +92,33 @@
   }
 </style>
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

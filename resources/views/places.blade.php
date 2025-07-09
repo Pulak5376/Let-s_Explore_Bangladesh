@@ -3,7 +3,7 @@
 @section('title', 'Places')
 
 @section('content')
-@php
+<?php
 $places = [
   [
     'id' => 1,
@@ -14,7 +14,7 @@ $places = [
   ],
   [
     'id' => 2,
-    'name' => 'Sundarbans',
+    'name' => 'Sundarban',
     'duration' => '2 Days',
     'price' => 3500,
     'image' => 'https://sundarbantravel.com/wp-content/uploads/2023/02/River_in_Sundarban.jpg'
@@ -76,8 +76,7 @@ $places = [
     'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Midway_to_Konglak_Hill%2C_Khagrachari%2C_Bangladesh.jpg/800px-Midway_to_Konglak_Hill%2C_Khagrachari%2C_Bangladesh.jpg'
   ]
 ];
-@endphp
-
+?>
 <section class="places-section" style="padding: 40px; max-width: 1200px; margin: auto;">
   <h1 style="text-align: center; margin-bottom: 30px; font-weight: 700; font-size: 2.5rem; color:rgb(44, 63, 82);">
     Top Tourist Places in Bangladesh
