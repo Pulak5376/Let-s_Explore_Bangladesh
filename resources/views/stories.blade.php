@@ -29,7 +29,7 @@
     </div>
 
     <div style="background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Sajek_Valley_Rangamati_3.jpg" alt="Sajek Valley" style="width: 100%; height: 180px; object-fit: cover;">
+      <img src="https://th.bing.com/th/id/OIP.s2MqHWn2L7W8SV0dE4TrEAHaEK?w=267&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Sajek Valley" style="width: 100%; height: 180px; object-fit: cover;">
       <div style="padding: 18px;">
         <h3 style="margin: 0 0 10px;">Above the Clouds: Sajek Valley</h3>
         <p style="color: #555;">"Waking up to a sea of clouds below our cottage was surreal. The hills, the sunrise, and the warmth of the local people made Sajek a dream come true."</p>
@@ -47,7 +47,7 @@
     </div>
 
     <div style="background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Paharpur_Buddhist_Bihar.jpg" alt="Paharpur Ruins" style="width: 100%; height: 180px; object-fit: cover;">
+      <img src="https://th.bing.com/th/id/OIP.4BFQViNLOulToeA3-AyEsAHaEK?w=314&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Paharpur Ruins" style="width: 100%; height: 180px; object-fit: cover;">
       <div style="padding: 18px;">
         <h3 style="margin: 0 0 10px;">Echoes of History: Paharpur Ruins</h3>
         <p style="color: #555;">"Walking among the ancient bricks of Somapura Mahavihara, I felt transported to another era. The grandeur and serenity of the ruins left me in awe."</p>

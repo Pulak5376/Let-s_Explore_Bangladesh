@@ -4,7 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
-    return view('1stScreen');
+    return view('welcome');
 });
 
 Route::get('/places', [CartController::class, 'places'])->name('places');
