@@ -74,7 +74,7 @@
 <body>
   <!-- ===== Header ===== -->
   <header>
-    <a href="/" class="logo">Explore BD</a>
+    <a href="/" class="logo">Let'sExplore Bangladesh</a>
 
     <nav>
       <ul class="nav-list" id="navbar">
@@ -100,16 +100,86 @@
   </header>
 
   <!-- ===== Animated Hero ===== -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Discover Bangladesh's Hidden Gems</h1>
-      <p>From the Sundarbans to the rolling tea gardens—start your adventure today.</p>
-      <div class="cta-buttons">
-        <a href="/places" class="btn">Explore Places</a>
-        <a href="/register" class="btn" style="background:#0abf2e;color:#fff">Join Us</a>
-      </div>
+<section class="hero">
+  <div class="hero-content">
+    <h1>Discover Bangladesh's Hidden Gems</h1>
+    <p>From the Sundarbans to the rolling tea gardens—start your adventure today.</p>
+    <div class="cta-buttons">
+      <a href="/places" class="btn">Explore Places</a>
+      <a href="/register" class="btn" style="background:#0abf2e;color:#fff">Join Us</a>
     </div>
-  </section>
+  </div>
+</section>
+
+<style>
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Background image + slow zoom for subtle motion */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1739477021524-0266d3dabec9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTh8fHxlbnwwfHx8fHw%3D');
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  transition: transform 12s ease-in-out;
+}
+.hero:hover::before {
+  transform: scale(1.08);
+}
+
+/* Dark gradient overlay for legibility */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 80%);
+}
+
+.hero-content {
+  position: relative;   /* lift above pseudo‑elements */
+  z-index: 1;
+  max-width: 720px;
+  padding: 0 1.5rem;
+  animation: fadeUp 1s ease 0.2s both;
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.hero p { margin: 0.8rem 0 2rem; font-size: 1.15rem; line-height: 1.6; }
+.cta-buttons { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+
+.btn {
+  padding: 0.8rem 2.2rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  border: 2px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+.btn:hover { background: #fff; color: #000; }
+
+/* entrance animation */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+</style>
+
 
   <!-- ===== Main Content (Blade) ===== -->
   <main>
