@@ -22,7 +22,7 @@
 
     <nav>
       <ul id="navbar">
-        <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}">Home</a></li>
+        <li><a href="/welcome" class="{{ request()->is('welcome') ? 'active' : '' }}">Home</a></li>
         <li><a href="/places" class="{{ request()->is('places') ? 'active' : '' }}">Places</a></li>
         <li><a href="/stories" class="{{ request()->is('stories') ? 'active' : '' }}">Stories</a></li>
         <li><a href="/about" class="{{ request()->is('about') ? 'active' : '' }}">About</a></li>

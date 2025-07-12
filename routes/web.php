@@ -21,11 +21,13 @@ Route::get('/weather', function () {
 Route::get('/login', function () {
     return view('login');
 });
-Route::post('/welcome', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
-
+Route::post('/welcome', function () {
+    return view('welcome');
+});
 Route::get('/register', function () {
     return view('register');
 });
