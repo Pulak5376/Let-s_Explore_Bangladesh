@@ -16,8 +16,8 @@
       <h1>Lets Explore Bangladesh</h1>
       <p>Explore bangladesh with us.</p>
       <div class="buttons">
-        <a href="#">Log in</a>
-        <a href="#">Sign up</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
       </div>
     </div>
   </div>
