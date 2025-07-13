@@ -3,40 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tour De - Flight Booking</title>
+  <title>Tour De – Flight Booking</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- Header -->
   <header>
-    <h1>Tour De</h1>
+    <h1>✈️ Tour De</h1>
     <nav>
       <a href="#">Home</a>
       <a href="#">Destinations</a>
       <a href="#">Flights</a>
       <a href="#">Hotels</a>
+      <a href="#">Contact</a>
     </nav>
   </header>
 
-  <!-- Flight Search Section -->
-  <section class="flight-search">
-    <h2>Book Your Flight</h2>
+  <!-- Flight Booking Section -->
+  <section class="flight-booking">
+    <h2>Book Your Next Flight</h2>
+    <p class="subtitle">Smart, easy and fast flight booking at your fingertips.</p>
+
     <form class="flight-form">
       <div class="row">
-        <input type="text" placeholder="From (e.g., Dhaka)" required />
-        <input type="text" placeholder="To (e.g., Bangkok)" required />
+        <input type="text" placeholder="From (e.g., DAC - Dhaka)" required />
+        <input type="text" placeholder="To (e.g., SIN - Singapore)" required />
       </div>
       <div class="row">
-        <input type="date" required />
-        <input type="date" required />
+        <label>
+          Departure:
+          <input type="date" required />
+        </label>
+        <label>
+          Return:
+          <input type="date" required />
+        </label>
       </div>
       <div class="row">
         <select required>
-          <option value="">Select Class</option>
-          <option value="economy">Economy</option>
-          <option value="business">Business</option>
-          <option value="first">First Class</option>
+          <option value="">Select Travel Class</option>
+          <option>Economy</option>
+          <option>Premium Economy</option>
+          <option>Business</option>
+          <option>First Class</option>
         </select>
         <input type="number" placeholder="Passengers" min="1" required />
       </div>
@@ -44,116 +54,194 @@
     </form>
   </section>
 
-  <!-- Sample Flight Results -->
+  <!-- Flight Result Section -->
   <section class="flight-results">
-    <h3>Popular Flights</h3>
+    <h3>🔥 Featured Flights</h3>
+
     <div class="flight-card">
-      <div>
-        <strong>Biman Airlines</strong>
-        <p>DAC ✈ BKK</p>
-        <p>10:00 AM - 2:00 PM</p>
+      <div class="flight-info">
+        <h4>🛫 Biman Bangladesh</h4>
+        <p>DAC → DXB</p>
+        <p>Depart: 10:00 AM | Arrive: 2:30 PM</p>
       </div>
-      <div>
+      <div class="flight-meta">
+        <p class="price">৳ 18,900</p>
         <p>Economy</p>
-        <p>৳ 15,500</p>
         <button>Book Now</button>
       </div>
     </div>
 
     <div class="flight-card">
-      <div>
-        <strong>AirAsia</strong>
-        <p>DAC ✈ KUL</p>
-        <p>3:30 PM - 7:45 PM</p>
+      <div class="flight-info">
+        <h4>🛫 Qatar Airways</h4>
+        <p>DAC → DOH</p>
+        <p>Depart: 3:45 PM | Arrive: 6:50 PM</p>
       </div>
-      <div>
-        <p>Economy</p>
-        <p>৳ 9,999</p>
+      <div class="flight-meta">
+        <p class="price">৳ 24,500</p>
+        <p>Business</p>
         <button>Book Now</button>
       </div>
     </div>
   </section>
-  <style>/* Flight Search Section */
-.flight-search {
-  background: #eefdfd;
-  padding: 40px 20px;
+  <style>/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9fcfd;
+  color: #333;
+}
+
+/* Header */
+header {
+  background-color: #004d4d;
+  color: white;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 26px;
+}
+
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Flight Booking Section */
+.flight-booking {
+  padding: 50px 20px;
+  background: #e6fafa;
   text-align: center;
 }
 
-.flight-search h2 {
-  font-size: 26px;
-  margin-bottom: 20px;
+.flight-booking h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 25px;
 }
 
 .flight-form {
-  max-width: 700px;
+  max-width: 800px;
   margin: auto;
 }
 
 .flight-form .row {
   display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
   flex-wrap: wrap;
+  gap: 15px;
   justify-content: center;
+  margin-bottom: 15px;
 }
 
 .flight-form input,
 .flight-form select {
-  padding: 10px;
-  border: 1px solid #ccc;
+  padding: 12px;
   border-radius: 6px;
+  border: 1px solid #bbb;
+  font-size: 16px;
   width: 45%;
-  min-width: 160px;
+  min-width: 180px;
+}
+
+.flight-form label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  width: 45%;
 }
 
 .flight-form button {
-  background: #008080;
+  background: #006666;
   color: white;
   border: none;
-  padding: 12px 20px;
+  padding: 12px 30px;
   border-radius: 6px;
+  font-size: 16px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .flight-form button:hover {
-  background: #006666;
+  background: #004d4d;
 }
 
 /* Flight Results */
 .flight-results {
-  padding: 30px 20px;
-  max-width: 800px;
+  padding: 40px 20px;
+  max-width: 900px;
   margin: auto;
 }
 
 .flight-results h3 {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 22px;
+  font-size: 24px;
+  margin-bottom: 30px;
 }
 
 .flight-card {
-  display: flex;
-  justify-content: space-between;
   background: white;
   border-radius: 10px;
-  padding: 15px 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+  transition: 0.3s ease;
 }
 
-.flight-card button {
+.flight-card:hover {
+  transform: translateY(-3px);
+}
+
+.flight-info h4 {
+  margin-bottom: 5px;
+  color: #006666;
+}
+
+.flight-meta {
+  text-align: right;
+}
+
+.flight-meta .price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #008080;
+  margin-bottom: 5px;
+}
+
+.flight-meta button {
   background: #008080;
   border: none;
-  padding: 8px 14px;
   color: white;
+  padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
 }
 
-.flight-card button:hover {
-  background: #005555;
+.flight-meta button:hover {
+  background: #005959;
 }
 </style>
 
