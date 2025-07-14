@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,66 +16,299 @@
   <script src="{{ asset('js/script.js') }}" defer></script>
 
   <style>
-    /* Reset */
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Poppins',sans-serif;color:#1b1b1b;background:#f8f9fa;overflow-x:hidden}
-
-    /* Header & Navigation */
-    header{position:sticky;top:0;width:100%;background:#0abf2e;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:12px 28px;z-index:1000;box-shadow:0 2px 6px rgba(0,0,0,.08)}
-    .logo{font-weight:700;font-size:1.4rem;letter-spacing:.5px;text-decoration:none;color:#fff;display:flex;align-items:center;gap:.4rem}
-
-    nav{display:flex;align-items:center}
-    .nav-list{display:flex;gap:1.4rem;list-style:none}
-    .nav-link{position:relative;font-weight:500;text-decoration:none;color:#fff;transition:opacity .25s}
-    .nav-link.active,.nav-link:hover{opacity:.9}
-    .nav-link::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:#fff;transition:width .25s}
-    .nav-link:hover::after,.nav-link.active::after{width:100%}
-
-    /* Dropdown */
-    .dropdown{position:relative}
-    .dropdown-toggle{display:flex;align-items:center;gap:.25rem;cursor:pointer}
-    .dropdown-menu{position:absolute;top:100%;right:0;background:#fff;border-radius:8px;box-shadow:0 8px 18px rgba(0,0,0,.08);padding:.5rem 0;list-style:none;display:none;min-width:160px}
-    .dropdown-menu.show{display:block;animation:fadeIn .25s ease forwards}
-    .dropdown-menu li a{display:block;padding:.55rem 1rem;color:#1b1b1b;text-decoration:none;font-size:.9rem;white-space:nowrap}
-    .dropdown-menu li a:hover{background:#f1f3f5;color:#0abf2e}
-
-    @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-
-    /* Hamburger */
-    .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer}
-    .hamburger span{width:24px;height:3px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s}
-    .hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-    .hamburger.active span:nth-child(2){opacity:0}
-    .hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
-    /* Mobile Nav */
-    @media(max-width:768px){
-      .nav-list{position:fixed;inset:0 0 0 auto;width:75%;background:#0abf2e;flex-direction:column;padding:5rem 2rem;transform:translateX(100%);transition:transform .35s cubic-bezier(.5,0,.5,1)}
-      .nav-list.open{transform:translateX(0)}
-      .hamburger{display:flex}
+    :root {
+      --brand-green: #0abf2e;
+      --brand-green-light: #2ed864;
+      --bg-light: #f8f9fa;
+      --bg-dark: #121212;
+      --text-light: #1b1b1b;
+      --text-dark: #e5e5e5;
+      --header-height: 70px;
+      --radius: 10px;
+      --transition: 0.25s ease;
     }
 
-    /* Hero Section */
-    .hero{position:relative;isolation:isolate;height:calc(100vh - 70px);display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;background:url('https://images.unsplash.com/photo-1518684079-25c0f4ac9936?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat}
-    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.25));z-index:-1}
+    [data-theme="dark"] {
+      --bg-light: var(--bg-dark);
+      --text-light: var(--text-dark);
+      --brand-green: #2ed864;
+    }
 
-    .hero h1{font-size:clamp(2.2rem,5vw,4.5rem);font-weight:700;line-height:1.15;animation:slideUp .9s ease both .2s}
-    .hero p{margin-top:.8rem;font-size:clamp(1rem,2vw,1.4rem);font-weight:300;color:#e6e6e6;animation:slideUp .9s ease both .35s}
-    @keyframes slideUp{0%{opacity:0;transform:translateY(28px)}100%{opacity:1;transform:translateY(0)}}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-light);
+      background: var(--bg-light);
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
 
-    .cta-buttons{margin-top:1.8rem;display:flex;gap:1rem;justify-content:center;animation:slideUp .9s ease both .5s}
-    .btn{display:inline-block;padding:.8rem 2rem;font-weight:600;border-radius:40px;text-decoration:none;background:#fff;color:#0abf2e;box-shadow:0 6px 18px rgba(0,0,0,.15);transition:transform .25s,box-shadow .25s}
-    .btn:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
+    header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: var(--brand-green);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 28px;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0,0,0,.08);
+    }
 
-    main{padding:3rem 1.5rem;max-width:1200px;margin-inline:auto}
-    footer{background:#0abf2e;color:#fff;text-align:center;padding:1.25rem 1rem;margin-top:4rem;font-size:.9rem}
+    .logo {
+      font-weight: 700;
+      font-size: 1.4rem;
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1.35rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    nav .nav-list {
+      display: flex;
+      gap: 1.4rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      position: relative;
+      font-weight: 500;
+      text-decoration: none;
+      color: #fff;
+      transition: opacity var(--transition);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      opacity: 0.9;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: #fff;
+      transition: width var(--transition);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      cursor: pointer;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 18px rgba(0,0,0,.08);
+      padding: .5rem 0;
+      list-style: none;
+      display: none;
+      min-width: 160px;
+      color: var(--text-light);
+    }
+
+    .dropdown-menu.show {
+      display: block;
+      animation: fadeIn .25s ease forwards;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: .55rem 1rem;
+      color: inherit;
+      text-decoration: none;
+      font-size: .9rem;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu li a:hover {
+      background: #f1f3f5;
+      color: var(--brand-green);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 3px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    @media(max-width:768px){
+      .nav-list {
+        position: fixed;
+        inset: 0 0 0 auto;
+        width: 75%;
+        background: var(--brand-green);
+        flex-direction: column;
+        padding: 5rem 2rem;
+        transform: translateX(100%);
+        transition: transform .35s ease;
+      }
+
+      .nav-list.open {
+        transform: translateX(0);
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .hero {
+      position: relative;
+      height: calc(100vh - var(--header-height));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1739477021524-0266d3dabec9?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+      transform: scale(1);
+      transition: transform 12s ease-in-out;
+      z-index: -2;
+    }
+
+    .hero:hover::before {
+      transform: scale(1.08);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.25));
+      z-index: -1;
+    }
+
+    .glass {
+      backdrop-filter: blur(8px) saturate(180%);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: var(--radius);
+      padding: 4rem 2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      font-weight: 300;
+      color: #e6e6e6;
+      margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      font-weight: 600;
+      border-radius: 40px;
+      text-decoration: none;
+      background: #fff;
+      color: var(--brand-green);
+      box-shadow: 0 6px 18px rgba(0,0,0,.15);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0,0,0,.2);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+    }
+
+    .btn-ghost:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    footer {
+      background: var(--brand-green);
+      color: #fff;
+      text-align: center;
+      padding: 1.25rem 1rem;
+      margin-top: 4rem;
+      font-size: .9rem;
+    }
   </style>
 </head>
 <body>
-  <!-- ===== Header ===== -->
+  <!-- Header -->
   <header>
     <a href="/" class="logo">Let'sExplore Bangladesh</a>
-
     <nav>
       <ul class="nav-list" id="navbar">
         <li><a href="/welcome" class="nav-link {{ request()->is('welcome') ? 'active' : '' }}">Home</a></li>
@@ -93,109 +326,40 @@
         </li>
       </ul>
     </nav>
-
+    <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
+      <i data-feather="moon"></i>
+    </button>
     <div id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span><span></span>
     </div>
   </header>
 
-  <!-- ===== Animated Hero ===== -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>Discover Bangladesh's Hidden Gems</h1>
-    <p>From the Sundarbans to the rolling tea gardens—start your adventure today.</p>
-    <div class="cta-buttons">
-      <a href="/places" class="btn">Explore Places</a>
-      <a href="/register" class="btn" style="background:#0abf2e;color:#fff">Join Us</a>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="glass">
+      <h1>Discover Bangladesh's Hidden Gems</h1>
+      <p>From the Sundarbans to the rolling tea gardens—start your adventure today.</p>
+      <div class="cta-buttons">
+        <a href="/places" class="btn">Explore Places</a>
+        <a href="/register" class="btn btn-ghost">Join Us</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<style>
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-  overflow: hidden;
-}
-
-/* Background image + slow zoom for subtle motion */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1739477021524-0266d3dabec9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTh8fHxlbnwwfHx8fHw%3D');
-  background-size: cover;
-  background-position: center;
-  transform: scale(1);
-  transition: transform 12s ease-in-out;
-}
-.hero:hover::before {
-  transform: scale(1.08);
-}
-
-/* Dark gradient overlay for legibility */
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 80%);
-}
-
-.hero-content {
-  position: relative;   /* lift above pseudo‑elements */
-  z-index: 1;
-  max-width: 720px;
-  padding: 0 1.5rem;
-  animation: fadeUp 1s ease 0.2s both;
-}
-.hero h1 {
-  font-size: clamp(2.5rem, 6vw, 4.25rem);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-.hero p { margin: 0.8rem 0 2rem; font-size: 1.15rem; line-height: 1.6; }
-.cta-buttons { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
-
-.btn {
-  padding: 0.8rem 2.2rem;
-  font-weight: 600;
-  border-radius: 9999px;
-  border: 2px solid #fff;
-  color: #fff;
-  text-decoration: none;
-  transition: background 0.3s, color 0.3s;
-}
-.btn:hover { background: #fff; color: #000; }
-
-/* entrance animation */
-@keyframes fadeUp {
-  0% { opacity: 0; transform: translateY(40px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-</style>
-
-
-  <!-- ===== Main Content (Blade) ===== -->
+  <!-- Main Blade Content -->
   <main>
     @yield('content')
   </main>
 
-  <!-- ===== Footer ===== -->
+  <!-- Footer -->
   <footer>
-    © 2025 • Let's Explore Bangladesh. All rights reserved.
+    © 2025 • Let's Explore Bangladesh. All rights reserved.
   </footer>
 
+  <!-- Scripts -->
   <script>
-    // Feather Icons
     feather.replace();
 
-    // Mobile Nav Toggle
     const hamburger = document.getElementById('hamburger');
     const navList = document.getElementById('navbar');
     hamburger.addEventListener('click', () => {
@@ -204,7 +368,6 @@
       hamburger.setAttribute('aria-expanded', navList.classList.contains('open'));
     });
 
-    // Dropdown
     const dropdownToggle = document.getElementById('dropdownToggle');
     const dropdownMenu = document.getElementById('dropdownMenu');
     dropdownToggle.addEventListener('click', (e) => {
@@ -214,6 +377,21 @@
     document.addEventListener('click', (e) => {
       if (!dropdownMenu.contains(e.target) && !dropdownToggle.contains(e.target)) {
         dropdownMenu.classList.remove('show');
+      }
+    });
+
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+    themeToggle.addEventListener('click', () => {
+      const isDark = htmlElement.getAttribute('data-theme') === 'dark';
+      htmlElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        htmlElement.setAttribute('data-theme', savedTheme);
       }
     });
   </script>
