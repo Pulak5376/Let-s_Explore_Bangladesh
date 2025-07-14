@@ -64,7 +64,7 @@
     border-bottom: none;
   }
   .remove-btn:hover {
-    background:rgb(201, 63, 47);
+    background:rgba(180, 80, 69, 1);
   }
   @media (max-width: 700px) {
     .cart-table-wrapper {
