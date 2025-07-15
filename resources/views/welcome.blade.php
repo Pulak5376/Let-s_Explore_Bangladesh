@@ -3,6 +3,17 @@
 @section('title', 'Home')
 
 @section('content')
+<section class="hero">
+  <div class="glass">
+    <h1>Discover Bangladesh's Hidden Gems</h1>
+    <p>From the Sundarbans to the rolling tea gardens—start your adventure today.</p>
+    <div class="cta-buttons">
+      <a href="/places" class="btn">Explore Places</a>
+      <a href="/register" class="btn btn-ghost">Join Us</a>
+    </div>
+  </div>
+</section>
+
 <section class="hero-section" role="banner" aria-label="Introduction">
   <h1 id="typed-text" aria-live="polite" aria-atomic="true"></h1>
   <p class="hero-subtitle">
@@ -64,6 +75,75 @@
 </section>
 
 <style>
+  .hero {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    height: calc(100vh - var(--header-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1739477021524-0266d3dabec9?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+    transform: scale(1);
+    transition: transform 12s ease-in-out;
+    z-index: -2;
+  }
+
+  .hero:hover::before {
+    transform: scale(1.08);
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(0, 0, 0, .55), rgba(0, 0, 0, .25));
+    z-index: -1;
+  }
+
+  .glass {
+    backdrop-filter: blur(8px) saturate(180%);
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: var(--radius);
+    padding: 4rem 2rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: #00ff0dc9;
+  }
+
+  .hero p {
+    font-size: clamp(1rem, 2.2vw, 1.35rem);
+    font-weight: 300;
+    color: #e6e6e6;
+    margin-bottom: 2rem;
+  }
+   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-light);
+      background: var(--bg-light);
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
   .carousel-slide {
     display: none;
   }
