@@ -99,8 +99,7 @@ $places = [
         <form action="{{ route('cart.add') }}" method="POST" style="text-align: center;">
           @csrf
           <input type="hidden" name="place_id" value="{{ $place['id'] }}" />
-          <button type="submit" 
-                  style="background-color:rgb(51, 139, 197); color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%; transition: background-color 0.3s;">
+          <button type="submit" class="shadow-button">
             Add to Cart
           </button>
         </form>
@@ -111,12 +110,34 @@ $places = [
 </section>
 
 <style>
+  .shadow-button {
+    padding: 12px 0;
+    font-size: 18px;
+    background-color: #af3077;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(60, 202, 16, 0.93);
+    transition: all 0.3s ease;
+    outline: none;
+    width: 100%;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+  .shadow-button:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.28);
+    background-color: #10b34cff; /* এখানে আপনার পছন্দের হোভার কালার দিন */
+  }
+  .shadow-button:focus,
+  .shadow-button:active {
+    box-shadow: 0 0 0 4px rgba(13, 208, 218, 0.41), 0 6px 12px rgba(0,0,0,0.28);
+    outline: none;
+  }
+
   .place-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 10px 20px rgb(0 0 0 / 0.15);
-  }
-  button.book-btn:hover {
-    background-color:rgb(36, 114, 163);
   }
 
   @media (max-width: 1024px) {
@@ -130,4 +151,23 @@ $places = [
     }
   }
 </style>
+@endsection
+
+@section('scripts')
+<script>
+  document.querySelectorAll('.add-to-cart-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      // Remove active-border from all buttons
+      document.querySelectorAll('.add-to-cart-btn').forEach(function(b) {
+        b.classList.remove('active-border');
+      });
+      // Add active-border to the clicked button
+      btn.classList.add('active-border');
+      // Optional: Remove border after a short time (e.g., 1s)
+      setTimeout(function() {
+        btn.classList.remove('active-border');
+      }, 1000);
+    });
+  });
+</script>
 @endsection
