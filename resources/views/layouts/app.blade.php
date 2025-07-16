@@ -298,8 +298,10 @@
         <li class="dropdown" style="position: relative;">
           <a href="#" class="nav-link dropdown-toggle" onclick="event.preventDefault(); toggleDropdown()">More <span id="dropdown-arrow">&#9662;</span></a>
           <ul id="dropdown-menu" class="dropdown-menu">
+            <li><a href="{{ url('/hotelbook') }}">Hotel Booking</a></li>
             <li><a href="{{ url('/weather') }}">Weather Check</a></li>
             <li><a href="{{ url('/cart') }}">View Cart</a></li>
+            
           </ul>
         </li>
         <li>
