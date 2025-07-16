@@ -21,6 +21,12 @@ Route::get('/weather', function () {
 Route::get('/login', function () {
     return view('login');
 });
+Route::get('/hotelbook', function () {
+    return view('hotelbook');
+});
+Route::get('/flightbook', function () {
+    return view('flightbook');
+});
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
