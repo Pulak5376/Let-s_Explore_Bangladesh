@@ -69,4 +69,80 @@
     </div>
   </div>
 </section>
+
+<style>
+  .gallery-section {
+    background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 50%, #e8f5e8 100%) !important;
+    min-height: 100vh;
+  }
+
+  .gallery-section h1 {
+    color: #2e7d32 !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .gallery-grid > div {
+    background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e8 100%) !important;
+    border: 2px solid rgba(102, 187, 106, 0.2) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .gallery-grid > div:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 8px 25px rgba(46, 125, 50, 0.2) !important;
+    border-color: rgba(102, 187, 106, 0.3) !important;
+  }
+
+  .gallery-grid h3 {
+    color: #2e7d32 !important;
+    font-weight: 600;
+  }
+
+  .gallery-grid p {
+    color: #388e3c !important;
+  }
+
+  /* Dark Mode Styles */
+  body.dark-mode {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%) !important;
+  }
+
+  body.dark-mode .gallery-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%) !important;
+  }
+
+  body.dark-mode .gallery-section h1 {
+    color: #81c784 !important;
+  }
+
+  body.dark-mode .gallery-grid > div {
+    background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%) !important;
+    border-color: rgba(102, 187, 106, 0.3) !important;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2) !important;
+  }
+
+  body.dark-mode .gallery-grid > div:hover {
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3) !important;
+    border-color: rgba(102, 187, 106, 0.4) !important;
+  }
+
+  body.dark-mode .gallery-grid h3 {
+    color: #66bb6a !important;
+  }
+
+  body.dark-mode .gallery-grid p {
+    color: #a5d6a7 !important;
+  }
+
+  @media (max-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+    }
+    
+    .gallery-section {
+      padding: 30px 15px !important;
+    }
+  }
+</style>
 @endsection

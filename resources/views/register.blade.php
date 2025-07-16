@@ -9,6 +9,14 @@
 </head>
 
 <body>
+  <!-- Dark Mode Toggle -->
+  <div class="dark-mode-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+    <label for="darkToggle" style="color: white; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+      <span>Dark Mode</span>
+      <input type="checkbox" id="darkToggle" onchange="toggleDarkMode()" style="transform: scale(1.2);" />
+    </label>
+  </div>
+
   <main class="register-wrapper">
     <section class="register-card" aria-labelledby="registerTitle">
       <h1 id="registerTitle" class="register-title">Create Your Account</h1>
@@ -158,7 +166,86 @@
     .login-link:focus {
       text-decoration: underline;
     }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background: linear-gradient(135deg, #1a1a1a, #2d2d2d) !important;
+    }
+
+    body.dark-mode .register-card {
+      background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%) !important;
+      box-shadow: 0 12px 30px rgba(76, 175, 80, 0.25) !important;
+      border: 1px solid rgba(102, 187, 106, 0.3) !important;
+    }
+
+    body.dark-mode .register-title {
+      color: #81c784 !important;
+    }
+
+    body.dark-mode .input-label {
+      color: #b0bec5 !important;
+    }
+
+    body.dark-mode input[type="text"],
+    body.dark-mode input[type="email"],
+    body.dark-mode input[type="password"] {
+      background: rgba(50, 50, 50, 0.9) !important;
+      border-color: #4caf50 !important;
+      color: #e0e0e0 !important;
+    }
+
+    body.dark-mode input[type="text"]::placeholder,
+    body.dark-mode input[type="email"]::placeholder,
+    body.dark-mode input[type="password"]::placeholder {
+      color: #a0a0a0 !important;
+    }
+
+    body.dark-mode input[type="text"]:focus,
+    body.dark-mode input[type="email"]:focus,
+    body.dark-mode input[type="password"]:focus {
+      border-color: #66bb6a !important;
+      box-shadow: 0 0 8px rgba(102, 187, 106, 0.4) !important;
+    }
+
+    body.dark-mode .btn-primary {
+      background: linear-gradient(135deg, #2e7d32, #1b5e20) !important;
+      box-shadow: 0 6px 15px rgba(76, 175, 80, 0.5) !important;
+    }
+
+    body.dark-mode .btn-primary:hover,
+    body.dark-mode .btn-primary:focus {
+      background: linear-gradient(135deg, #4caf50, #2e7d32) !important;
+      box-shadow: 0 8px 20px rgba(76, 175, 80, 0.7) !important;
+    }
+
+    body.dark-mode .login-text {
+      color: #b0bec5 !important;
+    }
+
+    body.dark-mode .login-link {
+      color: #66bb6a !important;
+    }
   </style>
+
+  <script>
+    function toggleDarkMode() {
+      const isDark = document.body.classList.toggle('dark-mode');
+      document.getElementById('darkToggle').checked = isDark;
+      localStorage.setItem('darkMode', isDark);
+    }
+
+    // Load dark mode preference
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+      if (savedDarkMode) {
+        document.body.classList.add('dark-mode');
+        document.getElementById('darkToggle').checked = true;
+      }
+
+      // Make toggleDarkMode globally accessible
+      window.toggleDarkMode = toggleDarkMode;
+    });
+  </script>
 </body>
 
 </html>

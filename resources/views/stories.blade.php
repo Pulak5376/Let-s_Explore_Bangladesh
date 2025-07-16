@@ -3,20 +3,22 @@
 @section('title', 'Stories')
 
 @section('content')
-<section class="stories-section" style="padding: 40px; background-color: #f9f9f9;">
+<section class="stories-section" style="padding: 40px; background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 50%, #e8f5e8 100%); min-height: 100vh;">
   <style>
     .story-card {
-      background-color: #fff;
-      border-radius: 10px;
+      background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e8 100%);
+      border: 2px solid rgba(102, 187, 106, 0.2);
+      border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 25px rgba(46, 125, 50, 0.15);
+      transition: all 0.3s ease;
       animation: fadeInUp 1s ease both;
     }
 
     .story-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(46, 125, 50, 0.25);
+      border-color: rgba(102, 187, 106, 0.3);
     }
 
     @keyframes fadeInUp {
@@ -27,6 +29,70 @@
       100% {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    .stories-section h1 {
+      color: #2e7d32 !important;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .stories-section p {
+      color: #388e3c !important;
+    }
+
+    .story-card h3 {
+      color: #2e7d32 !important;
+      font-weight: 600;
+    }
+
+    .story-card p {
+      color: #558b2f !important;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%) !important;
+    }
+
+    body.dark-mode .stories-section {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%) !important;
+    }
+
+    body.dark-mode .stories-section h1 {
+      color: #81c784 !important;
+    }
+
+    body.dark-mode .stories-section > div p {
+      color: #b0bec5 !important;
+    }
+
+    body.dark-mode .story-card {
+      background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%) !important;
+      border-color: rgba(102, 187, 106, 0.3) !important;
+      box-shadow: 0 8px 25px rgba(76, 175, 80, 0.2) !important;
+    }
+
+    body.dark-mode .story-card:hover {
+      box-shadow: 0 15px 35px rgba(76, 175, 80, 0.3) !important;
+      border-color: rgba(102, 187, 106, 0.4) !important;
+    }
+
+    body.dark-mode .story-card h3 {
+      color: #66bb6a !important;
+    }
+
+    body.dark-mode .story-card p {
+      color: #a5d6a7 !important;
+    }
+
+    body.dark-mode .story-card div[style*="color: #888"] {
+      color: #90a4ae !important;
+    }
+
+    @media (max-width: 768px) {
+      .stories-section {
+        padding: 20px;
       }
     }
   </style>

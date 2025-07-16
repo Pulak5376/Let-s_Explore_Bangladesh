@@ -30,6 +30,37 @@
       color: var(--text-dark);
     }
 
+    body.dark-mode header {
+      background: linear-gradient(135deg, #2e7d32, #1b5e20) !important;
+    }
+
+    body.dark-mode .logo {
+      color: #e8f5e8 !important;
+    }
+
+    body.dark-mode nav ul li a {
+      color: #e8f5e8 !important;
+    }
+
+    body.dark-mode nav ul li a:hover {
+      color: #81c784 !important;
+      background: rgba(129, 199, 132, 0.1) !important;
+    }
+
+    body.dark-mode .dropdown-content {
+      background: linear-gradient(135deg, #2c2c2c, #3a3a3a) !important;
+      border: 1px solid rgba(102, 187, 106, 0.3) !important;
+    }
+
+    body.dark-mode .dropdown-content a {
+      color: #e0e0e0 !important;
+    }
+
+    body.dark-mode .dropdown-content a:hover {
+      background: rgba(76, 175, 80, 0.2) !important;
+      color: #81c784 !important;
+    }
+
     header {
       display: flex;
       justify-content: space-between;
@@ -354,7 +385,21 @@
     function toggleDarkMode() {
       const isDark = document.body.classList.toggle('dark-mode');
       document.getElementById('darkToggle').checked = isDark;
+      // Save dark mode preference to localStorage
+      localStorage.setItem('darkMode', isDark);
     }
+
+    // Load dark mode preference on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+      if (savedDarkMode) {
+        document.body.classList.add('dark-mode');
+        const darkToggle = document.getElementById('darkToggle');
+        if (darkToggle) {
+          darkToggle.checked = true;
+        }
+      }
+    });
   </script>
 </body>
 

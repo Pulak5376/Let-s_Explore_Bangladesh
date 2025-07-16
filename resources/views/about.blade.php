@@ -61,6 +61,44 @@
       font-size: 2.2rem;
       margin-bottom: 10px;
     }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%) !important;
+    }
+
+    body.dark-mode .about-section {
+      background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%) !important;
+      box-shadow: 0 4px 24px rgba(76, 175, 80, 0.2) !important;
+      border: 1px solid rgba(102, 187, 106, 0.3) !important;
+      color: #e0e0e0 !important;
+    }
+
+    body.dark-mode h1,
+    body.dark-mode h2 {
+      color: #81c784 !important;
+    }
+
+    body.dark-mode p {
+      color: #b0bec5 !important;
+    }
+
+    body.dark-mode .team-card {
+      box-shadow: 0 4px 18px rgba(76, 175, 80, 0.3) !important;
+      border: 1px solid rgba(102, 187, 106, 0.2) !important;
+    }
+
+    body.dark-mode .team-card:hover {
+      box-shadow: 0 8px 32px rgba(76, 175, 80, 0.4) !important;
+    }
+
+    body.dark-mode .team-name {
+      color: #e0e0e0 !important;
+    }
+
+    body.dark-mode .team-role {
+      color: #ffd700 !important;
+    }
   </style>
 
   <h2 style="margin-top: 40px; color: #1e7e34; text-align:center; font-size:2rem;">Tour Management Team</h2>

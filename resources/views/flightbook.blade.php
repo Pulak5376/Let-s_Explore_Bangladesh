@@ -204,4 +204,79 @@ body {
   </div>
 </section>
 
+<style>
+  /* Dark Mode Styles */
+  body.dark-mode {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%) !important;
+    color: #e0e0e0 !important;
+  }
+
+  body.dark-mode .flight-booking {
+    background: linear-gradient(135deg, #2c2c2c, #3a3a3a) !important;
+  }
+
+  body.dark-mode .flight-booking h2 {
+    color: #81c784 !important;
+  }
+
+  body.dark-mode .subtitle {
+    color: #b0bec5 !important;
+  }
+
+  body.dark-mode .flight-form input,
+  body.dark-mode .flight-form select {
+    background: rgba(50, 50, 50, 0.9) !important;
+    border-color: #4caf50 !important;
+    color: #e0e0e0 !important;
+  }
+
+  body.dark-mode .flight-form input::placeholder {
+    color: #a0a0a0 !important;
+  }
+
+  body.dark-mode .search-flights {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20) !important;
+    border-color: #4caf50 !important;
+  }
+
+  body.dark-mode .search-flights:hover {
+    background: linear-gradient(135deg, #4caf50, #2e7d32) !important;
+  }
+
+  body.dark-mode .available-flights h3 {
+    color: #81c784 !important;
+  }
+
+  body.dark-mode .flight-card {
+    background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%) !important;
+    border: 1px solid rgba(102, 187, 106, 0.3) !important;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.2) !important;
+  }
+
+  body.dark-mode .flight-card:hover {
+    box-shadow: 0 15px 35px rgba(76, 175, 80, 0.3) !important;
+  }
+
+  body.dark-mode .flight-details h4 {
+    color: #66bb6a !important;
+  }
+
+  body.dark-mode .flight-details p {
+    color: #a5d6a7 !important;
+  }
+
+  body.dark-mode .price {
+    color: #81c784 !important;
+  }
+
+  body.dark-mode .flight-card button {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20) !important;
+    border-color: #4caf50 !important;
+  }
+
+  body.dark-mode .flight-card button:hover {
+    background: linear-gradient(135deg, #4caf50, #2e7d32) !important;
+  }
+</style>
+
 @endsection

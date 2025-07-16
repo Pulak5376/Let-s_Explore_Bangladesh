@@ -106,6 +106,54 @@
   100% { transform: rotate(360deg); }
 }
 
+/* Dark Mode Styles */
+body.dark-mode .weather-card {
+  background: rgba(44, 44, 44, 0.95) !important;
+  border-color: rgba(102, 187, 106, 0.3) !important;
+  box-shadow: 0 12px 30px rgba(76, 175, 80, 0.25) !important;
+}
+
+body.dark-mode .weather-card h1 {
+  color: #81c784 !important;
+}
+
+body.dark-mode .weather-card p {
+  color: #b0bec5 !important;
+}
+
+body.dark-mode .weather-card input {
+  background: rgba(50, 50, 50, 0.9) !important;
+  border-color: #4caf50 !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .weather-card input::placeholder {
+  color: #a0a0a0 !important;
+}
+
+body.dark-mode .weather-card input:focus {
+  border-color: #66bb6a !important;
+  box-shadow: 0 0 8px rgba(102, 187, 106, 0.4) !important;
+}
+
+body.dark-mode .weather-card button {
+  background: linear-gradient(135deg, #2e7d32, #1b5e20) !important;
+  border-color: #4caf50 !important;
+}
+
+body.dark-mode .weather-card button:hover {
+  background: linear-gradient(135deg, #4caf50, #2e7d32) !important;
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4) !important;
+}
+
+body.dark-mode #weatherResult h2 {
+  color: #66bb6a !important;
+}
+
+body.dark-mode #weatherResult p {
+  color: #a5d6a7 !important;
+}
+
 @media (max-width: 500px) {
   .weather-card {
     padding: 25px 18px;
