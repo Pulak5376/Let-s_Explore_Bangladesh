@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Outside Country Visit</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f8fb; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 40px auto; background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
+        h1 { color: #2a6d8f; }
+        label { display: block; margin-top: 16px; }
+        input, textarea, select { width: 100%; padding: 8px; margin-top: 4px; border-radius: 4px; border: 1px solid #ccc; }
+        button { margin-top: 20px; padding: 10px 20px; background: #2a6d8f; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #1e4e66; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Outside Country Visit</h1>
+        <form>
+            <label for="destination">Destination Country:</label>
+            <input type="text" id="destination" name="destination" placeholder="e.g. Thailand" required>
+
+            <label for="dates">Travel Dates:</label>
+            <input type="text" id="dates" name="dates" placeholder="e.g. 2025-08-01 to 2025-08-10" required>
+
+            <label for="purpose">Purpose of Visit:</label>
+            <select id="purpose" name="purpose" required>
+                <option value="">Select</option>
+                <option value="tourism">Tourism</option>
+                <option value="business">Business</option>
+                <option value="education">Education</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="details">Additional Details:</label>
+            <textarea id="details" name="details" rows="4" placeholder="Enter any additional information..."></textarea>
+
+            <label for="contact">Contact Email:</label>
+            <input type="email" id="contact" name="contact" placeholder="your@email.com" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>

@@ -78,7 +78,7 @@ $places = [
 ];
 ?>
 <section class="places-section" style="padding: 40px; max-width: 1200px; margin: auto;">
-  <h1 style="text-align: center; margin-bottom: 30px; font-weight: 700; font-size: 2.5rem; color:rgb(44, 63, 82);">
+  <h1 style="text-align: center; margin-bottom: 30px; font-weight: 700; font-size: 2.5rem; color:rgba(14, 219, 58, 1);">
     Top Tourist Places in Bangladesh
   </h1>
   <p style="text-align: center; margin-bottom: 50px; color:rgb(126, 140, 141); font-size: 1.1rem;">
