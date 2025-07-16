@@ -34,4 +34,5 @@ Route::get('/register', function () {
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+Route::view('/package', 'package');
 

@@ -291,6 +291,7 @@
       <ul id="navbar">
         <li><a href="/welcome" class="{{ request()->is('/welcome') ? 'active' : '' }}">Home</a></li>
         <li><a href="/places" class="{{ request()->is('places') ? 'active' : '' }}">Places</a></li>
+        <li><a href="/package" class="{{ request()->is('package') ? 'active' : '' }}">Combo Packages</a></li>
         <li><a href="/stories" class="{{ request()->is('stories') ? 'active' : '' }}">Stories</a></li>
         <li><a href="/about" class="{{ request()->is('about') ? 'active' : '' }}">About</a></li>
         <li><a href="/gallery" class="{{ request()->is('gallery') ? 'active' : '' }}">Gallery</a></li>
@@ -302,7 +303,6 @@
             <li><a href="{{ url('/flightbook') }}">Flight Booking</a></li>
             <li><a href="{{ url('/weather') }}">Weather Check</a></li>
             <li><a href="{{ url('/cart') }}">View Cart</a></li>
-            
           </ul>
         </li>
         <li>
