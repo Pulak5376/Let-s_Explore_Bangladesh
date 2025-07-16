@@ -74,6 +74,20 @@ $places = [
     'duration' => '2 Day',
     'price' => 4000,
     'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Midway_to_Konglak_Hill%2C_Khagrachari%2C_Bangladesh.jpg/800px-Midway_to_Konglak_Hill%2C_Khagrachari%2C_Bangladesh.jpg'
+  ],
+  [
+    'id' => 11,
+    'name' => 'Vulaganj',
+    'duration' => '2 Days',
+    'price' => 1800,
+    'image' => 'https://adarbepari.com/wp-content/uploads/2016/05/bholaganj-sadapathor-sylhet.jpg'
+  ],
+  [
+    'id' => 12,
+    'name' => 'Jaflong',
+    'duration' => '2 Days',
+    'price' => 2200,
+    'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZWP36lsPTPR-RFvtJoT27ZQQN2eSVTHnMpg&s'
   ]
 ];
 ?>
