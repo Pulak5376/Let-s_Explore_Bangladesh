@@ -81,7 +81,7 @@
       <img src="https://img.favpng.com/1/9/15/3d-male-avatar-cartoon-man-with-glasses-Bnq3PC7J_t.jpg" alt="Abir Hasan">
       <div class="team-emoji">🧭</div>
       <div class="team-name">Abir Hasan</div>
-      <div class="team-role">Guide for Bandarban</div>
+      <div class="team-role">Guide</div>
     </div>
     <div class="team-card" style="background:#d32f2f;">
       <img src="https://www.shutterstock.com/image-vector/cool-beard-man-vector-logo-600nw-1719020434.jpg" alt="Nehal Ahmed">
