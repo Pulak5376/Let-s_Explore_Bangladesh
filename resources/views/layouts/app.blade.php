@@ -13,8 +13,8 @@
       --bg-light: #ffffff;
       --bg-dark: #121212;
       --text-light: #000000;
-      --text-dark: #ffffff;
-      --header-bg: rgb(1, 173, 24);
+      --text-dark: #ffffffbe;
+      --header-bg: rgba(183, 255, 191, 1);
     }
 
     body {
