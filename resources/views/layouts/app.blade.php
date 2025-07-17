@@ -454,7 +454,7 @@
       }) => {
         const menu = document.getElementById(menuId);
         const arrow = document.getElementById(arrowId);
-        const toggle = document.querySelector(#${arrowId}).parentElement;
+        const toggle = document.querySelector('#${arrowId}').parentElement;
 
         if (
           menu &&
