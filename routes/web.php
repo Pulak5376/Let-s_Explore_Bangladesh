@@ -46,6 +46,9 @@ Route::get('/bus', function () {
 Route::get('/Review', function () {
     return view('Review');
 });
+Route::get('/Convert', function () {
+    return view('Convert');
+});
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
