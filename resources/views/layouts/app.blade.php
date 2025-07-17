@@ -327,22 +327,24 @@
         <li><a href="/about" class="{{ request()->is('about') ? 'active' : '' }}">About</a></li>
         <li><a href="/gallery" class="{{ request()->is('gallery') ? 'active' : '' }}">Gallery</a></li>
         <li><a href="/contact" class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a></li>
+
         <li class="dropdown" style="position: relative;">
-          <a href="#" class="nav-link dropdown-toggle" onclick="event.preventDefault(); toggleDropdown()">More<span id="dropdown-arrow">&#9662;</span></a>
-          <ul id="dropdown-menu" class="dropdown-menu">
+          <a href="#" class="nav-link dropdown-toggle" onclick="event.preventDefault(); toggleDropdown('transport-menu', 'transport-arrow')">Transport<span id="transport-arrow">&#9662;</span></a>
+          <ul id="transport-menu" class="dropdown-menu">
+            <li><a href="{{ url('/train') }}">Train Ticket</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown" style="position: relative;">
+          <a href="#" class="nav-link dropdown-toggle" onclick="event.preventDefault(); toggleDropdown('more-menu', 'more-arrow')">More<span id="more-arrow">&#9662;</span></a>
+          <ul id="more-menu" class="dropdown-menu">
             <li><a href="{{ url('/hotelbook') }}">Hotel Booking</a></li>
             <li><a href="{{ url('/flightbook') }}">Flight Booking</a></li>
             <li><a href="{{ url('/weather') }}">Weather Check</a></li>
             <li><a href="{{ url('/cart') }}">View Cart</a></li>
           </ul>
         </li>
-        <li class="dropdown" style="position: relative;">
-          <a href="#" class="nav-link dropdown-toggle" onclick="event.preventDefault(); toggleDropdown()">Transport<span id="dropdown-arrow">&#9662;</span></a>
-          <ul id="dropdown-menu" class="dropdown-menu">
-            <li><a href="{{ url('/hotelbook') }}">Bus Ticket</a></li>
-            <li><a href="{{ url('/flightbook') }}">Train Ticket</a></li>
-          </ul>
-        </li>
+
         <li>
           <div class="dark-mode-toggle">
             <span>Dark Mode</span>
@@ -392,11 +394,9 @@
     function toggleDarkMode() {
       const isDark = document.body.classList.toggle('dark-mode');
       document.getElementById('darkToggle').checked = isDark;
-      // Save dark mode preference to localStorage
       localStorage.setItem('darkMode', isDark);
     }
 
-    // Load dark mode preference on page load
     document.addEventListener('DOMContentLoaded', function() {
       const savedDarkMode = localStorage.getItem('darkMode') === 'true';
       if (savedDarkMode) {
@@ -406,6 +406,45 @@
           darkToggle.checked = true;
         }
       }
+    });
+
+    function toggleDropdown(menuId, arrowId) {
+      const menu = document.getElementById(menuId);
+      const arrow = document.getElementById(arrowId);
+
+      const isOpen = menu.style.display === 'block';
+      menu.style.display = isOpen ? 'none' : 'block';
+      arrow.classList.toggle('rotate-up', !isOpen);
+    }
+    document.addEventListener('click', function(e) {
+      const dropdowns = [{
+          menuId: 'more-menu',
+          arrowId: 'more-arrow'
+        },
+        {
+          menuId: 'transport-menu',
+          arrowId: 'transport-arrow'
+        }
+      ];
+
+      dropdowns.forEach(({
+        menuId,
+        arrowId
+      }) => {
+        const menu = document.getElementById(menuId);
+        const arrow = document.getElementById(arrowId);
+        const toggle = document.querySelector(`#${arrowId}`).parentElement;
+
+        if (
+          menu &&
+          arrow &&
+          !menu.contains(e.target) &&
+          !toggle.contains(e.target)
+        ) {
+          menu.style.display = 'none';
+          arrow.classList.remove('rotate-up');
+        }
+      });
     });
   </script>
 </body>

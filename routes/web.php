@@ -37,6 +37,9 @@ Route::post('/welcome', function () {
 Route::get('/register', function () {
     return view('register');
 });
+Route::get('/train', function () {
+    return view('train');
+});
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
