@@ -43,6 +43,9 @@ Route::get('/train', function () {
 Route::get('/bus', function () {
     return view('bus');
 });
+Route::get('/Review', function () {
+    return view('Review');
+});
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
