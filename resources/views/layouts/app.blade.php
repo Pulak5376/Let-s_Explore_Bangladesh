@@ -345,6 +345,7 @@
             <li><a href="{{ url('/weather') }}">Weather Check</a></li>
             <li><a href="{{ url('/cart') }}">View Cart</a></li>
              <li><a href="{{ url('/Review') }}">Review</a></li>
+              <li><a href="{{ url('/Convert') }}">Currency Converter</a></li>
           </ul>
         </li>
 
