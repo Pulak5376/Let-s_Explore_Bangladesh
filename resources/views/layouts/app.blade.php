@@ -71,6 +71,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
+      
     }
 
     .logo {
@@ -229,6 +230,22 @@
       margin-left: 10px;
     }
 
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 60px;            
+      width: 60px;             
+      object-fit: cover;         
+      border-radius: 50%;      
+      background: white;        
+      border: 3px solid #10740fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
+    }
+
+
     @media (max-width: 768px) {
       nav ul {
         flex-direction: column;
@@ -310,7 +327,9 @@
 
 <body>
   <header>
-    <a href="/" class="logo">Let'sExplore BD</a>
+    <a href="/" class="logo">
+      <img src="{{ asset('images/logo.png') }}" alt="Let's Explore Bangladesh">
+    </a>
 
     <div class="hamburger" id="menu-toggle">
       <span></span>
@@ -344,8 +363,6 @@
             <li><a href="{{ url('/flightbook') }}">Flight Booking</a></li>
             <li><a href="{{ url('/weather') }}">Weather Check</a></li>
             <li><a href="{{ url('/cart') }}">View Cart</a></li>
-             <li><a href="{{ url('/Review') }}">Review</a></li>
-              <li><a href="{{ url('/Convert') }}">Currency Converter</a></li>
           </ul>
         </li>
 
@@ -437,7 +454,7 @@
       }) => {
         const menu = document.getElementById(menuId);
         const arrow = document.getElementById(arrowId);
-        const toggle = document.querySelector(`#${arrowId}`).parentElement;
+        const toggle = document.querySelector(#${arrowId}).parentElement;
 
         if (
           menu &&
