@@ -43,6 +43,7 @@ Route::get('/train', function () {
 Route::get('/bus', function () {
     return view('bus');
 });
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
