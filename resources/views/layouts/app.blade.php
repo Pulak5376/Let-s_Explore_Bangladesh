@@ -332,6 +332,8 @@
           <a href="#" class="nav-link dropdown-toggle" onclick="event.preventDefault(); toggleDropdown('transport-menu', 'transport-arrow')">Transport<span id="transport-arrow">&#9662;</span></a>
           <ul id="transport-menu" class="dropdown-menu">
             <li><a href="{{ url('/train') }}">Train Ticket</a></li>
+            <li><a href="{{ url('/bus') }}">Bus Ticket</a></li>
+
           </ul>
         </li>
 

@@ -11,8 +11,6 @@
   }
 
   .bus-booking-wrapper {
-    height: 100vh;
-    width: 100vw;
     background: linear-gradient(135deg, #0f3443, #1c5873);
     display: flex;
     justify-content: center;
@@ -115,12 +113,12 @@
     <form>
       <div>
         <label for="from">From</label>
-        <input type="text" id="from" name="from" placeholder="Departure city" required>
+        <input type="text" id="from" name="from" placeholder="Departure terminal" required>
       </div>
 
       <div>
         <label for="to">To</label>
-        <input type="text" id="to" name="to" placeholder="Destination city" required>
+        <input type="text" id="to" name="to" placeholder="Destination terminal" required>
       </div>
 
       <div>
@@ -129,12 +127,12 @@
       </div>
 
       <div>
-        <label for="bus_type">Bus Type</label>
-        <select id="bus_type" name="bus_type" required>
+        <label for="bus_class">Bus Type</label>
+        <select id="bus_class" name="bus_class" required>
           <option value="" disabled selected>Select Bus Type</option>
-          <option value="AC">AC</option>
           <option value="Non-AC">Non-AC</option>
-          <option value="Sleeper">Sleeper</option>
+          <option value="AC">AC</option>
+          <option value="Sleeper">Sleeper Coach</option>
         </select>
       </div>
 

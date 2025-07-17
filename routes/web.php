@@ -40,6 +40,9 @@ Route::get('/register', function () {
 Route::get('/train', function () {
     return view('train');
 });
+Route::get('/bus', function () {
+    return view('bus');
+});
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
