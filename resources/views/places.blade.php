@@ -1,8 +1,341 @@
 @extends('layouts.app')
 
-@section('title', 'Places')
+@section('title', 'Explore Places')
 
 @section('content')
+<style>
+  .places-hero {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), 
+                url('https://images.unsplash.com/photo-1539650116574-75c0c6d73d0e?ixlib=rb-4.0.3') center/cover;
+    padding: 6rem 2rem;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .places-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 1;
+  }
+
+  .places-hero > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .places-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    background: #f8f9fa;
+    min-height: 100vh;
+  }
+
+  .division-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: white;
+    border: 2px solid #e9ecef;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    color: #6c757d;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .filter-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    transition: left 0.3s ease;
+    z-index: -1;
+  }
+
+  .filter-btn.active,
+  .filter-btn:hover {
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+  }
+
+  .filter-btn.active::before,
+  .filter-btn:hover::before {
+    left: 0;
+  }
+
+  .places-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .place-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+  }
+
+  .place-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  }
+
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+  }
+
+  .place-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .place-card:hover .place-image {
+    transform: scale(1.1);
+  }
+
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .place-card:hover .image-overlay {
+    opacity: 1;
+  }
+
+  .price-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  .card-content {
+    padding: 1.5rem;
+  }
+
+  .division-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .card-details {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+
+  .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .add-to-cart-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .add-to-cart-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ee5a52, #d63384);
+    transition: left 0.3s ease;
+    z-index: -1;
+  }
+
+  .add-to-cart-btn:hover::before {
+    left: 0;
+  }
+
+  .add-to-cart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+  }
+
+  .stats-section {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 3rem 2rem;
+    margin: 3rem 0;
+    border-radius: 20px;
+    text-align: center;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+
+  /* Filter animations */
+  .place-card.fade-in {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .place-card.fade-out {
+    animation: fadeOut 0.3s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+  }
+
+  /* Dark Mode Styles */
+  body.dark-mode .places-container {
+    background: #1a1a1a;
+  }
+
+  body.dark-mode .place-card {
+    background: #2c2c2c;
+    border: 1px solid #3a3a3a;
+  }
+
+  body.dark-mode .card-title {
+    color: #e9ecef;
+  }
+
+  body.dark-mode .card-details {
+    color: #adb5bd;
+  }
+
+  body.dark-mode .filter-btn {
+    background: #2c2c2c;
+    color: #adb5bd;
+    border-color: #3a3a3a;
+  }
+
+  body.dark-mode .stats-section {
+    background: linear-gradient(135deg, #2c2c2c, #3a3a3a);
+  }
+
+  @media (max-width: 768px) {
+    .places-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .places-hero {
+      padding: 4rem 1rem;
+    }
+    
+    .places-container {
+      padding: 2rem 1rem;
+    }
+    
+    .division-filters {
+      gap: 0.5rem;
+    }
+    
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
 <?php
 $divisions = [
   [
@@ -266,255 +599,92 @@ $places = [
   ]
 ];
 ?>
-<section class="places-section" style="padding: 40px; max-width: 1400px; margin: auto; background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 50%, #e8f5e8 100%); min-height: 100vh;">
-  <h1 style="text-align: center; margin-bottom: 20px; font-weight: 700; font-size: 2.5rem; color: #2e7d32; text-shadow: 1px 1px 3px rgba(0,0,0,0.1);">
-    Explore Bangladesh by Division
-  </h1>
-  <p style="text-align: center; margin-bottom: 50px; color: #388e3c; font-size: 1.2rem; font-weight: 500;">
-    Choose a division to discover amazing tourist destinations across Bangladesh
+
+<section class="places-hero">
+  <h1 style="font-size: 3rem; margin-bottom: 1rem; font-weight: 800;">Explore Bangladesh</h1>
+  <p style="font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto;">
+    Discover amazing destinations across all 8 divisions of Bangladesh
   </p>
+</section>
 
-  <!-- Division Filter Cards -->
-  <div class="division-filter" style="margin-bottom: 50px;">
-    <h2 style="text-align: center; margin-bottom: 30px; color: #2e7d32; font-size: 1.8rem; font-weight: 600;">Select a Division</h2>
-    <div class="divisions-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px;">
-      @foreach ($divisions as $division)
-      <div class="division-card" data-division="{{ $division['id'] }}" style="cursor: pointer; border: 3px solid #66bb6a; border-radius: 15px; overflow: hidden; box-shadow: 0 8px 25px rgba(46, 125, 50, 0.15); transition: all 0.3s ease; background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e8 100%);">
-        <img src="{{ $division['image'] }}" alt="{{ $division['name'] }}" style="width: 100%; height: 180px; object-fit: cover;" />
-        <div class="division-info" style="padding: 20px; text-align: center;">
-          <h3 style="font-size: 1.4rem; margin-bottom: 10px; color: #2e7d32; font-weight: 600;">{{ $division['name'] }} Division</h3>
-          <p style="color: #388e3c; font-size: 0.95rem; line-height: 1.4;">{{ $division['description'] }}</p>
-        </div>
+<div class="places-container">
+  <!-- Division Filter Buttons -->
+  <div class="division-filters">
+    <button class="filter-btn active" data-division="all">All Places</button>
+    @foreach ($divisions as $division)
+      <button class="filter-btn" data-division="{{ $division['id'] }}">{{ $division['name'] }}</button>
+    @endforeach
+  </div>
+
+  <!-- Statistics Section -->
+  <div class="stats-section">
+    <h2 style="font-size: 2rem; margin-bottom: 1rem;">Travel Statistics</h2>
+    <p style="opacity: 0.9;">Explore Bangladesh's rich diversity</p>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">8</div>
+        <div class="stat-label">Divisions</div>
       </div>
-      @endforeach
-    </div>
-
-    <!-- Show All Button -->
-    <div style="text-align: center; margin-bottom: 30px;">
-      <button id="show-all-btn" class="filter-button active" style="padding: 12px 30px; background: linear-gradient(135deg, #4caf50, #388e3c); color: white; border: 2px solid #66bb6a; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-size: 1rem;">
-        Show All Places
-      </button>
+      <div class="stat-item">
+        <div class="stat-number">25+</div>
+        <div class="stat-label">Destinations</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">64</div>
+        <div class="stat-label">Districts</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Adventures</div>
+      </div>
     </div>
   </div>
 
-  <!-- Places Display -->
-  <div class="places-container">
-    <h2 id="places-title" style="text-align: center; margin-bottom: 30px; color: #2e7d32; font-size: 2rem; font-weight: 600;">All Tourist Places</h2>
-    <div class="places-list" id="places-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
-      @foreach ($places as $place)
-      <div class="place-card" data-division="{{ $place['division'] }}" style="border: 2px solid #66bb6a; border-radius: 15px; overflow: hidden; box-shadow: 0 8px 25px rgba(46, 125, 50, 0.15); transition: all 0.3s ease; background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e8 100%);">
-        <img src="{{ $place['image'] }}" alt="{{ $place['name'] }}" style="width: 100%; height: 200px; object-fit: cover;" />
-        <div class="place-info" style="padding: 20px;">
-          <h3 style="font-size: 1.3rem; margin-bottom: 10px; color: #2e7d32; font-weight: 600;">{{ $place['name'] }}</h3>
-          <ul style="list-style: none; padding: 0; margin: 15px 0;">
-            <li style="color: #388e3c; margin-bottom: 8px; font-weight: 500;"><strong>Duration:</strong> {{ $place['duration'] }}</li>
-            <li style="color: #558b2f; font-weight: 700; font-size: 1.1rem;"><strong>Package:</strong> BDT {{ $place['price'] }}/- per person</li>
-          </ul>
-
-          <form action="{{ route('cart.add') }}" method="POST" style="text-align: center;">
+  <!-- Places Grid -->
+  <div class="places-grid" id="places-grid">
+    @foreach ($places as $place)
+      <div class="place-card fade-in" data-division="{{ $place['division'] }}">
+        <div class="image-container">
+          <img src="{{ $place['image'] }}" alt="{{ $place['name'] }}" class="place-image">
+          <div class="price-badge">৳{{ number_format($place['price']) }}</div>
+          <div class="image-overlay">
+            <div style="text-align: center; color: white;">
+              <h4 style="margin-bottom: 0.5rem;">{{ $place['name'] }}</h4>
+              <p style="opacity: 0.9;">{{ ucfirst($place['division']) }} Division</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-content">
+          <span class="division-badge">📍 {{ ucfirst($place['division']) }}</span>
+          <h3 class="card-title">{{ $place['name'] }}</h3>
+          <div class="card-details">
+            <div class="detail-item">
+              <span>⏱️</span>
+              <span>{{ $place['duration'] }}</span>
+            </div>
+            <div class="detail-item">
+              <span>💰</span>
+              <span>৳{{ number_format($place['price']) }}/person</span>
+            </div>
+          </div>
+          
+          <form action="{{ route('cart.add') }}" method="POST">
             @csrf
-            <input type="hidden" name="place_id" value="{{ $place['id'] }}" />
-            <button type="submit" class="shadow-button">
-              Add to Cart
+            <input type="hidden" name="place_id" value="{{ $place['id'] }}">
+            <button type="submit" class="add-to-cart-btn">
+              🛒 Add to Cart
             </button>
           </form>
         </div>
       </div>
-      @endforeach
-    </div>
+    @endforeach
   </div>
-</section>
+</div>
 
-<style>
-  .shadow-button {
-    padding: 12px 0;
-    font-size: 16px;
-    background: linear-gradient(135deg, #c8102e, #d32f2f);
-    color: white;
-    border: 2px solid #ffd700;
-    border-radius: 25px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(200, 16, 46, 0.3);
-    transition: all 0.3s ease;
-    outline: none;
-    width: 100%;
-    font-weight: 600;
-    margin-top: 15px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  }
-  .shadow-button:hover {
-    box-shadow: 0 6px 20px rgba(200, 16, 46, 0.4);
-    background: linear-gradient(135deg, #d32f2f, #b71c1c);
-    transform: translateY(-2px);
-    border-color: #ffeb3b;
-  }
-  .shadow-button:focus,
-  .shadow-button:active {
-    box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.4), 0 6px 20px rgba(200, 16, 46, 0.4);
-    outline: none;
-  }
-
-  .place-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(46, 125, 50, 0.25);
-    border-color: #4caf50;
-  }
-
-  .division-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 35px rgba(46, 125, 50, 0.2);
-    border-color: #4caf50;
-  }
-
-  .division-card.active {
-    border-color: #4caf50;
-    box-shadow: 0 10px 30px rgba(46, 125, 50, 0.3);
-    transform: scale(1.02);
-    background: linear-gradient(135deg, #e8f5e8 0%, #dcedc8 100%);
-  }
-
-  .filter-button {
-    padding: 12px 30px;
-    background: linear-gradient(135deg, #4caf50, #388e3c);
-    color: white;
-    border: 2px solid #66bb6a;
-    border-radius: 25px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .filter-button:hover {
-    background: linear-gradient(135deg, #66bb6a, #4caf50);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
-  }
-
-  .filter-button.active {
-    background: linear-gradient(135deg, #2e7d32, #388e3c);
-    box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
-    border-color: #4caf50;
-  }
-
-  .place-card {
-    display: block;
-    opacity: 1;
-    transition: all 0.5s ease;
-  }
-
-  .place-card.hidden {
-    display: none;
-  }
-
-  /* Light green page background */
-  body {
-    background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 50%, #e8f5e8 100%) !important;
-    min-height: 100vh;
-  }
-
-  /* Dark Mode Styles */
-  body.dark-mode {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%) !important;
-    color: #e0e0e0 !important;
-  }
-
-  body.dark-mode .places-section {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%) !important;
-  }
-
-  body.dark-mode h1,
-  body.dark-mode h2,
-  body.dark-mode h3 {
-    color: #81c784 !important;
-  }
-
-  body.dark-mode p {
-    color: #b0bec5 !important;
-  }
-
-  body.dark-mode .division-card {
-    background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%) !important;
-    border-color: #4caf50 !important;
-    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.2) !important;
-  }
-
-  body.dark-mode .division-card:hover {
-    background: linear-gradient(135deg, #3a3a3a 0%, #4a4a4a 100%) !important;
-    box-shadow: 0 12px 35px rgba(76, 175, 80, 0.3) !important;
-  }
-
-  body.dark-mode .division-card.active {
-    background: linear-gradient(135deg, #2e5d32 0%, #3e7b40 100%) !important;
-    border-color: #66bb6a !important;
-  }
-
-  body.dark-mode .place-card {
-    background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%) !important;
-    border-color: #4caf50 !important;
-    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.2) !important;
-  }
-
-  body.dark-mode .place-card:hover {
-    background: linear-gradient(135deg, #3a3a3a 0%, #4a4a4a 100%) !important;
-    box-shadow: 0 15px 40px rgba(76, 175, 80, 0.3) !important;
-  }
-
-  body.dark-mode .place-info h3 {
-    color: #66bb6a !important;
-  }
-
-  body.dark-mode .place-info li {
-    color: #a5d6a7 !important;
-  }
-
-  body.dark-mode .filter-button {
-    background: linear-gradient(135deg, #2e7d32, #1b5e20) !important;
-    border-color: #4caf50 !important;
-    color: #e8f5e8 !important;
-  }
-
-  body.dark-mode .filter-button:hover {
-    background: linear-gradient(135deg, #4caf50, #2e7d32) !important;
-  }
-
-  body.dark-mode .filter-button.active {
-    background: linear-gradient(135deg, #1b5e20, #2e7d32) !important;
-  }
-
-  @media (max-width: 1024px) {
-    .divisions-grid {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
-    .places-list {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
-  }
-  @media (max-width: 600px) {
-    .divisions-grid {
-      grid-template-columns: 1fr !important;
-    }
-    .places-list {
-      grid-template-columns: 1fr !important;
-    }
-    .places-section {
-      padding: 20px !important;
-    }
-  }
-</style>
-@endsection
-
-@section('scripts')
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const divisionCards = document.querySelectorAll('.division-card');
+    const filterBtns = document.querySelectorAll('.filter-btn');
     const placeCards = document.querySelectorAll('.place-card');
-    const placesTitle = document.getElementById('places-title');
-    const showAllBtn = document.getElementById('show-all-btn');
 
     // Division names mapping
     const divisionNames = {
@@ -528,72 +698,76 @@ $places = [
       'mymensingh': 'Mymensingh'
     };
 
-    // Function to filter places by division
+    // Filter functionality with animations
     function filterPlaces(selectedDivision) {
-      placeCards.forEach(card => {
+      placeCards.forEach((card, index) => {
         const cardDivision = card.getAttribute('data-division');
+        
         if (selectedDivision === 'all' || cardDivision === selectedDivision) {
-          card.classList.remove('hidden');
           card.style.display = 'block';
+          setTimeout(() => {
+            card.classList.remove('fade-out');
+            card.classList.add('fade-in');
+          }, index * 100);
         } else {
-          card.classList.add('hidden');
-          card.style.display = 'none';
+          card.classList.remove('fade-in');
+          card.classList.add('fade-out');
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 300);
         }
       });
-
-      // Update title
-      if (selectedDivision === 'all') {
-        placesTitle.textContent = 'All Tourist Places';
-      } else {
-        placesTitle.textContent = `${divisionNames[selectedDivision]} Division - Tourist Places`;
-      }
-
-      // Update active states
-      divisionCards.forEach(card => card.classList.remove('active'));
-      if (selectedDivision !== 'all') {
-        document.querySelector(`[data-division="${selectedDivision}"]`).classList.add('active');
-      }
     }
 
-    // Add click event listeners to division cards
-    divisionCards.forEach(card => {
-      card.addEventListener('click', function() {
+    // Add click event listeners to filter buttons
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Remove active class from all buttons
+        filterBtns.forEach(b => b.classList.remove('active'));
+        
+        // Add active class to clicked button
+        this.classList.add('active');
+        
+        // Filter places
         const selectedDivision = this.getAttribute('data-division');
         filterPlaces(selectedDivision);
         
-        // Scroll to places section
-        document.getElementById('places-list').scrollIntoView({
+        // Smooth scroll to places grid
+        document.getElementById('places-grid').scrollIntoView({
           behavior: 'smooth',
           block: 'start'
         });
       });
     });
 
-    // Show all button functionality
-    showAllBtn.addEventListener('click', function() {
-      filterPlaces('all');
-      divisionCards.forEach(card => card.classList.remove('active'));
+    // Enhanced add to cart functionality
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const originalText = this.innerHTML;
+        
+        // Visual feedback
+        this.innerHTML = '✅ Added!';
+        this.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+        
+        // Create success animation
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = 'scale(1)';
+        }, 150);
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+          this.innerHTML = originalText;
+          this.style.background = 'linear-gradient(135deg, #ff6b6b, #ee5a52)';
+        }, 2000);
+      });
     });
 
-    // Add to cart button functionality
-    document.querySelectorAll('.shadow-button').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
-        // Add visual feedback with Bangladesh theme
-        const originalText = btn.textContent;
-        btn.textContent = 'Added!';
-        btn.style.background = 'linear-gradient(135deg, #ffd700, #ffeb3b)';
-        btn.style.color = '#c8102e';
-        btn.style.borderColor = '#c8102e';
-        btn.style.fontWeight = '700';
-        
-        setTimeout(function() {
-          btn.textContent = originalText;
-          btn.style.background = 'linear-gradient(135deg, #c8102e, #d32f2f)';
-          btn.style.color = 'white';
-          btn.style.borderColor = '#ffd700';
-          btn.style.fontWeight = '600';
-        }, 1000);
-      });
+    // Initial animation for cards
+    placeCards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('fade-in');
+      }, index * 100);
     });
   });
 </script>
