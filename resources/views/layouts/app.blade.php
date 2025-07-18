@@ -71,7 +71,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      
+
     }
 
     .logo {
@@ -216,7 +216,7 @@
       text-align: center;
       padding: 20px;
       background: var(--header-bg);
-      color: white;
+      color: black;
       margin-top: 60px;
     }
 
@@ -236,13 +236,13 @@
     }
 
     .logo img {
-      height: 60px;            
-      width: 60px;             
-      object-fit: cover;         
-      border-radius: 50%;      
-      background: white;        
+      height: 60px;
+      width: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+      background: white;
       border: 3px solid #10740fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
 
@@ -350,11 +350,9 @@
         <li class="dropdown" style="position: relative;">
           <a href="#" class="nav-link dropdown-toggle" onclick="event.preventDefault(); toggleDropdown('transport-menu', 'transport-arrow')">Transport<span id="transport-arrow">&#9662;</span></a>
           <ul id="transport-menu" class="dropdown-menu">
-            <li><a href="{{ url('/flightbook') }}">Flight Booking</a></li>
-            <li><a href="{{ url('/train') }}">Train Ticket</a></li>
             <li><a href="{{ url('/bus') }}">Bus Ticket</a></li>
-            
-
+            <li><a href="{{ url('/train') }}">Train Ticket</a></li>
+            <li><a href="{{ url('/flightbook') }}">Flight Ticket</a></li>
           </ul>
         </li>
 
@@ -362,7 +360,6 @@
           <a href="#" class="nav-link dropdown-toggle" onclick="event.preventDefault(); toggleDropdown('more-menu', 'more-arrow')">More<span id="more-arrow">&#9662;</span></a>
           <ul id="more-menu" class="dropdown-menu">
             <li><a href="{{ url('/hotelbook') }}">Hotel Booking</a></li>
-            
             <li><a href="{{ url('/weather') }}">Weather Check</a></li>
             <li><a href="{{ url('/cart') }}">View Cart</a></li>
           </ul>
