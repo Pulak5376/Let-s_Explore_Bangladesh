@@ -350,8 +350,10 @@
         <li class="dropdown" style="position: relative;">
           <a href="#" class="nav-link dropdown-toggle" onclick="event.preventDefault(); toggleDropdown('transport-menu', 'transport-arrow')">Transport<span id="transport-arrow">&#9662;</span></a>
           <ul id="transport-menu" class="dropdown-menu">
+            <li><a href="{{ url('/flightbook') }}">Flight Booking</a></li>
             <li><a href="{{ url('/train') }}">Train Ticket</a></li>
             <li><a href="{{ url('/bus') }}">Bus Ticket</a></li>
+            
 
           </ul>
         </li>
@@ -360,7 +362,7 @@
           <a href="#" class="nav-link dropdown-toggle" onclick="event.preventDefault(); toggleDropdown('more-menu', 'more-arrow')">More<span id="more-arrow">&#9662;</span></a>
           <ul id="more-menu" class="dropdown-menu">
             <li><a href="{{ url('/hotelbook') }}">Hotel Booking</a></li>
-            <li><a href="{{ url('/flightbook') }}">Flight Booking</a></li>
+            
             <li><a href="{{ url('/weather') }}">Weather Check</a></li>
             <li><a href="{{ url('/cart') }}">View Cart</a></li>
           </ul>
