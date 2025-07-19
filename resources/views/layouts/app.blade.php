@@ -61,6 +61,10 @@
       color: #81c784 !important;
     }
 
+    body.dark-mode .hamburger span {
+      background: #e8f5e8 !important;
+    }
+
     header {
       display: flex;
       justify-content: space-between;
@@ -157,8 +161,21 @@
     .hamburger span {
       width: 25px;
       height: 3px;
-      background: white;
+      background: black;
       border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
     }
 
     .dark-switch {
@@ -247,22 +264,88 @@
 
 
     @media (max-width: 768px) {
-      nav ul {
+      #navbar {
         flex-direction: column;
-        position: absolute;
+        position: fixed;
         top: 65px;
-        left: 0;
-        width: 100%;
-        background: rgb(2, 245, 35);
-        display: none;
+        left: -100%;
+        width: 280px;
+        height: calc(100vh - 65px);
+        background: linear-gradient(135deg, #00695c 0%, #388e3c 100%);
+        display: flex;
+        transition: left 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
+        padding-top: 20px;
       }
 
-      nav ul.show {
-        display: flex;
+      #navbar.show {
+        left: 0;
+      }
+
+      #navbar li {
+        margin: 0;
+        width: 100%;
+      }
+
+      #navbar li a {
+        padding: 15px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        width: 100%;
+        display: block;
+      }
+
+      #navbar li a:hover,
+      #navbar li a.active {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #81c784 !important;
       }
 
       .hamburger {
         display: flex;
+      }
+
+      .dropdown-menu {
+        position: static !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        margin-left: 20px !important;
+        width: calc(100% - 20px) !important;
+        min-width: auto !important;
+      }
+
+      .dropdown-menu li a {
+        color: rgba(255, 255, 255, 0.8) !important;
+        padding: 12px 20px !important;
+        font-size: 14px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+      }
+
+      .dropdown-menu li a:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: white !important;
+      }
+
+      .mobile-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        display: none;
+      }
+
+      .mobile-overlay.show {
+        display: block;
+      }
+
+      body.menu-open {
+        overflow: hidden;
       }
 
       .dark-switch {
@@ -327,7 +410,7 @@
 
 <body>
   <header>
-    <a href="/" class="logo">
+    <a href="{{ url('/welcome') }}" class="logo">
       <img src="{{ asset('images/logo.png') }}" alt="Let's Explore Bangladesh">
     </a>
 
@@ -339,13 +422,13 @@
 
     <nav>
       <ul id="navbar">
-        <li><a href="/welcome" class="{{ request()->is('/welcome') ? 'active' : '' }}">Home</a></li>
-        <li><a href="/places" class="{{ request()->is('places') ? 'active' : '' }}">Places</a></li>
-        <li><a href="/package" class="{{ request()->is('package') ? 'active' : '' }}">Combo Packages</a></li>
-        <li><a href="/stories" class="{{ request()->is('stories') ? 'active' : '' }}">Stories</a></li>
-        <li><a href="/about" class="{{ request()->is('about') ? 'active' : '' }}">About</a></li>
-        <li><a href="/gallery" class="{{ request()->is('gallery') ? 'active' : '' }}">Gallery</a></li>
-        <li><a href="/contact" class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a></li>
+        <li><a href="{{ url('/welcome') }}" class="{{ request()->is('welcome') ? 'active' : '' }}">Home</a></li>
+        <li><a href="{{ url('/places') }}" class="{{ request()->is('places') ? 'active' : '' }}">Places</a></li>
+        <li><a href="{{ url('/package') }}" class="{{ request()->is('package') ? 'active' : '' }}">Combo Packages</a></li>
+        <li><a href="{{ url('/stories') }}" class="{{ request()->is('stories') ? 'active' : '' }}">Stories</a></li>
+        <li><a href="{{ url('/about') }}" class="{{ request()->is('about') ? 'active' : '' }}">About</a></li>
+        <li><a href="{{ url('/gallery') }}" class="{{ request()->is('gallery') ? 'active' : '' }}">Gallery</a></li>
+        <li><a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a></li>
 
         <li class="dropdown" style="position: relative;">
           <a href="#" class="nav-link dropdown-toggle" onclick="event.preventDefault(); toggleDropdown('transport-menu', 'transport-arrow')">Transport<span id="transport-arrow">&#9662;</span></a>
@@ -387,86 +470,5 @@
     <p>© 2025. All rights reserved by Let's Explore Bangladesh.</p>
   </footer>
 
-  <script>
-    document.getElementById('menu-toggle').addEventListener('click', function() {
-      document.getElementById('navbar').classList.toggle('show');
-    });
-
-    function toggleDropdown() {
-      const menu = document.getElementById('dropdown-menu');
-      const arrow = document.getElementById('dropdown-arrow');
-
-      const isOpen = menu.style.display === 'block';
-      menu.style.display = isOpen ? 'none' : 'block';
-      arrow.classList.toggle('rotate-up', !isOpen);
-    }
-
-    document.addEventListener('click', function(e) {
-      const menu = document.getElementById('dropdown-menu');
-      const toggle = document.querySelector('.dropdown-toggle');
-
-      if (!menu.contains(e.target) && !toggle.contains(e.target)) {
-        menu.style.display = 'none';
-        document.getElementById('dropdown-arrow').classList.remove('rotate-up');
-      }
-    });
-
-    function toggleDarkMode() {
-      const isDark = document.body.classList.toggle('dark-mode');
-      document.getElementById('darkToggle').checked = isDark;
-      localStorage.setItem('darkMode', isDark);
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const savedDarkMode = localStorage.getItem('darkMode') === 'true';
-      if (savedDarkMode) {
-        document.body.classList.add('dark-mode');
-        const darkToggle = document.getElementById('darkToggle');
-        if (darkToggle) {
-          darkToggle.checked = true;
-        }
-      }
-    });
-
-    function toggleDropdown(menuId, arrowId) {
-      const menu = document.getElementById(menuId);
-      const arrow = document.getElementById(arrowId);
-
-      const isOpen = menu.style.display === 'block';
-      menu.style.display = isOpen ? 'none' : 'block';
-      arrow.classList.toggle('rotate-up', !isOpen);
-    }
-    document.addEventListener('click', function(e) {
-      const dropdowns = [{
-          menuId: 'more-menu',
-          arrowId: 'more-arrow'
-        },
-        {
-          menuId: 'transport-menu',
-          arrowId: 'transport-arrow'
-        }
-      ];
-
-      dropdowns.forEach(({
-        menuId,
-        arrowId
-      }) => {
-        const menu = document.getElementById(menuId);
-        const arrow = document.getElementById(arrowId);
-        const toggle = document.querySelector('#${arrowId}').parentElement;
-
-        if (
-          menu &&
-          arrow &&
-          !menu.contains(e.target) &&
-          !toggle.contains(e.target)
-        ) {
-          menu.style.display = 'none';
-          arrow.classList.remove('rotate-up');
-        }
-      });
-    });
-  </script>
 </body>
-
 </html>
