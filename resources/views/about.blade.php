@@ -215,18 +215,24 @@
     font-size: 1.4rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   .team-role {
     color: #ffd700;
     font-size: 1rem;
     margin-bottom: 1rem;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   }
 
   .team-bio {
     font-size: 0.9rem;
-    opacity: 0.9;
+    opacity: 0.95;
     line-height: 1.5;
+    color: #f0f0f0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   }
 
   .stats-section {
@@ -270,6 +276,57 @@
   .stat-label {
     color: #666;
     font-weight: 500;
+  }
+
+  /* Dark Mode Styles */
+  body.dark-mode .about-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  }
+
+  body.dark-mode .content-text,
+  body.dark-mode .stats-section {
+    background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%);
+    border-color: rgba(76, 175, 80, 0.2);
+  }
+
+  body.dark-mode .section-title {
+    color: #4caf50;
+  }
+
+  body.dark-mode .section-text {
+    color: #b0bec5;
+  }
+
+  body.dark-mode .stat-item {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(0, 106, 78, 0.1));
+    border-color: rgba(76, 175, 80, 0.2);
+  }
+
+  body.dark-mode .stat-number {
+    color: #4caf50;
+  }
+
+  body.dark-mode .stat-label {
+    color: #b0bec5;
+  }
+
+  body.dark-mode .team-card {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+  }
+
+  body.dark-mode .team-name {
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  body.dark-mode .team-role {
+    color: #ffd700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  body.dark-mode .team-bio {
+    color: #e8f5e8;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
   }
 
   @media (max-width: 768px) {
@@ -401,22 +458,22 @@
   <div class="team-section">
     <h2 class="section-title" style="text-align: center;" data-aos="fade-up">Meet Our Team</h2>
     <p style="text-align: center; color: #666; font-size: 1.1rem; margin-bottom: 3rem;" data-aos="fade-up">
-      Passionate individuals working together to make your Bangladesh journey unforgettable
+      Five passionate individuals working together to make your Bangladesh journey unforgettable
     </p>
     
     <div class="team-grid">
       <div class="team-card" data-aos="fade-up" data-aos-delay="100">
         <div class="team-avatar">👨‍💼</div>
-        <h3 class="team-name">Abir Rahman</h3>
+        <h3 class="team-name">Pulok</h3>
         <p class="team-role">Founder & CEO</p>
         <p class="team-bio">
-          Passionate traveler and entrepreneur dedicated to promoting Bangladesh's tourism potential globally.
+          Visionary leader passionate about showcasing Bangladesh's beauty and cultural heritage to the world.
         </p>
       </div>
       
       <div class="team-card" data-aos="fade-up" data-aos-delay="200">
         <div class="team-avatar">👩‍💻</div>
-        <h3 class="team-name">Sabbir Ahmed</h3>
+        <h3 class="team-name">Turzo</h3>
         <p class="team-role">Lead Developer</p>
         <p class="team-bio">
           Tech enthusiast creating seamless digital experiences for travelers exploring Bangladesh.
@@ -425,10 +482,28 @@
       
       <div class="team-card" data-aos="fade-up" data-aos-delay="300">
         <div class="team-avatar">🗺️</div>
-        <h3 class="team-name">Pulak Roy</h3>
+        <h3 class="team-name">Nehal</h3>
         <p class="team-role">Travel Guide Specialist</p>
         <p class="team-bio">
           Local expert with deep knowledge of Bangladesh's hidden gems and cultural treasures.
+        </p>
+      </div>
+      
+      <div class="team-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="team-avatar">🎨</div>
+        <h3 class="team-name">Abir</h3>
+        <p class="team-role">Creative Director</p>
+        <p class="team-bio">
+          Artistic visionary crafting compelling visual stories that capture Bangladesh's essence.
+        </p>
+      </div>
+      
+      <div class="team-card" data-aos="fade-up" data-aos-delay="500">
+        <div class="team-avatar">📋</div>
+        <h3 class="team-name">Sabbir</h3>
+        <p class="team-role">Operations Manager</p>
+        <p class="team-bio">
+          Ensuring smooth operations and exceptional customer experiences for every Bangladesh adventure.
         </p>
       </div>
     </div>
