@@ -23,7 +23,7 @@ Route::get('/login', function () {
 });
 Route::get('/hotelbook', function () {
     return view('hotelbook');
-});
+})->name('hotelbook');
 Route::get('/flightbook', function () {
     return view('flightbook');
 });
