@@ -16,7 +16,7 @@
     <div class="hero-text-container">
       <div class="hero-badge">
         <span class="badge-icon">🇧🇩</span>
-        <span>Explore Bangladesh</span>
+        <span>Lets Explore Bangladesh</span>
       </div>
       <h1 class="hero-title">
         <span class="title-line" data-aos="fade-up" data-aos-delay="200">Discover the</span>
@@ -100,7 +100,109 @@
   </div>
 </section>
 
-<!-- Premium Destinations Carousel -->
+<!-- Bangladesh Highlights Section - New Full-Width Section -->
+<section class="highlights-section">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-badge">Discover Bangladesh</span>
+      <h2>Why Bangladesh is Your Next Adventure</h2>
+      <p>From pristine beaches to ancient heritage, Bangladesh offers diverse experiences waiting to be explored</p>
+    </div>
+    
+    <div class="highlights-grid">
+      <div class="highlight-item" data-aos="fade-right" data-aos-delay="100">
+        <div class="highlight-image">
+          <img src="https://images.unsplash.com/photo-1566402187818-59e91bf0eba6?auto=format&fit=crop&w=600&q=80" alt="Cox's Bazar Beach">
+        </div>
+        <div class="highlight-content">
+          <div class="highlight-badge">World's Longest</div>
+          <h3>Cox's Bazar Beach</h3>
+          <p>Experience the world's longest natural sea beach stretching over 120 kilometers with golden sand and stunning sunsets over the Bay of Bengal.</p>
+          <div class="highlight-stats">
+            <div class="stat"><span class="stat-num">120km</span><span class="stat-text">Beach Length</span></div>
+            <div class="stat"><span class="stat-num">1M+</span><span class="stat-text">Annual Visitors</span></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="highlight-item" data-aos="fade-left" data-aos-delay="200">
+        <div class="highlight-content">
+          <div class="highlight-badge">UNESCO Heritage</div>
+          <h3>Sundarbans Mangrove Forest</h3>
+          <p>Explore the world's largest mangrove forest, home to the majestic Royal Bengal Tiger and countless other wildlife species in this UNESCO World Heritage Site.</p>
+          <div class="highlight-stats">
+            <div class="stat"><span class="stat-num">400</span><span class="stat-text">Tiger Population</span></div>
+            <div class="stat"><span class="stat-num">6,017km²</span><span class="stat-text">Total Area</span></div>
+          </div>
+        </div>
+        <div class="highlight-image">
+          <img src="https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?auto=format&fit=crop&w=600&q=80" alt="Sundarbans Forest">
+        </div>
+      </div>
+      
+      <div class="highlight-item" data-aos="fade-right" data-aos-delay="300">
+        <div class="highlight-image">
+          <img src="https://images.unsplash.com/photo-1563492065_c36fdb0bc4d4?auto=format&fit=crop&w=600&q=80" alt="Tea Gardens">
+        </div>
+        <div class="highlight-content">
+          <div class="highlight-badge">Tea Capital</div>
+          <h3>Sylhet Tea Gardens</h3>
+          <p>Walk through emerald green tea gardens stretching as far as the eye can see, and experience the finest tea culture in the rolling hills of Sylhet.</p>
+          <div class="highlight-stats">
+            <div class="stat"><span class="stat-num">150+</span><span class="stat-text">Tea Gardens</span></div>
+            <div class="stat"><span class="stat-num">200</span><span class="stat-text">Years of Heritage</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Services Section -->
+<section class="services-section">
+  <div class="container">
+    <div class="services-grid">
+      <div class="service-card" data-aos="zoom-in" data-aos-delay="100">
+        <div class="service-icon">✈️</div>
+        <h3>Flight Booking</h3>
+        <p>Book domestic and international flights with best prices</p>
+        <a href="/flightbook" class="service-link">Book Now →</a>
+      </div>
+      <div class="service-card" data-aos="zoom-in" data-aos-delay="200">
+        <div class="service-icon">🏨</div>
+        <h3>Hotel Booking</h3>
+        <p>Find and book comfortable accommodations nationwide</p>
+        <a href="{{ route('hotelbook') }}" class="service-link">Book Now →</a>
+      </div>
+      <div class="service-card" data-aos="zoom-in" data-aos-delay="300">
+        <div class="service-icon">🚌</div>
+        <h3>Bus Booking</h3>
+        <p>Convenient bus travel across Bangladesh</p>
+        <a href="/bus" class="service-link">Book Now →</a>
+      </div>
+      <div class="service-card" data-aos="zoom-in" data-aos-delay="400">
+        <div class="service-icon">🚂</div>
+        <h3>Train Booking</h3>
+        <p>Comfortable train journeys to your destination</p>
+        <a href="/train" class="service-link">Book Now →</a>
+      </div>
+      <div class="service-card" data-aos="zoom-in" data-aos-delay="500">
+        <div class="service-icon">🌤️</div>
+        <h3>Weather Info</h3>
+        <p>Check weather conditions for your travel</p>
+        <a href="{{ route('weather') }}" class="service-link">Check Now →</a>
+      </div>
+      <div class="service-card" data-aos="zoom-in" data-aos-delay="600">
+        <div class="service-icon">💱</div>
+        <h3>Currency Converter</h3>
+        <p>Convert currencies for your travel budget</p>
+        <a href="/Convert" class="service-link">Convert →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Enhanced Destinations Carousel -->
 <section class="destinations-section">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
@@ -713,8 +815,17 @@ body {
   z-index: 2;
   text-align: center;
   color: white;
-  max-width: 900px;
-  padding: 0 20px;
+  width: 100%;
+  padding: 0 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-text-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .hero-badge {
@@ -739,16 +850,18 @@ body {
 .hero-title {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 24px;
+  gap: 12px;
+  margin-bottom: 32px;
+  width: 100%;
 }
 
 .title-line {
   display: block;
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
-  font-weight: 700;
-  line-height: 1.1;
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 800;
+  line-height: 1;
   letter-spacing: -0.02em;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .gradient-text {
@@ -760,13 +873,15 @@ body {
 }
 
 .hero-description {
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
   font-weight: 400;
   opacity: 0.95;
-  margin-bottom: 32px;
-  max-width: 700px;
+  margin-bottom: 40px;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.6;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .hero-buttons {
@@ -929,7 +1044,7 @@ body {
 /* Section Styling */
 .section-header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 48px;
 }
 
 .section-badge {
@@ -962,19 +1077,19 @@ body {
 
 /* Features Section */
 .features-section {
-  padding: 100px 0;
+  padding: 80px 0;
   background: linear-gradient(135deg, var(--white) 0%, var(--gray-100) 100%);
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
+  gap: 32px;
 }
 
 .feature-card {
   background: var(--white);
-  padding: 40px 30px;
+  padding: 32px 24px;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-light);
   border: 1px solid var(--gray-200);
@@ -988,15 +1103,15 @@ body {
 }
 
 .feature-icon {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   background: linear-gradient(135deg, var(--light-green) 0%, var(--accent-green) 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 24px;
-  font-size: 2rem;
+  margin: 0 auto 20px;
+  font-size: 1.8rem;
 }
 
 .feature-card h3 {
@@ -1009,6 +1124,239 @@ body {
 .feature-card p {
   color: var(--gray-600);
   line-height: 1.6;
+}
+
+/* Bangladesh Highlights Section */
+.highlights-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, var(--light-green) 0%, var(--white) 100%);
+}
+
+.highlights-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.highlight-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-light);
+  border: 1px solid var(--gray-200);
+}
+
+.highlight-item:nth-child(even) {
+  direction: rtl;
+}
+
+.highlight-item:nth-child(even) > * {
+  direction: ltr;
+}
+
+.highlight-image {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  height: 300px;
+}
+
+.highlight-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.highlight-item:hover .highlight-image img {
+  transform: scale(1.05);
+}
+
+.highlight-content {
+  padding: 20px 0;
+}
+
+.highlight-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--gold), #ff9800);
+  color: var(--black);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.highlight-content h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.highlight-content p {
+  font-size: 1.1rem;
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.highlight-stats {
+  display: flex;
+  gap: 32px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-num {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+.stat-text {
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Services Section */
+.services-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, 
+    #006A4E 0%,     /* Bangladesh Green */
+    #228B22 50%,    /* Forest Green */
+    #00695C 100%    /* Teal Green */
+  );
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.services-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="%23F42A41" opacity="0.1"/></svg>') repeat;
+  background-size: 200px 200px;
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.service-card {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.15) 0%, 
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(244, 42, 65, 0.1) 50%,  /* Bangladesh Red accent */
+    transparent 100%
+  );
+  transition: left 0.5s ease;
+}
+
+.service-card:hover::before {
+  left: 100%;
+}
+
+.service-card:hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.25) 0%, 
+    rgba(244, 42, 65, 0.1) 100%  /* Bangladesh Red */
+  );
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(244, 42, 65, 0.3);
+  box-shadow: 0 15px 40px rgba(244, 42, 65, 0.2);
+}
+
+.service-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.3));
+}
+
+.service-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #FFFFFF;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.service-card p {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  color: #F8F9FA;
+}
+
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #F42A41, #DC143C);  /* Bangladesh Red */
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 25px;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(244, 42, 65, 0.3);
+}
+
+.service-link:hover {
+  background: linear-gradient(135deg, #DC143C, #B22222);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(244, 42, 65, 0.4);
+  color: white;
 }
 
 /* Animation Classes */
@@ -1420,43 +1768,60 @@ body {
 
 /* Testimonials Section */
 .testimonials-section {
-  padding: 100px 0;
-  background: linear-gradient(135deg, var(--gray-900) 0%, var(--primary-green) 100%);
-  color: white;
+  padding: 80px 0;
+  background: linear-gradient(135deg, 
+    #F8F9FA 0%, 
+    #E8F5E8 50%, 
+    #F1F8E9 100%
+  );
+  color: #2C3E50;
 }
 
 .testimonials-section .section-badge {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #006A4E, #00695C);
+  color: white;
+  border: none;
 }
 
 .testimonials-section .section-header h2 {
-  color: white;
+  color: #2C3E50;
 }
 
 .testimonials-section .section-header p {
-  color: rgba(255, 255, 255, 0.8);
+  color: #6C757D;
 }
 
 .testimonials-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 32px;
 }
 
 .testimonial-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #FFFFFF;
+  border: 2px solid #E8F5E8;
   border-radius: var(--border-radius-lg);
-  padding: 30px;
+  padding: 32px;
   transition: var(--transition);
+  box-shadow: 0 8px 25px rgba(0, 105, 92, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(135deg, #006A4E, #00695C, #F42A41);
 }
 
 .testimonial-card:hover {
   transform: translateY(-8px);
-  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 40px rgba(0, 105, 92, 0.15);
+  border-color: #66BB6A;
 }
 
 .testimonial-content {
@@ -1464,22 +1829,72 @@ body {
 }
 
 .testimonial-rating {
-  color: var(--gold);
-  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 16px;
 }
 
+.testimonial-rating .stars {
+  color: #FFD700;
+  font-size: 1.2rem;
+  text-shadow: 0 1px 3px rgba(255, 215, 0, 0.3);
+}
+
 .testimonial-content p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #2C3E50;
   font-style: italic;
+  position: relative;
+  padding: 0 20px;
+}
+
+.testimonial-content p::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -10px;
+  font-size: 3rem;
+  color: #006A4E;
+  font-family: serif;
+  opacity: 0.3;
 }
 
 .testimonial-author {
   display: flex;
   align-items: center;
   gap: 16px;
+  padding-top: 16px;
+  border-top: 2px solid #E8F5E8;
+}
+
+.author-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #006A4E;
+  box-shadow: 0 4px 12px rgba(0, 105, 92, 0.2);
+}
+
+.author-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.author-info h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #006A4E;
+  margin-bottom: 4px;
+}
+
+.author-info span {
+  font-size: 0.9rem;
+  color: #6C757D;
+  font-weight: 500;
 }
 
 .author-avatar {
@@ -1542,6 +1957,67 @@ body {
   .testimonials-grid {
     grid-template-columns: 1fr;
   }
+  
+  /* Reduced padding for mobile */
+  .features-section,
+  .destinations-section,
+  .packages-section,
+  .testimonials-section,
+  .highlights-section {
+    padding: 40px 0;
+  }
+  
+  .services-section {
+    padding: 40px 0;
+  }
+  
+  .section-header {
+    margin-bottom: 32px;
+  }
+  
+  .highlights-grid {
+    gap: 40px;
+  }
+  
+  .highlight-item {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+  
+  .highlight-item:nth-child(even) {
+    direction: ltr;
+  }
+  
+  .highlight-image {
+    height: 200px;
+  }
+  
+  .highlight-stats {
+    justify-content: center;
+    gap: 24px;
+  }
+  
+  .services-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+  }
+}
+
+/* Additional section padding optimization for desktop */
+.destinations-section {
+  padding: 60px 0;
+  background: var(--white);
+}
+
+.packages-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, var(--gray-100) 0%, var(--light-green) 100%);
+}
+
+.testimonials-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, var(--white) 0%, var(--gray-100) 100%);
 }
 </style>
 
