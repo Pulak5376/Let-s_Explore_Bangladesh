@@ -3,8 +3,481 @@
 @section('title', 'Stories')
 
 @section('content')
+
+<!-- Immersive Hero Section -->
+<section class="hero-stories">
+  <div class="hero-background">
+    <div class="hero-slides">
+      <div class="hero-slide active" data-bg="https://sundarbantravel.com/wp-content/uploads/2023/02/River_in_Sundarban.jpg"></div>
+      <div class="hero-slide" data-bg="https://upload.wikimedia.org/wikipedia/commons/d/db/Saint_Martins_Island_with_boats_in_foreground.jpg"></div>
+      <div class="hero-slide" data-bg="https://th.bing.com/th/id/OIP.s2MqHWn2L7W8SV0dE4TrEAHaEK?w=267&h=180&c=7&r=0&o=7&pid=1.7&rm=3"></div>
+      <div class="hero-slide" data-bg="https://images.hive.blog/768x0/https://cdn.pixabay.com/photo/2018/03/20/14/00/sea-3243357_960_720.jpg"></div>
+    </div>
+    <div class="hero-overlay"></div>
+  </div>
+  
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-pulse"></span>
+      <span>🌍 Travel Stories</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="title-word" data-delay="0">Discover</span>
+      <span class="title-word" data-delay="0.2">Bangladesh</span>
+      <span class="title-word gradient-text" data-delay="0.4">Adventures</span>
+    </h1>
+    <p class="hero-subtitle">
+      <span class="subtitle-line" data-delay="0.6">Share your journey, inspire others</span>
+      <span class="subtitle-line" data-delay="0.8">Connect with fellow travelers worldwide</span>
+    </p>
+    <div class="hero-stats">
+      <div class="stat-item" data-delay="1.0">
+        <span class="stat-number" data-count="1247">0</span>
+        <span class="stat-label">Stories Shared</span>
+      </div>
+      <div class="stat-item" data-delay="1.2">
+        <span class="stat-number" data-count="89">0</span>
+        <span class="stat-label">Destinations</span>
+      </div>
+      <div class="stat-item" data-delay="1.4">
+        <span class="stat-number" data-count="15642">0</span>
+        <span class="stat-label">Adventures</span>
+      </div>
+    </div>
+    <div class="hero-cta" data-delay="1.6">
+      <button class="cta-primary">
+        <span>Share Your Story</span>
+        <i class="cta-arrow">→</i>
+      </button>
+      <button class="cta-secondary">
+        <span>Explore Stories</span>
+        <i class="cta-play">▶</i>
+      </button>
+    </div>
+  </div>
+  
+  <div class="scroll-indicator">
+    <div class="scroll-mouse">
+      <div class="scroll-wheel"></div>
+    </div>
+    <span>Scroll to explore</span>
+  </div>
+  
+  <div class="floating-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+</section>
+
 <section class="stories-section" style="padding: 20px; background: linear-gradient(135deg, #f8fffe 0%, #e8f5e8 50%, #f8fffe 100%); min-height: 100vh;">
   <style>
+    /* Hero Section Styles */
+    .hero-stories {
+      position: relative;
+      height: 100vh;
+      min-height: 800px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .hero-background {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-slides {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      animation: kenBurns 15s ease-in-out infinite;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+    }
+
+    @keyframes kenBurns {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.05) rotate(0.5deg); }
+      50% { transform: scale(1.1) rotate(0deg); }
+      75% { transform: scale(1.05) rotate(-0.5deg); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, 
+        rgba(0, 105, 92, 0.7) 0%, 
+        rgba(0, 105, 92, 0.5) 50%, 
+        rgba(0, 0, 0, 0.6) 100%);
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      color: white;
+      max-width: 1000px;
+      padding: 0 40px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 32px;
+      animation: fadeInUp 1s ease-out 0.5s both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .badge-pulse {
+      position: absolute;
+      left: 16px;
+      width: 8px;
+      height: 8px;
+      background: #00ff88;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { 
+        opacity: 1; 
+        transform: scale(1); 
+        box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
+      }
+      50% { 
+        opacity: 0.8; 
+        transform: scale(1.2); 
+        box-shadow: 0 0 0 10px rgba(0, 255, 136, 0);
+      }
+    }
+
+    .hero-title {
+      margin-bottom: 32px;
+      line-height: 1.1;
+    }
+
+    .title-word {
+      display: inline-block;
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 800;
+      margin: 0 16px;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: wordReveal 1s ease-out forwards;
+    }
+
+    .title-word:nth-child(1) { animation-delay: 0.2s; }
+    .title-word:nth-child(2) { animation-delay: 0.4s; }
+    .title-word:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes wordReveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffd700 0%, #ff6b35 50%, #f7931e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.3));
+    }
+
+    .hero-subtitle {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 400;
+      opacity: 0.9;
+      margin-bottom: 48px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .subtitle-line {
+      display: block;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: slideInUp 1s ease-out forwards;
+    }
+
+    .subtitle-line:nth-child(1) { animation-delay: 0.8s; }
+    .subtitle-line:nth-child(2) { animation-delay: 1s; }
+
+    @keyframes slideInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: statReveal 1s ease-out forwards;
+    }
+
+    @keyframes statReveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ffd700;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 1rem;
+      font-weight: 500;
+      opacity: 0.8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: ctaReveal 1s ease-out forwards;
+      animation-delay: 1.6s;
+    }
+
+    @keyframes ctaReveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cta-primary, .cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 36px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-primary {
+      background: linear-gradient(135deg, #ffd700 0%, #ff6b35 100%);
+      color: #1a1a1a;
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(255, 215, 0, 0.4);
+    }
+
+    .cta-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .cta-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      text-align: center;
+      color: white;
+      opacity: 0.8;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .scroll-mouse {
+      width: 24px;
+      height: 40px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 12px;
+      margin: 0 auto 8px;
+      position: relative;
+    }
+
+    .scroll-wheel {
+      width: 4px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 2px;
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: scrollWheel 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollWheel {
+      0%, 100% { top: 6px; opacity: 1; }
+      50% { top: 20px; opacity: 0.3; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+
+    .floating-particles {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 215, 0, 0.6);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .particle:nth-child(1) {
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+      animation-duration: 8s;
+    }
+
+    .particle:nth-child(2) {
+      top: 40%;
+      right: 15%;
+      animation-delay: 2s;
+      animation-duration: 6s;
+    }
+
+    .particle:nth-child(3) {
+      bottom: 30%;
+      left: 20%;
+      animation-delay: 4s;
+      animation-duration: 7s;
+    }
+
+    .particle:nth-child(4) {
+      top: 60%;
+      right: 25%;
+      animation-delay: 1s;
+      animation-duration: 9s;
+    }
+
+    .particle:nth-child(5) {
+      bottom: 20%;
+      right: 30%;
+      animation-delay: 3s;
+      animation-duration: 5s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10%, 90% {
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 0.8;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-content {
+        padding: 0 20px;
+      }
+      
+      .title-word {
+        margin: 0 8px;
+        font-size: clamp(2rem, 12vw, 3rem);
+      }
+      
+      .hero-stats {
+        gap: 30px;
+      }
+      
+      .stat-number {
+        font-size: 2rem;
+      }
+      
+      .hero-cta {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .cta-primary, .cta-secondary {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+    }
     .social-feed {
       max-width: 100%;
       margin: 0;
@@ -497,6 +970,108 @@
   </div>
 
   <script>
+    // Hero Background Slideshow
+    function initHeroSlideshow() {
+      const slides = document.querySelectorAll('.hero-slide');
+      let currentSlide = 0;
+      
+      // Set initial backgrounds
+      slides.forEach((slide, index) => {
+        const bgUrl = slide.getAttribute('data-bg');
+        slide.style.backgroundImage = `url(${bgUrl})`;
+      });
+      
+      function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+      }
+      
+      // Change slide every 5 seconds
+      setInterval(nextSlide, 5000);
+    }
+
+    // Counter Animation
+    function animateCounters() {
+      const counters = document.querySelectorAll('.stat-number[data-count]');
+      
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const duration = 2000; // 2 seconds
+        const increment = target / (duration / 16); // 60fps
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          
+          // Format large numbers
+          if (target >= 1000) {
+            counter.textContent = Math.floor(current).toLocaleString();
+          } else {
+            counter.textContent = Math.floor(current);
+          }
+        }, 16);
+      });
+    }
+
+    // Hero CTA Interactions
+    function initHeroCTA() {
+      const primaryCTA = document.querySelector('.cta-primary');
+      const secondaryCTA = document.querySelector('.cta-secondary');
+      
+      primaryCTA.addEventListener('click', function() {
+        // Smooth scroll to stories section
+        document.querySelector('.stories-section').scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        
+        // Show create story modal (placeholder)
+        setTimeout(() => {
+          alert('🌟 Ready to share your Bangladesh adventure?\n\nFeature coming soon - you\'ll be able to:\n📸 Upload stunning photos\n📝 Write your travel story\n📍 Tag amazing locations\n🤝 Connect with fellow adventurers');
+        }, 800);
+      });
+      
+      secondaryCTA.addEventListener('click', function() {
+        // Smooth scroll to stories
+        document.querySelector('.stories-section').scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    }
+
+    // Parallax Effect for Hero
+    function initParallax() {
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const heroHeight = document.querySelector('.hero-stories').offsetHeight;
+        
+        if (scrolled < heroHeight) {
+          const parallaxSpeed = scrolled * 0.5;
+          document.querySelector('.hero-background').style.transform = `translateY(${parallaxSpeed}px)`;
+          
+          // Fade effect
+          const opacity = 1 - (scrolled / heroHeight);
+          document.querySelector('.hero-content').style.opacity = opacity;
+        }
+      });
+    }
+
+    // Initialize all hero functions
+    document.addEventListener('DOMContentLoaded', function() {
+      initHeroSlideshow();
+      initHeroCTA();
+      initParallax();
+      
+      // Start counter animation after a delay
+      setTimeout(animateCounters, 1000);
+    });
+
     // Event delegation for action buttons
     document.addEventListener('click', function(e) {
       if (e.target.closest('.action-btn')) {
