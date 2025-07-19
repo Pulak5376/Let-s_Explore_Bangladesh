@@ -470,5 +470,669 @@
     <p>© 2025. All rights reserved by Let's Explore Bangladesh.</p>
   </footer>
 
+  <!-- AI Chatbot Support System -->
+  <div id="chatbot-container" class="chatbot-hidden">
+    <div class="chatbot-header">
+      <div class="chatbot-title">
+        <div class="chatbot-avatar">🤖</div>
+        <div class="chatbot-info">
+          <h4>Bangladesh Travel Assistant</h4>
+          <span class="chatbot-status">
+            <span class="status-indicator"></span>
+            Online
+          </span>
+        </div>
+      </div>
+      <div class="chatbot-controls">
+        <button class="minimize-btn" onclick="minimizeChatbot()">−</button>
+        <button class="close-btn" onclick="closeChatbot()">×</button>
+      </div>
+    </div>
+    
+    <div class="chatbot-messages" id="chatbot-messages">
+      <div class="message bot-message">
+        <div class="message-avatar">🇧🇩</div>
+        <div class="message-content">
+          <p>Hi there! I'm your Bangladesh Travel Assistant. I can help you with:</p>
+          <ul>
+            <li>🗺️ Finding the best destinations</li>
+            <li>🏨 Hotel recommendations</li>
+            <li>✈️ Flight and travel planning</li>
+            <li>🍜 Local food suggestions</li>
+            <li>📸 Photography spots</li>
+            <li>💰 Budget planning</li>
+          </ul>
+          <p>What would you like to explore in Bangladesh?</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="chatbot-suggestions">
+      <button class="suggestion-btn" onclick="sendSuggestion('Best places to visit in Bangladesh')">
+        🏞️ Best Places
+      </button>
+      <button class="suggestion-btn" onclick="sendSuggestion('Cox Bazar travel guide')">
+        🏖️ Cox Bazar
+      </button>
+      <button class="suggestion-btn" onclick="sendSuggestion('Sundarban tour packages')">
+        🐅 Sundarban
+      </button>
+    </div>
+    
+    <div class="chatbot-input">
+      <div class="input-group">
+        <input type="text" id="chatbot-input" placeholder="Ask me anything about Bangladesh travel..." />
+        <button class="send-btn" onclick="sendMessage()">
+          <span class="send-icon">📤</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Chatbot Button -->
+  <button class="chatbot-toggle" onclick="toggleChatbot()" id="chatbot-toggle">
+    <span class="chat-icon">💬</span>
+    <span class="notification-badge" id="notification-badge">1</span>
+  </button>
+
+  <!-- Chatbot Styles -->
+  <style>
+    /* Chatbot Toggle Button */
+    .chatbot-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 1px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #00695c, #4caf50);
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 4px 20px rgba(0, 105, 92, 0.3);
+      cursor: pointer;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .chatbot-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(0, 105, 92, 0.4);
+    }
+
+    .chatbot-toggle .chat-icon {
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .chatbot-toggle.active .chat-icon {
+      transform: rotate(180deg);
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #f44336;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Chatbot Container */
+    #chatbot-container {
+      position: fixed;
+      bottom: 90px;
+      right: 40px;
+      width: 380px;
+      height: 600px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      z-index: 999;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 2px solid rgba(0, 105, 92, 0.1);
+    }
+
+    #chatbot-container.chatbot-hidden {
+      transform: translateY(100%) scale(0.8);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #chatbot-container.chatbot-minimized {
+      height: 70px;
+    }
+
+    /* Chatbot Header */
+    .chatbot-header {
+      background: linear-gradient(135deg, #00695c, #4caf50);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chatbot-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chatbot-avatar {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .chatbot-info h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .chatbot-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      background: #4caf50;
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0.3; }
+    }
+
+    .chatbot-controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    .minimize-btn, .close-btn {
+      width: 30px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .minimize-btn:hover, .close-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Messages Area */
+    .chatbot-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .message {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .message-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #00695c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .user-message .message-avatar {
+      background: #2196f3;
+      order: 2;
+    }
+
+    .user-message {
+      flex-direction: row-reverse;
+    }
+
+    .message-content {
+      background: white;
+      border-radius: 18px;
+      padding: 12px 16px;
+      max-width: 250px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      animation: messageSlide 0.3s ease;
+    }
+
+    .user-message .message-content {
+      background: #2196f3;
+      color: white;
+    }
+
+    @keyframes messageSlide {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message-content p {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .message-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .message-content ul {
+      margin: 8px 0;
+      padding-left: 16px;
+      font-size: 14px;
+    }
+
+    .message-content li {
+      margin-bottom: 4px;
+    }
+
+    /* Suggestions */
+    .chatbot-suggestions {
+      padding: 15px 20px;
+      background: white;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .suggestion-btn {
+      background: rgba(0, 105, 92, 0.1);
+      border: 1px solid rgba(0, 105, 92, 0.2);
+      color: #00695c;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .suggestion-btn:hover {
+      background: #00695c;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Input Area */
+    .chatbot-input {
+      padding: 20px;
+      background: white;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    #chatbot-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 25px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    #chatbot-input:focus {
+      border-color: #00695c;
+    }
+
+    .send-btn {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, #00695c, #4caf50);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .send-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(0, 105, 92, 0.3);
+    }
+
+    .send-icon {
+      font-size: 16px;
+    }
+
+    /* Dark Mode Support */
+    body.dark-mode #chatbot-container {
+      background: #2d2d2d;
+      border-color: rgba(102, 187, 106, 0.2);
+    }
+
+    body.dark-mode .chatbot-messages {
+      background: #1a1a1a;
+    }
+
+    body.dark-mode .message-content {
+      background: #3d3d3d;
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .chatbot-input {
+      background: #2d2d2d;
+      border-color: rgba(102, 187, 106, 0.2);
+    }
+
+    body.dark-mode #chatbot-input {
+      background: #3d3d3d;
+      color: #e0e0e0;
+      border-color: rgba(102, 187, 106, 0.3);
+    }
+
+    body.dark-mode .chatbot-suggestions {
+      background: #2d2d2d;
+      border-color: rgba(102, 187, 106, 0.2);
+    }
+
+    body.dark-mode .suggestion-btn {
+      background: rgba(102, 187, 106, 0.1);
+      border-color: rgba(102, 187, 106, 0.2);
+      color: #66bb6a;
+    }
+
+    body.dark-mode .suggestion-btn:hover {
+      background: #66bb6a;
+      color: #1a1a1a;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      #chatbot-container {
+        width: calc(100vw - 40px);
+        height: calc(100vh - 100px);
+        bottom: 10px;
+        right: 20px;
+      }
+
+      .chatbot-toggle {
+        bottom: 10px;
+        right: 20px;
+      }
+
+      .suggestion-btn {
+        font-size: 11px;
+        padding: 6px 10px;
+      }
+    }
+  </style>
+
+  <!-- Chatbot JavaScript -->
+  <script>
+    let chatbotOpen = false;
+    let chatbotMinimized = false;
+
+    // Predefined responses for Bangladesh travel
+    const chatbotResponses = {
+      'best places': [
+        "🏞️ Here are Bangladesh's top destinations:",
+        "• Cox's Bazar - World's longest natural beach",
+        "• Sundarban - Royal Bengal Tiger habitat",
+        "• Sajek Valley - Above the clouds experience", 
+        "• Saint Martin Island - Coral island paradise",
+        "• Srimangal - Tea garden capital",
+        "• Bandarban - Hill district beauty",
+        "• Rangamati - Lake district",
+        "• Paharpur - Ancient Buddhist monastery"
+      ],
+      'cox bazar': [
+        "🏖️ Cox's Bazar Travel Guide:",
+        "• 120km long natural beach",
+        "• Best time: October to March",
+        "• Activities: Beach walking, surfing, parasailing",
+        "• Must visit: Himchari, Inani Beach, Teknaf",
+        "• Stay: Sea Crown Hotel, Long Beach Hotel",
+        "• Food: Fresh seafood, Burmese cuisine"
+      ],
+      'sundarban': [
+        "🐅 Sundarban Mangrove Forest:",
+        "• UNESCO World Heritage Site",
+        "• Home to Royal Bengal Tigers",
+        "• Best time: November to February",
+        "• Duration: 2-3 days tour",
+        "• Activities: Boat safari, bird watching",
+        "• Entry: Through Mongla or Khulna",
+        "• Book through authorized tour operators"
+      ],
+      'hotel': [
+        "🏨 Hotel Recommendations by Area:",
+        "Cox's Bazar: Sea Crown, Long Beach Hotel",
+        "Dhaka: Pan Pacific, The Westin",
+        "Chittagong: Peninsula, Agrabad Hotel",
+        "Sylhet: Grand Sylhet, Rose View Hotel",
+        "Budget options available in all areas",
+        "Book in advance during peak season"
+      ],
+      'food': [
+        "🍜 Must-try Bangladesh Foods:",
+        "• Hilsa fish curry (national fish)",
+        "• Biryani (aromatic rice dish)",
+        "• Panta bhat (traditional breakfast)",
+        "• Roshogolla & Mishti doi (sweets)",
+        "• Fuchka/Pani puri (street food)",
+        "• Kacchi biryani",
+        "• Shorshe ilish (hilsa in mustard)"
+      ],
+      'budget': [
+        "💰 Bangladesh Travel Budget Guide:",
+        "Budget: $20-30/day",
+        "• Accommodation: $5-15/night",
+        "• Food: $3-8/day",
+        "• Transport: $2-10/day",
+        "• Activities: $5-20/day",
+        "Mid-range: $40-80/day",
+        "Luxury: $100+/day"
+      ],
+      'transport': [
+        "🚌 Transportation in Bangladesh:",
+        "• Domestic flights (fastest)",
+        "• AC buses (comfortable)",
+        "• Trains (scenic routes)",
+        "• CNG/Rickshaw (local transport)",
+        "• Launch/Ferry (river routes)",
+        "• Rent a car with driver",
+        "Book tickets in advance for comfort"
+      ]
+    };
+
+    function toggleChatbot() {
+      const container = document.getElementById('chatbot-container');
+      const toggle = document.getElementById('chatbot-toggle');
+      const badge = document.getElementById('notification-badge');
+      
+      chatbotOpen = !chatbotOpen;
+      
+      if (chatbotOpen) {
+        container.classList.remove('chatbot-hidden');
+        toggle.classList.add('active');
+        badge.style.display = 'none';
+        setTimeout(() => {
+          document.getElementById('chatbot-input').focus();
+        }, 300);
+      } else {
+        container.classList.add('chatbot-hidden');
+        toggle.classList.remove('active');
+        chatbotMinimized = false;
+      }
+    }
+
+    function minimizeChatbot() {
+      const container = document.getElementById('chatbot-container');
+      chatbotMinimized = !chatbotMinimized;
+      
+      if (chatbotMinimized) {
+        container.classList.add('chatbot-minimized');
+      } else {
+        container.classList.remove('chatbot-minimized');
+      }
+    }
+
+    function closeChatbot() {
+      const container = document.getElementById('chatbot-container');
+      const toggle = document.getElementById('chatbot-toggle');
+      
+      container.classList.add('chatbot-hidden');
+      toggle.classList.remove('active');
+      chatbotOpen = false;
+      chatbotMinimized = false;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chatbot-input');
+      const message = input.value.trim();
+      
+      if (message) {
+        addMessage(message, 'user');
+        input.value = '';
+        
+        // Simulate typing delay
+        setTimeout(() => {
+          const response = generateResponse(message);
+          addMessage(response, 'bot');
+        }, 1000);
+      }
+    }
+
+    function sendSuggestion(suggestion) {
+      document.getElementById('chatbot-input').value = suggestion;
+      sendMessage();
+    }
+
+    function addMessage(content, sender) {
+      const messagesContainer = document.getElementById('chatbot-messages');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}-message`;
+      
+      const avatar = sender === 'user' ? '👤' : '🇧🇩';
+      
+      if (Array.isArray(content)) {
+        content = content.join('<br>');
+      }
+      
+      messageDiv.innerHTML = `
+        <div class="message-avatar">${avatar}</div>
+        <div class="message-content">
+          <p>${content}</p>
+        </div>
+      `;
+      
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function generateResponse(message) {
+      const lowerMessage = message.toLowerCase();
+      
+      // Check for keywords and return appropriate response
+      for (const [keyword, response] of Object.entries(chatbotResponses)) {
+        if (lowerMessage.includes(keyword)) {
+          return response;
+        }
+      }
+      
+      // Default responses for common queries
+      if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+        return "Hello! 👋 Welcome to Bangladesh Travel Assistant. How can I help you plan your amazing journey in Bangladesh?";
+      }
+      
+      if (lowerMessage.includes('thank')) {
+        return "You're welcome! 😊 Have an amazing time exploring Bangladesh. Feel free to ask if you need more help!";
+      }
+      
+      if (lowerMessage.includes('weather')) {
+        return "🌤️ Bangladesh Weather:<br>• Winter (Dec-Feb): 10-25°C, best time to visit<br>• Summer (Mar-May): 25-40°C, hot & humid<br>• Monsoon (Jun-Sep): Heavy rainfall<br>• Post-monsoon (Oct-Nov): Pleasant weather";
+      }
+      
+      if (lowerMessage.includes('visa')) {
+        return "📋 Visa Information:<br>• Visa on arrival for many countries<br>• Tourist visa: 30 days<br>• Required: Passport, photos, return ticket<br>• Fee: varies by nationality<br>• Check with Bangladesh embassy in your country";
+      }
+      
+      // Generic helpful response
+      return [
+        "I'd be happy to help you with that! 🤔",
+        "Try asking me about:",
+        "• Best places to visit",
+        "• Hotel recommendations", 
+        "• Food suggestions",
+        "• Travel budget",
+        "• Transportation",
+        "• Weather information",
+        "• Visa requirements"
+      ];
+    }
+
+    // Enter key support
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('chatbot-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          sendMessage();
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>

@@ -782,7 +782,7 @@
     /* Floating Action Button */
     .fab {
       position: fixed;
-      bottom: 30px;
+      bottom: 100px;
       right: 30px;
       width: 60px;
       height: 60px;
@@ -828,6 +828,39 @@
       opacity: 1;
       visibility: visible;
       right: 75px;
+    }
+
+    /* Override chatbot positioning for stories page */
+    .chatbot-toggle {
+      right: 30px !important;
+      bottom: 20px !important;
+      z-index: 1001 !important;
+    }
+
+    #chatbot-container {
+      right: 30px !important;
+      bottom: 90px !important;
+      z-index: 1000 !important;
+    }
+
+    /* Mobile responsive override */
+    @media (max-width: 768px) {
+      .fab {
+        bottom: 80px;
+        right: 20px;
+      }
+      
+      .chatbot-toggle {
+        right: 20px !important;
+        bottom: 10px !important;
+      }
+
+      #chatbot-container {
+        right: 10px !important;
+        bottom: 70px !important;
+        width: calc(100vw - 20px) !important;
+        height: calc(100vh - 120px) !important;
+      }
     }
   </style>
 
