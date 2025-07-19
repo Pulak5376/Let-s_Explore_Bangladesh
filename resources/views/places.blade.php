@@ -4,14 +4,21 @@
 
 @section('content')
 <style>
+  /* Import AOS for animations */
+  @import url('https://unpkg.com/aos@2.3.1/dist/aos.css');
+
   .places-hero {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), 
-                url('https://images.unsplash.com/photo-1539650116574-75c0c6d73d0e?ixlib=rb-4.0.3') center/cover;
-    padding: 6rem 2rem;
+    background: linear-gradient(135deg, rgba(0, 105, 92, 0.9), rgba(76, 175, 80, 0.8)), 
+                url('https://images.unsplash.com/photo-1605640840605-14ac1855827b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+    padding: 8rem 2rem;
     text-align: center;
     color: white;
     position: relative;
     overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .places-hero::before {
@@ -21,20 +28,152 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, rgba(0, 105, 92, 0.7) 0%, rgba(244, 42, 65, 0.3) 100%);
     z-index: 1;
+    animation: gradientShift 10s ease-in-out infinite;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% {
+      background: linear-gradient(45deg, rgba(0, 105, 92, 0.7) 0%, rgba(244, 42, 65, 0.3) 100%);
+    }
+    50% {
+      background: linear-gradient(45deg, rgba(244, 42, 65, 0.4) 0%, rgba(0, 105, 92, 0.8) 100%);
+    }
+  }
+
+  .places-hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(0, 105, 92, 0.3) 0%, transparent 50%);
+    z-index: 2;
+    animation: floatingOrbs 15s ease-in-out infinite;
+  }
+
+  @keyframes floatingOrbs {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    33% { transform: translateY(-20px) scale(1.1); }
+    66% { transform: translateY(10px) scale(0.9); }
   }
 
   .places-hero > * {
     position: relative;
-    z-index: 2;
+    z-index: 3;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    animation: heroSlideUp 1.5s ease-out;
+  }
+
+  @keyframes heroSlideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #ffffff, #f0f9ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes titleGlow {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)); }
+    50% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6)); }
+  }
+
+  .hero-subtitle {
+    font-size: 1.4rem;
+    opacity: 0.95;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    animation: subtitleFade 2s ease-out 0.5s both;
+  }
+
+  @keyframes subtitleFade {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 0.95;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+    animation: statsSlideIn 2s ease-out 1s both;
+  }
+
+  @keyframes statsSlideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .stat-item {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .stat-item:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 105, 92, 0.3);
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-top: 0.5rem;
   }
 
   .places-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 4rem 2rem;
-    background: #f8f9fa;
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
     min-height: 100vh;
   }
 
@@ -42,19 +181,20 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     flex-wrap: wrap;
   }
 
   .filter-btn {
-    background: white;
-    border: 2px solid #e9ecef;
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    color: #6c757d;
-    font-weight: 500;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    color: #00695c;
+    border: 2px solid rgba(0, 105, 92, 0.2);
+    padding: 12px 25px;
+    border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 14px;
     position: relative;
     overflow: hidden;
   }
@@ -66,22 +206,21 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    transition: left 0.3s ease;
-    z-index: -1;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    transition: left 0.5s;
   }
 
-  .filter-btn.active,
-  .filter-btn:hover {
-    color: white;
-    border-color: transparent;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-  }
-
-  .filter-btn.active::before,
   .filter-btn:hover::before {
-    left: 0;
+    left: 100%;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: linear-gradient(135deg, #00695c, #4caf50);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 105, 92, 0.3);
+    border-color: #00695c;
   }
 
   .places-grid {
@@ -95,31 +234,34 @@
     background: white;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 30px rgba(0, 105, 92, 0.1);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
+    border: 1px solid rgba(0, 105, 92, 0.1);
   }
 
   .place-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 25px 50px rgba(0, 105, 92, 0.2);
+    border-color: #00695c;
   }
 
   .image-container {
     position: relative;
     overflow: hidden;
-    height: 250px;
+    height: 280px;
   }
 
   .place-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s ease;
+    filter: brightness(1.1) saturate(1.2);
   }
 
   .place-card:hover .place-image {
-    transform: scale(1.1);
+    transform: scale(1.15) rotate(2deg);
   }
 
   .image-overlay {
@@ -601,10 +743,26 @@ $places = [
 ?>
 
 <section class="places-hero">
-  <h1 style="font-size: 3rem; margin-bottom: 1rem; font-weight: 800;">Explore Bangladesh</h1>
-  <p style="font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto;">
-    Discover amazing destinations across all 8 divisions of Bangladesh
-  </p>
+  <div class="hero-content">
+    <h1 class="hero-title">Explore Bangladesh</h1>
+    <p class="hero-subtitle">
+      Discover amazing destinations across all 8 divisions of Bangladesh. From pristine beaches to lush green hills, ancient temples to modern cities.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-number">8</span>
+        <span class="stat-label">Divisions</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">25+</span>
+        <span class="stat-label">Amazing Places</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">🇧🇩</span>
+        <span class="stat-label">Beautiful Bangladesh</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <div class="places-container">
@@ -758,17 +916,83 @@ $places = [
         // Reset after 2 seconds
         setTimeout(() => {
           this.innerHTML = originalText;
-          this.style.background = 'linear-gradient(135deg, #ff6b6b, #ee5a52)';
+          this.style.background = 'linear-gradient(135deg, #00695c, #4caf50)';
         }, 2000);
       });
     });
 
-    // Initial animation for cards
-    placeCards.forEach((card, index) => {
-      setTimeout(() => {
-        card.classList.add('fade-in');
-      }, index * 100);
-    });
+    // Initialize AOS animations
+    if (typeof AOS !== 'undefined') {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        offset: 100
+      });
+    }
   });
 </script>
+
+<style>
+  /* Mobile responsiveness enhancements */
+  @media (max-width: 768px) {
+    .places-hero {
+      padding: 4rem 1rem;
+      min-height: 80vh;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+    }
+
+    .hero-stats {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .stat-item {
+      padding: 1rem;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+    }
+
+    .division-filters {
+      gap: 0.5rem;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      font-size: 12px;
+    }
+
+    .places-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .places-container {
+      padding: 3rem 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<!-- AOS Animation Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 @endsection
