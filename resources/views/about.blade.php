@@ -168,7 +168,7 @@
   }
 
   .team-card {
-    background: linear-gradient(135deg, #00695c, #4caf50);
+    background: linear-gradient(135deg, rgba(0, 105, 92, 0.9), rgba(76, 175, 80, 0.8));
     color: white;
     border-radius: 20px;
     padding: 2rem;
@@ -176,6 +176,8 @@
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
   }
 
   .team-card::before {
@@ -185,7 +187,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
     transition: left 0.5s;
   }
 
@@ -196,19 +198,23 @@
   .team-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0, 105, 92, 0.3);
+    background: linear-gradient(135deg, rgba(0, 105, 92, 0.95), rgba(76, 175, 80, 0.9));
   }
 
   .team-avatar {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    margin: 0 auto 1rem;
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
+    margin: 0 auto 1.5rem;
+    border: 4px solid #ffffff;
+    background: linear-gradient(135deg, #ffffff, #f0f9ff);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
+    font-size: 3rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 10;
   }
 
   .team-name {
@@ -311,7 +317,18 @@
   }
 
   body.dark-mode .team-card {
-    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.9), rgba(27, 94, 32, 0.8));
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  body.dark-mode .team-card:hover {
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.95), rgba(27, 94, 32, 0.9));
+  }
+
+  body.dark-mode .team-avatar {
+    background: linear-gradient(135deg, #ffffff, #e8f5e8);
+    border-color: #ffffff;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   }
 
   body.dark-mode .team-name {
