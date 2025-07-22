@@ -517,12 +517,27 @@
   <!-- Map Section -->
   <div class="map-section" data-aos="fade-up">
     <h2 class="map-title">Find Us on Map</h2>
-    <div style="width: 100%; height: 300px; background: linear-gradient(135deg, rgba(0, 106, 78, 0.1), rgba(76, 175, 80, 0.1)); border-radius: 15px; display: flex; align-items: center; justify-content: center; border: 2px dashed rgba(0, 106, 78, 0.3);">
-      <div style="text-align: center; color: #666;">
-        <div style="font-size: 3rem; margin-bottom: 1rem;">🗺️</div>
-        <p style="font-size: 1.1rem; margin: 0;">Interactive Map Coming Soon</p>
-        <p style="font-size: 0.9rem; margin: 0.5rem 0 0 0; opacity: 0.7;">Located in the heart of Dhaka, Bangladesh</p>
-      </div>
+    <!-- Google Maps Embed (No API Key Required) -->
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.9076890469297!2d90.4099324!3d23.8103088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c70c15ea1de1%3A0x97856381e88fb311!2sDhaka%2C%20Bangladesh!5e0!3m2!1sen!2s!4v1642678901234!5m2!1sen!2s"
+      width="100%" 
+      height="400" 
+      style="border: none; border-radius: 15px; box-shadow: 0 5px 15px rgba(0, 106, 78, 0.2);" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    
+    <!-- Fallback for JavaScript-based map -->
+    <div id="map" style="display: none; width: 100%; height: 400px; border-radius: 15px; border: 2px solid rgba(0, 106, 78, 0.2);"></div>
+    
+    <!-- Instructions for API key setup -->
+    <div style="margin-top: 20px; padding: 15px; background: rgba(0, 106, 78, 0.05); border-radius: 10px; border-left: 4px solid #006a4e;">
+      <p style="margin: 0; color: #666; font-size: 0.9rem;">
+        <strong>Note:</strong> To use advanced Google Maps features, get your API key from 
+        <a href="https://console.cloud.google.com/" target="_blank" style="color: #006a4e; text-decoration: underline;">Google Cloud Console</a>
+        and replace the placeholder in the JavaScript code below.
+      </p>
     </div>
   </div>
 </div>
@@ -541,5 +556,125 @@
       offset: 100
     });
   });
+
+  // Initialize Google Map
+  function initMap() {
+    // Coordinates for Dhaka, Bangladesh (you can change these to your exact location)
+    const dhakaLocation = { lat: 23.8103, lng: 90.4125 };
+    
+    // Map options
+    const mapOptions = {
+      zoom: 15,
+      center: dhakaLocation,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      styles: [
+        {
+          featureType: "all",
+          elementType: "geometry.fill",
+          stylers: [{ color: "#f8f9fa" }]
+        },
+        {
+          featureType: "water",
+          elementType: "geometry",
+          stylers: [{ color: "#4caf50", lightness: 20 }]
+        },
+        {
+          featureType: "road",
+          elementType: "geometry",
+          stylers: [{ color: "#ffffff" }]
+        },
+        {
+          featureType: "poi",
+          elementType: "geometry.fill",
+          stylers: [{ color: "#e8f5e8" }]
+        }
+      ]
+    };
+
+    // Create map
+    const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    // Create marker
+    const marker = new google.maps.Marker({
+      position: dhakaLocation,
+      map: map,
+      title: "Let's Explore Bangladesh",
+      icon: {
+        url: 'data:image/svg+xml;base64,' + btoa(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="18" fill="#006a4e" stroke="#ffffff" stroke-width="4"/>
+            <circle cx="20" cy="20" r="8" fill="#ffffff"/>
+            <text x="20" y="26" text-anchor="middle" fill="#006a4e" font-size="12" font-weight="bold">✈</text>
+          </svg>
+        `),
+        scaledSize: new google.maps.Size(40, 40)
+      }
+    });
+
+    // Info window
+    const infoWindow = new google.maps.InfoWindow({
+      content: `
+        <div style="padding: 10px; font-family: Arial, sans-serif;">
+          <h3 style="color: #006a4e; margin: 0 0 10px 0;">Let's Explore Bangladesh</h3>
+          <p style="margin: 5px 0; color: #666;">📍 Dhaka, Bangladesh</p>
+          <p style="margin: 5px 0; color: #666;">📞 +880 1XXX-XXXXXX</p>
+          <p style="margin: 5px 0; color: #666;">📧 info@letsexplorebangladesh.com</p>
+        </div>
+      `
+    });
+
+    // Open info window when marker is clicked
+    marker.addListener('click', function() {
+      infoWindow.open(map, marker);
+    });
+
+    // Open info window by default
+    infoWindow.open(map, marker);
+  }
+
+  // Handle map loading error
+  function handleMapError() {
+    const mapElement = document.getElementById('map');
+    if (mapElement) {
+      mapElement.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: linear-gradient(135deg, rgba(0, 106, 78, 0.1), rgba(76, 175, 80, 0.1)); border-radius: 15px;">
+          <div style="text-align: center; color: #666;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🗺️</div>
+            <p style="font-size: 1.1rem; margin: 0;">Map temporarily unavailable</p>
+            <p style="font-size: 0.9rem; margin: 0.5rem 0 0 0; opacity: 0.7;">Located in the heart of Dhaka, Bangladesh</p>
+          </div>
+        </div>
+      `;
+    }
+  }
+</script>
+
+<!-- Google Maps API -->
+<!-- 
+  OPTION 1: Use the embed above (no API key needed)
+  OPTION 2: Get your API key from https://console.cloud.google.com/ and uncomment below:
+-->
+<!--
+<script async defer 
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_ACTUAL_API_KEY_HERE&callback=initMap&libraries=places"
+        onerror="handleMapError()">
+</script>
+-->
+
+<!-- Instructions for getting Google Maps API Key -->
+<script>
+  console.log(`
+    🗺️ GOOGLE MAPS SETUP INSTRUCTIONS:
+    
+    1. Go to: https://console.cloud.google.com/
+    2. Create a new project or select existing
+    3. Enable "Maps JavaScript API"
+    4. Create credentials (API Key)
+    5. Restrict the key to your domain
+    6. Replace YOUR_ACTUAL_API_KEY_HERE with your key
+    7. Uncomment the script tag above
+    
+    Current status: Using embedded map (no API key required)
+  `);
 </script>
 @endsection
