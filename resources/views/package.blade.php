@@ -533,6 +533,24 @@
           'overlay' => 'Experience the Tea Capital'
         ],
         [
+          'title' => 'Kaptai Adventure Package',
+          'image' => 'https://www.bangladeshtravelandtours.com/wp-content/uploads/2023/04/85-768x432.jpg',
+          'duration' => '3 Days, 2 Nights',
+          'badge' => 'Popular',
+          'includes' => [
+            'Jaflong Crystal Clear River',
+            'Ratargul Swamp Forest',
+            'Lalakhal Blue Water',
+            'Keane Bridge Historic Site',
+            'Ali Amjad\'s Clock Tower',
+            '3-star hotel accommodation',
+            'AC transport for sightseeing',
+            'Professional tour guide'
+          ],
+          'price' => 'BDT 5,500',
+          'overlay' => 'Experience the Tea Capital'
+        ],
+        [
           'title' => 'Srimangal Tea Garden Escape',
           'image' => 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Sreemangal_tea_garden_2017-08-20.jpg',
           'duration' => '2 Days, 1 Night',
