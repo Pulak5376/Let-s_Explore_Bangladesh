@@ -791,9 +791,10 @@ body {
   justify-content: center;
   overflow: hidden;
   background: linear-gradient(135deg, 
-    rgba(0, 106, 78, 0.9) 0%, 
-    rgba(76, 175, 80, 0.8) 50%, 
-    rgba(244, 42, 65, 0.3) 100%),
+    rgba(0, 0, 0, 0.3) 0%, 
+    rgba(0, 106, 78, 0.2) 30%,
+    rgba(76, 175, 80, 0.1) 70%, 
+    rgba(0, 0, 0, 0.4) 100%),
     url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2000&q=80') center/cover;
   animation: heroBackground 20s ease-in-out infinite;
 }
@@ -813,8 +814,8 @@ body {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at center, 
-    rgba(0, 106, 78, 0.4) 0%, 
-    rgba(0, 106, 78, 0.8) 100%);
+    rgba(0, 0, 0, 0.1) 0%, 
+    rgba(0, 106, 78, 0.3) 100%);
   z-index: 1;
   animation: gradientShift 8s ease-in-out infinite;
 }
@@ -822,13 +823,13 @@ body {
 @keyframes gradientShift {
   0%, 100% {
     background: radial-gradient(circle at center, 
-      rgba(0, 106, 78, 0.4) 0%, 
-      rgba(0, 106, 78, 0.8) 100%);
+      rgba(0, 0, 0, 0.1) 0%, 
+      rgba(0, 106, 78, 0.3) 100%);
   }
   50% {
     background: radial-gradient(circle at center, 
-      rgba(244, 42, 65, 0.3) 0%, 
-      rgba(0, 106, 78, 0.9) 100%);
+      rgba(0, 106, 78, 0.1) 0%, 
+      rgba(0, 0, 0, 0.4) 100%);
   }
 }
 

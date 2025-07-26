@@ -8,7 +8,7 @@
   @import url('https://unpkg.com/aos@2.3.1/dist/aos.css');
 
   .places-hero {
-    background: linear-gradient(135deg, rgba(0, 105, 92, 0.9), rgba(76, 175, 80, 0.8)), 
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 105, 92, 0.2) 50%, rgba(0, 0, 0, 0.4) 100%), 
                 url('https://images.unsplash.com/photo-1605640840605-14ac1855827b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
     padding: 8rem 2rem;
     text-align: center;
@@ -28,17 +28,17 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, rgba(0, 105, 92, 0.7) 0%, rgba(244, 42, 65, 0.3) 100%);
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 105, 92, 0.1) 100%);
     z-index: 1;
     animation: gradientShift 10s ease-in-out infinite;
   }
 
   @keyframes gradientShift {
     0%, 100% {
-      background: linear-gradient(45deg, rgba(0, 105, 92, 0.7) 0%, rgba(244, 42, 65, 0.3) 100%);
+      background: linear-gradient(45deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 105, 92, 0.1) 100%);
     }
     50% {
-      background: linear-gradient(45deg, rgba(244, 42, 65, 0.4) 0%, rgba(0, 105, 92, 0.8) 100%);
+      background: linear-gradient(45deg, rgba(0, 105, 92, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
     }
   }
 
@@ -50,9 +50,9 @@
     right: 0;
     bottom: 0;
     background: 
-      radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(0, 105, 92, 0.3) 0%, transparent 50%);
+      radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(0, 105, 92, 0.1) 0%, transparent 50%);
     z-index: 2;
     animation: floatingOrbs 15s ease-in-out infinite;
   }
