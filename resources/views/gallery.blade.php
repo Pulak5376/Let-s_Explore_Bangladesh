@@ -8,8 +8,8 @@
   @import url('https://unpkg.com/aos@2.3.1/dist/aos.css');
 
   .gallery-hero {
-    background: linear-gradient(135deg, rgba(0, 106, 78, 0.9), rgba(76, 175, 80, 0.8)), 
-                url('https://images.unsplash.com/photo-1539650116574-75c0c6d73d0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 106, 78, 0.2) 50%, rgba(0, 0, 0, 0.4) 100%), 
+                url('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') center/cover;
     padding: 8rem 2rem;
     text-align: center;
     color: white;
@@ -19,6 +19,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-size: 120%;
+    animation: zoomOut 18s ease-in-out infinite;
+  }
+
+  @keyframes zoomOut {
+    0% {
+      background-size: 120%;
+      background-position: center center;
+    }
+    50% {
+      background-size: 100%;
+      background-position: center center;
+    }
+    100% {
+      background-size: 120%;
+      background-position: center center;
+    }
   }
 
   .gallery-hero::before {
@@ -28,17 +45,17 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, rgba(0, 106, 78, 0.7) 0%, rgba(244, 42, 65, 0.3) 100%);
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 106, 78, 0.1) 100%);
     z-index: 1;
     animation: gradientShift 8s ease-in-out infinite;
   }
 
   @keyframes gradientShift {
     0%, 100% {
-      background: linear-gradient(45deg, rgba(0, 106, 78, 0.7) 0%, rgba(244, 42, 65, 0.3) 100%);
+      background: linear-gradient(45deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 106, 78, 0.1) 100%);
     }
     50% {
-      background: linear-gradient(45deg, rgba(244, 42, 65, 0.4) 0%, rgba(0, 106, 78, 0.8) 100%);
+      background: linear-gradient(45deg, rgba(0, 106, 78, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
     }
   }
 
@@ -191,10 +208,22 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s ease;
+    transform: scale(1.1);
+    animation: galleryImageZoom 12s ease-in-out infinite;
+  }
+
+  @keyframes galleryImageZoom {
+    0%, 100% {
+      transform: scale(1.1);
+    }
+    50% {
+      transform: scale(1);
+    }
   }
 
   .gallery-card:hover .gallery-image {
-    transform: scale(1.15);
+    transform: scale(1.2);
+    animation-play-state: paused;
   }
 
   .image-overlay {
@@ -510,16 +539,16 @@
     @php
       $galleryItems = [
         [
-          'img' => 'https://www.travelandexplorebd.com/storage/app/public/posts/April2020/41.jpg',
-          'title' => 'Jaflong Crystal Waters',
-          'description' => 'Experience the pristine beauty of Jaflong with its crystal-clear rivers and stone collections in the heart of Sylhet.',
-          'category' => 'nature',
-          'location' => 'Sylhet',
+          'img' => 'https://upload.wikimedia.org/wikipedia/commons/d/db/Saint_Martins_Island_with_boats_in_foreground.jpg',
+          'title' => 'Saint Martin\'s Island Paradise',
+          'description' => 'Experience the pristine beauty of Saint Martin\'s Island with its crystal-clear waters and coral reefs in the Bay of Bengal.',
+          'category' => 'beaches',
+          'location' => 'Cox\'s Bazar',
           'likes' => 234,
           'views' => 1520
         ],
         [
-          'img' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Sundarban_Tiger.jpg/330px-Sundarban_Tiger.jpg',
+          'img' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Sundarban_Tiger.jpg/800px-Sundarban_Tiger.jpg',
           'title' => 'Royal Bengal Tiger',
           'description' => 'The majestic Royal Bengal Tiger in its natural habitat within the largest mangrove forest in the world.',
           'category' => 'nature',
@@ -528,16 +557,16 @@
           'views' => 2340
         ],
         [
-          'img' => 'https://images.hive.blog/768x0/https://cdn.pixabay.com/photo/2018/03/20/14/00/sea-3243357_960_720.jpg',
-          'title' => 'Cox\'s Bazar Sunset',
-          'description' => 'The world\'s longest natural sea beach offers spectacular sunset views over the Bay of Bengal.',
+          'img' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Kuakata_beach_sunset.jpg/800px-Kuakata_beach_sunset.jpg',
+          'title' => 'Kuakata Beach Sunset',
+          'description' => 'The panoramic sea beach where you can see both sunrise and sunset, known as the daughter of the sea.',
           'category' => 'beaches',
-          'location' => 'Cox\'s Bazar',
+          'location' => 'Patuakhali',
           'likes' => 678,
           'views' => 3450
         ],
         [
-          'img' => 'https://upload.wikimedia.org/wikipedia/commons/5/50/Sajek_Valley_20161205.jpg',
+          'img' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Sajek_Valley_Bangladesh.jpg/800px-Sajek_Valley_Bangladesh.jpg',
           'title' => 'Sajek Valley Clouds',
           'description' => 'Wake up above the clouds in the Queen of Hills, surrounded by lush green valleys and tribal culture.',
           'category' => 'hills',
@@ -546,7 +575,7 @@
           'views' => 1890
         ],
         [
-          'img' => 'https://cosmosgroup.sgp1.digitaloceanspaces.com/news/details/5967770_Kaptai%20Lake%20Rangamati%20Travel%20guide.jpg',
+          'img' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Kaptai_Lake_05.jpg/800px-Kaptai_Lake_05.jpg',
           'title' => 'Kaptai Lake Serenity',
           'description' => 'A tranquil artificial lake surrounded by green hills, perfect for boat rides and peaceful relaxation.',
           'category' => 'nature',
@@ -555,16 +584,16 @@
           'views' => 1670
         ],
         [
-          'img' => 'https://ttg.com.bd/uploads/tours/plans/204_36376273530_3c9a0335f5_b-copyjpg.webp',
-          'title' => 'Bandarban Mountains',
+          'img' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Midway_to_Konglak_Hill%2C_Khagrachari%2C_Bangladesh.jpg/800px-Midway_to_Konglak_Hill%2C_Khagrachari%2C_Bangladesh.jpg',
+          'title' => 'Khagrachari Hills',
           'description' => 'Breathtaking mountain landscapes and tribal culture in Bangladesh\'s hill district paradise.',
           'category' => 'hills',
-          'location' => 'Bandarban',
+          'location' => 'Khagrachari',
           'likes' => 412,
           'views' => 2100
         ],
         [
-          'img' => 'https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0a/32/be/dc.jpg',
+          'img' => 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Sreemangal_tea_garden_2017-08-20.jpg',
           'title' => 'Srimangal Tea Gardens',
           'description' => 'Rolling green tea gardens stretch as far as the eye can see in Bangladesh\'s tea capital.',
           'category' => 'nature',
@@ -573,30 +602,57 @@
           'views' => 2890
         ],
         [
-          'img' => 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3',
-          'title' => 'Traditional Rickshaw Art',
-          'description' => 'Colorful rickshaw art represents the vibrant culture and artistic heritage of Bangladesh.',
+          'img' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Lalbagh_Fort%2C_Dhaka.jpg/800px-Lalbagh_Fort%2C_Dhaka.jpg',
+          'title' => 'Lalbagh Fort Heritage',
+          'description' => 'Historic Mughal fort complex representing the rich architectural heritage of Bangladesh.',
           'category' => 'culture',
           'location' => 'Dhaka',
           'likes' => 167,
           'views' => 980
         ],
         [
-          'img' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Sixty_Dome_Mosque%2C_Bagerhat.jpg/300px-Sixty_Dome_Mosque%2C_Bagerhat.jpg',
+          'img' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sixty_Dome_Mosque_02.jpg/800px-Sixty_Dome_Mosque_02.jpg',
           'title' => 'Sixty Dome Mosque',
           'description' => 'UNESCO World Heritage site showcasing the architectural brilliance of 15th century Bengal.',
           'category' => 'culture',
           'location' => 'Bagerhat',
           'likes' => 298,
           'views' => 1450
+        ],
+        [
+          'img' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Ahsan_Manzil_Dhaka_Bangladesh.jpg/800px-Ahsan_Manzil_Dhaka_Bangladesh.jpg',
+          'title' => 'Ahsan Manzil Pink Palace',
+          'description' => 'The beautiful pink palace on the banks of Buriganga River, symbol of Dhaka\'s royal heritage.',
+          'category' => 'culture',
+          'location' => 'Dhaka',
+          'likes' => 384,
+          'views' => 2150
+        ],
+        [
+          'img' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Tajhat_Palace_Museum.jpg/800px-Tajhat_Palace_Museum.jpg',
+          'title' => 'Tajhat Palace',
+          'description' => 'Magnificent palace showcasing the grandeur of Bengal\'s zamindari era with intricate architecture.',
+          'category' => 'culture',
+          'location' => 'Rangpur',
+          'likes' => 276,
+          'views' => 1820
+        ],
+        [
+          'img' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Floating_Guava_Market_at_Barisal.jpg/800px-Floating_Guava_Market_at_Barisal.jpg',
+          'title' => 'Floating Guava Market',
+          'description' => 'Traditional floating market on the rivers of Barisal, showcasing unique water-based commerce.',
+          'category' => 'culture',
+          'location' => 'Barisal',
+          'likes' => 445,
+          'views' => 2680
         ]
       ];
     @endphp
 
     @foreach ($galleryItems as $index => $item)
-      <div class="gallery-card" data-category="{{ $item['category'] }}" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+      <div class="gallery-card" data-category="{{ $item['category'] }}" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}" style="--animation-delay: {{ $index * 0.5 }}s;">
         <div class="image-container">
-          <img src="{{ $item['img'] }}" alt="{{ $item['title'] }}" class="gallery-image">
+          <img src="{{ $item['img'] }}" alt="{{ $item['title'] }}" class="gallery-image" style="animation-delay: var(--animation-delay);">
           <div class="image-overlay">
             <div class="overlay-content">
               <button class="view-btn" data-image="{{ $item['img'] }}" data-title="{{ $item['title'] }}">

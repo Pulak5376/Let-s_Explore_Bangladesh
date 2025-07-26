@@ -8,7 +8,7 @@
   @import url('https://unpkg.com/aos@2.3.1/dist/aos.css');
 
   .packages-hero {
-    background: linear-gradient(135deg, rgba(0, 106, 78, 0.9), rgba(76, 175, 80, 0.8)), 
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 106, 78, 0.2) 50%, rgba(0, 0, 0, 0.4) 100%), 
                 url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
     padding: 8rem 2rem;
     text-align: center;
@@ -19,6 +19,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-size: 120%;
+    animation: zoomOut 20s ease-in-out infinite;
+  }
+
+  @keyframes zoomOut {
+    0% {
+      background-size: 120%;
+      background-position: center center;
+    }
+    50% {
+      background-size: 100%;
+      background-position: center center;
+    }
+    100% {
+      background-size: 120%;
+      background-position: center center;
+    }
   }
 
   .packages-hero::before {
@@ -28,17 +45,17 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, rgba(0, 106, 78, 0.7) 0%, rgba(244, 42, 65, 0.3) 100%);
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 106, 78, 0.1) 100%);
     z-index: 1;
     animation: gradientShift 8s ease-in-out infinite;
   }
 
   @keyframes gradientShift {
     0%, 100% {
-      background: linear-gradient(45deg, rgba(0, 106, 78, 0.7) 0%, rgba(244, 42, 65, 0.3) 100%);
+      background: linear-gradient(45deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 106, 78, 0.1) 100%);
     }
     50% {
-      background: linear-gradient(45deg, rgba(244, 42, 65, 0.4) 0%, rgba(0, 106, 78, 0.8) 100%);
+      background: linear-gradient(45deg, rgba(0, 106, 78, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
     }
   }
 
@@ -141,10 +158,22 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s ease;
+    transform: scale(1.1);
+    animation: cardImageZoom 15s ease-in-out infinite;
+  }
+
+  @keyframes cardImageZoom {
+    0%, 100% {
+      transform: scale(1.1);
+    }
+    50% {
+      transform: scale(1);
+    }
   }
 
   .package-card:hover .card-image {
-    transform: scale(1.1);
+    transform: scale(1.15);
+    animation-play-state: paused;
   }
 
   .card-overlay {
