@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('1stScreen');
@@ -50,8 +52,10 @@ Route::get('/Convert', function () {
     return view('Convert');
 });
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+
+
 Route::view('/package', 'package');
 
+
+Route::post('/signup', [RegisterController::class, 'store']);
+Route::post('/dologin', [LoginController::class, 'authenticate']);

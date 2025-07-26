@@ -7,21 +7,12 @@
   <title>Register</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
-
-<body>
-  <!-- Dark Mode Toggle -->
-  <div class="dark-mode-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
-    <label for="darkToggle" style="color: white; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px;">
-      <span>Dark Mode</span>
-      <input type="checkbox" id="darkToggle" onchange="toggleDarkMode()" style="transform: scale(1.2);" />
-    </label>
-  </div>
-
   <main class="register-wrapper">
     <section class="register-card" aria-labelledby="registerTitle">
       <h1 id="registerTitle" class="register-title">Create Your Account</h1>
 
-      <form id="registerForm">
+      <div id="msg-box" style="display:none;"></div>
+      <form id="registerForm" >
         @csrf
 
         <div class="input-group">
@@ -44,7 +35,7 @@
           <input type="password" id="password_confirmation" name="password_confirmation" placeholder="••••••••" required />
         </div>
 
-        <button type="submit" class="btn-primary">Sign Up</button>
+        <button type="submit" class="btn-primary" id="submit-btn">Sign Up</button>
       </form>
 
       <p class="login-text">
@@ -167,83 +158,109 @@
       text-decoration: underline;
     }
 
-    /* Dark Mode Styles */
-    body.dark-mode {
-      background: linear-gradient(135deg, #1a1a1a, #2d2d2d) !important;
+    #msg-box {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.85rem 1.2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: center;
+      display: none;
+      transition: opacity 0.3s;
+    }
+    #msg-box.success {
+      background: #e6f9ed;
+      color: #20734c;
+      border: 1.5px solid #4caf50;
+      box-shadow: 0 2px 8px rgba(76, 175, 80, 0.08);
+    }
+    #msg-box.error {
+      background: #ffeaea;
+      color: #b71c1c;
+      border: 1.5px solid #e53935;
+      box-shadow: 0 2px 8px rgba(229, 57, 53, 0.08);
+    }
+    body.dark-mode #msg-box.success {
+      background: #1b3c2b;
+      color: #81c784;
+      border-color: #388e3c;
+    }
+    body.dark-mode #msg-box.error {
+      background: #3a2323;
+      color: #ef9a9a;
+      border-color: #e57373;
     }
 
-    body.dark-mode .register-card {
-      background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%) !important;
-      box-shadow: 0 12px 30px rgba(76, 175, 80, 0.25) !important;
-      border: 1px solid rgba(102, 187, 106, 0.3) !important;
-    }
-
-    body.dark-mode .register-title {
-      color: #81c784 !important;
-    }
-
-    body.dark-mode .input-label {
-      color: #b0bec5 !important;
-    }
-
-    body.dark-mode input[type="text"],
-    body.dark-mode input[type="email"],
-    body.dark-mode input[type="password"] {
-      background: rgba(50, 50, 50, 0.9) !important;
-      border-color: #4caf50 !important;
-      color: #e0e0e0 !important;
-    }
-
-    body.dark-mode input[type="text"]::placeholder,
-    body.dark-mode input[type="email"]::placeholder,
-    body.dark-mode input[type="password"]::placeholder {
-      color: #a0a0a0 !important;
-    }
-
-    body.dark-mode input[type="text"]:focus,
-    body.dark-mode input[type="email"]:focus,
-    body.dark-mode input[type="password"]:focus {
-      border-color: #66bb6a !important;
-      box-shadow: 0 0 8px rgba(102, 187, 106, 0.4) !important;
-    }
-
-    body.dark-mode .btn-primary {
-      background: linear-gradient(135deg, #2e7d32, #1b5e20) !important;
-      box-shadow: 0 6px 15px rgba(76, 175, 80, 0.5) !important;
-    }
-
-    body.dark-mode .btn-primary:hover,
-    body.dark-mode .btn-primary:focus {
-      background: linear-gradient(135deg, #4caf50, #2e7d32) !important;
-      box-shadow: 0 8px 20px rgba(76, 175, 80, 0.7) !important;
-    }
-
-    body.dark-mode .login-text {
-      color: #b0bec5 !important;
-    }
-
-    body.dark-mode .login-link {
-      color: #66bb6a !important;
-    }
   </style>
 
   <script>
-    function toggleDarkMode() {
-      const isDark = document.body.classList.toggle('dark-mode');
-      document.getElementById('darkToggle').checked = isDark;
-      localStorage.setItem('darkMode', isDark);
+    const subbtn = document.getElementById('submit-btn');
+    const msgBox = document.getElementById('msg-box');
+
+    function showMsg(msg, type) {
+      msgBox.textContent = msg;
+      msgBox.className = type;
+      msgBox.style.display = 'block';
+      msgBox.style.opacity = '1';
+    }
+    function hideMsg() {
+      msgBox.style.opacity = '0';
+      setTimeout(() => { msgBox.style.display = 'none'; }, 300);
     }
 
-    // Load dark mode preference
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedDarkMode = localStorage.getItem('darkMode') === 'true';
-      if (savedDarkMode) {
-        document.body.classList.add('dark-mode');
-        document.getElementById('darkToggle').checked = true;
-      }
+    subbtn.addEventListener('click', function(event) {
+      event.preventDefault();
+      hideMsg();
+      const pass = document.getElementById('password').value;
+      const confirmPass = document.getElementById('password_confirmation').value;
 
-      // Make toggleDarkMode globally accessible
-      window.toggleDarkMode = toggleDarkMode;
+      const form = new FormData(document.getElementById('registerForm'));
+      if (!form.get('name') || !form.get('email') || !form.get('password') || !form.get('password_confirmation')) {
+        setTimeout(() => {
+          showMsg('Please fill in all fields!', 'error');
+        }, 300);
+        return;
+      }
+      if (pass.length < 4) {
+        setTimeout(() => {
+          showMsg('Password must be at least 4 characters long!', 'error');
+        }, 1000);
+        return;
+      }
+      if (pass !== confirmPass) {
+        setTimeout(() => {
+        showMsg('Passwords do not match!', 'error');
+        }, 1000);
+        return;
+      }
+      fetch('/signup', {
+        method: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+          'Accept': 'application/json'
+        },
+        body: new FormData(document.getElementById('registerForm'))
+      }).then(
+        data => data.json()
+      ).then(
+        (data) => {
+          if (data.success) {
+            showMsg("Registration successful!", 'success');
+            setTimeout(() => {
+              window.location.href = "/login";
+            }, 1200);
+          } else {
+            setTimeout(() => {
+              showMsg("Registration failed: " + data.message, 'error');
+            }, 1000);
+          }
+        }
+      ).catch(() => {
+        setTimeout(() => {
+          showMsg("An error occurred. Please try again.", 'error');
+        }, 500);
+      });
     });
   </script>
 </body>
