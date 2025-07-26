@@ -52,10 +52,8 @@ Route::get('/Convert', function () {
     return view('Convert');
 });
 
-
-
 Route::view('/package', 'package');
 
-
 Route::post('/signup', [RegisterController::class, 'store']);
+
 Route::post('/dologin', [LoginController::class, 'authenticate']);

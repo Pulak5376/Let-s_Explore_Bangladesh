@@ -6,55 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="login.css" />
 </head>
 
 <body>
-  <!-- Dark Mode Toggle -->
-  <div class="dark-mode-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
-    <label for="darkToggle" style="color: white; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px;">
-      <span>Dark Mode</span>
-      <input type="checkbox" id="darkToggle" onchange="toggleDarkMode()" style="transform: scale(1.2);" />
-    </label>
-  </div>
-
+  <!-- Success/Error Message Box -->
+  <div id="msg-box" style="display:none;"></div>
   <main class="login-wrapper">
     <section class="login-card" aria-labelledby="loginTitle">
       <h1 id="loginTitle" class="login-title">Let's Explore Bangladesh</h1>
-
-      <form id="loginForm" action="{{ route('welcome') }}" method="POST">
+      <form id="loginForm">
         @csrf
-
         <div class="input-group">
           <label for="email" class="input-label">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="you@example.com"
-            required
-            autocomplete="email"
-            aria-describedby="emailHelp" />
+          <input type="email" id="email" name="email" placeholder="you@example.com" required />
           <small id="emailHelp" class="input-error" aria-live="polite"></small>
         </div>
-
         <div class="input-group">
           <label for="password" class="input-label">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="••••••••"
-            required
-            autocomplete="current-password"
-            aria-describedby="passwordHelp" />
+          <input type="password" id="password" name="password" placeholder="••••••••" required />
           <small id="passwordHelp" class="input-error" aria-live="polite"></small>
         </div>
-
-        <button type="submit" class="btn-primary">Login</button>
+        <button type="submit" class="btn-primary" id="login-btn">Login</button>
         <p id="formError" class="form-error" aria-live="assertive"></p>
       </form>
-
       <p class="register-text">
         Don't have an account?
         <a href="/register" class="register-link">Sign up here</a>
@@ -62,7 +36,7 @@
     </section>
   </main>
 
-    <style>
+  <style>
     * {
       box-sizing: border-box;
     }
@@ -108,7 +82,6 @@
 
     .input-group {
       margin-bottom: 1.5rem;
-      position: relative;
     }
 
     .input-label {
@@ -129,25 +102,16 @@
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    input[type="email"]:focus,
-    input[type="password"]:focus {
+    input:focus {
       outline: none;
       border-color: #1c5873;
       box-shadow: 0 0 8px rgba(28, 88, 115, 0.4);
     }
 
-    .input-error {
-      color: #d33f2eff;
-      font-size: 0.8rem;
-      height: 1.2rem;
-      margin-top: 0.25rem;
-      visibility: hidden;
-    }
-
     .btn-primary {
       width: 100%;
       padding: 0.9rem 0;
-      background-color: #296e8aff;
+      background-color: #296e8a;
       color: #fff;
       font-size: 1.1rem;
       font-weight: 700;
@@ -171,7 +135,13 @@
       color: #e74c3c;
       text-align: center;
       min-height: 1.2rem;
-      visibility: hidden;
+    }
+
+    .input-error {
+      color: #d33f2e;
+      font-size: 0.8rem;
+      height: 1rem;
+      margin-top: 0.25rem;
     }
 
     .register-text {
@@ -188,148 +158,149 @@
       margin-left: 0.25rem;
     }
 
-    .register-link:hover,
-    .register-link:focus {
+    .register-link:hover {
       text-decoration: underline;
     }
 
-    /* Dark Mode Styles */
-    body.dark-mode {
-      background: linear-gradient(135deg, #1a1a1a, #2d2d2d) !important;
+    #msg-box {
+      position: fixed;
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-40px);
+      min-width: 320px;
+      max-width: 90vw;
+      z-index: 9999;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-size: 1.08rem;
+      font-weight: 600;
+      text-align: center;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.4s, transform 0.4s;
+      box-shadow: 0 4px 18px rgba(44, 62, 80, 0.10);
+      letter-spacing: 0.01em;
     }
 
-    body.dark-mode .login-card {
-      background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%) !important;
-      box-shadow: 0 12px 30px rgba(76, 175, 80, 0.25) !important;
-      border: 1px solid rgba(102, 187, 106, 0.3) !important;
+    #msg-box.show {
+      display: block;
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
-    body.dark-mode .login-title {
-      color: #81c784 !important;
+    #msg-box.success {
+      background: linear-gradient(90deg, #e6f9ed 80%, #b2f7cc 100%);
+      color: #20734c;
+      border: 2px solid #4caf50;
+      box-shadow: 0 2px 12px rgba(76, 175, 80, 0.10);
     }
 
-    body.dark-mode .input-label {
-      color: #b0bec5 !important;
+    #msg-box.success::before {
+      content: "✔ ";
+      font-size: 1.2em;
+      color: #43a047;
+      margin-right: 0.5em;
     }
 
-    body.dark-mode input[type="email"],
-    body.dark-mode input[type="password"] {
-      background: rgba(50, 50, 50, 0.9) !important;
-      border-color: #4caf50 !important;
-      color: #e0e0e0 !important;
+    #msg-box.error {
+      background: linear-gradient(90deg, #ffeaea 80%, #ffd6d6 100%);
+      color: #b71c1c;
+      border: 2px solid #e53935;
+      box-shadow: 0 2px 12px rgba(229, 57, 53, 0.10);
     }
 
-    body.dark-mode input[type="email"]::placeholder,
-    body.dark-mode input[type="password"]::placeholder {
-      color: #a0a0a0 !important;
-    }
-
-    body.dark-mode input[type="email"]:focus,
-    body.dark-mode input[type="password"]:focus {
-      border-color: #66bb6a !important;
-      box-shadow: 0 0 8px rgba(102, 187, 106, 0.4) !important;
-    }
-
-    body.dark-mode .btn-primary {
-      background: linear-gradient(135deg, #2e7d32, #1b5e20) !important;
-      box-shadow: 0 6px 15px rgba(76, 175, 80, 0.5) !important;
-    }
-
-    body.dark-mode .btn-primary:hover,
-    body.dark-mode .btn-primary:focus {
-      background: linear-gradient(135deg, #4caf50, #2e7d32) !important;
-      box-shadow: 0 8px 20px rgba(76, 175, 80, 0.7) !important;
-    }
-
-    body.dark-mode .register-text {
-      color: #b0bec5 !important;
-    }
-
-    body.dark-mode .register-link {
-      color: #66bb6a !important;
-    }
-
-    body.dark-mode .form-error {
-      color: #ef5350 !important;
-    }
-
-    body.dark-mode .input-error {
-      color: #ef5350 !important;
+    #msg-box.error::before {
+      content: "✖ ";
+      font-size: 1.2em;
+      color: #e53935;
+      margin-right: 0.5em;
     }
   </style>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('loginForm');
-      const emailInput = form.email;
-      const passwordInput = form.password;
-
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
       const emailError = document.getElementById('emailHelp');
       const passwordError = document.getElementById('passwordHelp');
       const formError = document.getElementById('formError');
+      const msgBox = document.getElementById('msg-box');
 
-      function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
+      function showMsg(msg, type) {
+        msgBox.textContent = msg;
+        msgBox.className = type + ' show';
+        msgBox.style.display = 'block';
+        setTimeout(() => {
+          msgBox.style.opacity = '1';
+          msgBox.style.transform = 'translateX(-50%) translateY(0)';
+        }, 10);
       }
 
-      form.addEventListener('submit', (e) => {
+      function hideMsg() {
+        msgBox.style.opacity = '0';
+        msgBox.style.transform = 'translateX(-50%) translateY(-40px)';
+        setTimeout(() => {
+          msgBox.style.display = 'none';
+          msgBox.className = '';
+        }, 400);
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
         emailError.textContent = '';
         passwordError.textContent = '';
         formError.textContent = '';
-        emailInput.classList.remove('invalid');
-        passwordInput.classList.remove('invalid');
-        formError.classList.remove('visible');
 
         let valid = true;
 
         if (!emailInput.value.trim()) {
           emailError.textContent = 'Email is required.';
-          emailInput.classList.add('invalid');
-          valid = false;
-        } else if (!validateEmail(emailInput.value.trim())) {
-          emailError.textContent = 'Please enter a valid email address.';
-          emailInput.classList.add('invalid');
           valid = false;
         }
 
-        if (!passwordInput.value) {
+        if (!passwordInput.value.trim()) {
           passwordError.textContent = 'Password is required.';
-          passwordInput.classList.add('invalid');
           valid = false;
         }
 
-        if (!valid) {
-          e.preventDefault();
-          return;
+        if (!valid) return;
+
+        const formData = new FormData(form);
+
+        try {
+          const response = await fetch('/dologin', {
+            method: 'POST',
+            headers: {
+              'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+              'Accept': 'application/json'
+            },
+            body: formData
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            showMsg('Login successful!', 'success');
+            setTimeout(() => {
+              hideMsg();
+              window.location.href = '/welcome';
+            }, 2000);
+          } else {
+            showMsg(result.message || 'Login failed.', 'error');
+            setTimeout(hideMsg, 2000);
+          }
+        } catch (error) {
+          console.error('Login error:', error);
+          showMsg('Something went wrong. Please try again.', 'error');
+          setTimeout(hideMsg, 2000);
         }
-
-        e.preventDefault();
-
-        setTimeout(() => {
-          alert(`Welcome back, ${emailInput.value.trim()}!`);
-          form.submit();
-        }, 200);
       });
-
-      // Dark mode functionality
-      function toggleDarkMode() {
-        const isDark = document.body.classList.toggle('dark-mode');
-        document.getElementById('darkToggle').checked = isDark;
-        localStorage.setItem('darkMode', isDark);
-      }
-
-      // Load dark mode preference
-      const savedDarkMode = localStorage.getItem('darkMode') === 'true';
-      if (savedDarkMode) {
-        document.body.classList.add('dark-mode');
-        document.getElementById('darkToggle').checked = true;
-      }
-
-      // Make toggleDarkMode globally accessible
-      window.toggleDarkMode = toggleDarkMode;
     });
   </script>
 </body>
 
 </html>
+
+
