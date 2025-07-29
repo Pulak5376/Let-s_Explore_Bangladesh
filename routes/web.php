@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\BusBookingController;
 
 Route::get('/', function () {
     return view('1stScreen');
@@ -43,7 +44,7 @@ Route::get('/train', function () {
     return view('train');
 });
 Route::get('/bus', function () {
-    return view('bus');
+    return view('bus.search');
 });
 Route::get('/Review', function () {
     return view('Review');
@@ -57,3 +58,6 @@ Route::view('/package', 'package');
 Route::post('/signup', [RegisterController::class, 'store']);
 
 Route::post('/dologin', [LoginController::class, 'authenticate']);
+
+Route::post('/bus-booking', [BusBookingController::class, 'book'])->name('bus.booking');
+Route::get('/bus/search', [BusBookingController::class, 'search'])->name('bus.search');
