@@ -5,7 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BusBookingController;
-
+use App\Http\Controllers\ReviewController;
 Route::get('/', function () {
     return view('1stScreen');
 });
@@ -46,9 +46,7 @@ Route::get('/train', function () {
 Route::get('/bus', function () {
     return view('bus.search');
 });
-Route::get('/Review', function () {
-    return view('Review');
-});
+
 Route::get('/Convert', function () {
     return view('Convert');
 });
@@ -61,3 +59,7 @@ Route::post('/dologin', [LoginController::class, 'authenticate']);
 
 Route::post('/bus-booking', [BusBookingController::class, 'book'])->name('bus.booking');
 Route::get('/bus/search', [BusBookingController::class, 'search'])->name('bus.search');
+
+
+Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');

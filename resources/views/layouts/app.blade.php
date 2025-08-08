@@ -14,7 +14,7 @@
       --bg-dark: #121212;
       --text-light: #000000;
       --text-dark: #ffffffbe;
-      --header-bg: rgba(183, 255, 191, 1);
+      --header-bg: rgba(42, 197, 60, 1);
     }
 
     body {
@@ -129,7 +129,7 @@
       min-width: 180px;
       padding: 8px 0;
       border-radius: 6px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 20px rgba(93, 160, 81, 0.26);
       display: none;
       z-index: 999;
     }
@@ -444,6 +444,7 @@
           <ul id="more-menu" class="dropdown-menu">
             <li><a href="{{ url('/hotelbook') }}">Hotel Booking</a></li>
             <li><a href="{{ url('/weather') }}">Weather Check</a></li>
+            <li><a href="{{ url('/reviews') }}">Review</a></li>
             <li><a href="{{ url('/cart') }}">View Cart</a></li>
           </ul>
         </li>
