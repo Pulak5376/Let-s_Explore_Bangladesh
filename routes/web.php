@@ -6,6 +6,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BusBookingController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\TransportController;
+
 Route::get('/', function () {
     return view('1stScreen');
 });
@@ -40,12 +42,6 @@ Route::post('/welcome', function () {
 Route::get('/register', function () {
     return view('register');
 });
-Route::get('/train', function () {
-    return view('train');
-});
-Route::get('/bus', function () {
-    return view('bus.search');
-});
 
 Route::get('/Convert', function () {
     return view('Convert');
@@ -57,8 +53,22 @@ Route::post('/signup', [RegisterController::class, 'store']);
 
 Route::post('/dologin', [LoginController::class, 'authenticate']);
 
-Route::post('/bus-booking', [BusBookingController::class, 'book'])->name('bus.booking');
-Route::get('/bus/search', [BusBookingController::class, 'search'])->name('bus.search');
+
+Route::get('/bus', function () {
+    return view('transports.bus');
+})->name('bus.page');
+
+Route::post('/bus/search', [TransportController::class, 'search'])->name('bus.search');
+
+Route::post('/bus/book', [TransportController::class, 'book'])->name('bus.book');
+
+Route::get('/train', function () {
+    return view('transports.train');
+})->name('train.page');
+
+Route::post('/train/search', [TransportController::class, 'search'])->name('train.search');
+Route::post('/{type}/book', [TransportController::class, 'book'])->name('transport.book');
+
 
 
 Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');

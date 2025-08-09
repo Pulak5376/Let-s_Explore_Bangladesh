@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Transport;
+use App\Models\Booking;
+
+class TransportController extends Controller
+{
+    // Search form handler for bus/train
+    public function search(Request $request)
+    {
+        $request->validate([
+            'type' => 'required|in:bus,train',
+            'from' => 'required|string',
+            'to' => 'required|string',
+        ]);
+
+        $transports = Transport::where('type', $request->type)
+            ->where('route_from', 'LIKE', '%' . $request->from . '%')
+            ->where('route_to', 'LIKE', '%' . $request->to . '%')
+            ->get();
+
+        return view('transports.' . $request->type, compact('transports'));
+    }
+
+
+    // Booking handler
+    public function book(Request $request)
+    {
+        $request->validate([
+            'transport_id' => 'required|exists:transports,id',
+            'seats_booked' => 'required|integer|min:1',
+            'passenger_name' => 'required|string|max:255',
+            'passenger_email' => 'required|email|max:255',
+            'passenger_phone' => 'required|string|max:20',
+        ]);
+
+        $transport = Transport::findOrFail($request->transport_id);
+
+        $totalBookedSeats = Booking::where('transport_id', $transport->id)->sum('seats_booked');
+        $availableSeats = $transport->total_seats - $totalBookedSeats;
+
+        if ($request->seats_booked > $availableSeats) {
+            return back()->withErrors(['seats_booked' => 'Not enough seats available. Only ' . $availableSeats . ' seats left.'])->withInput();
+        }
+
+        Booking::create([
+            'transport_id' => $transport->id,
+            'transport_type' => $transport->type,  // ekhane type add korchi
+            'passenger_name' => $request->passenger_name,
+            'passenger_email' => $request->passenger_email,
+            'passenger_phone' => $request->passenger_phone,
+            'seats_booked' => $request->seats_booked,
+        ]);
+
+
+        // Redirect to /bus (GET) or /train accordingly with success message
+        if ($transport->type == 'bus') {
+            return redirect()->route('bus.page')->with('success', 'Booking successful!');
+        } else {
+            return redirect()->route('train.page')->with('success', 'Booking successful!');
+        }
+    }
+}

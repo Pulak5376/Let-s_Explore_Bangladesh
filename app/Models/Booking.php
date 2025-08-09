@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Booking extends Model
+{
+    protected $fillable = [
+        'transport_id',
+        'transport_type',
+        'passenger_name',
+        'passenger_email',
+        'passenger_phone',
+        'seats_booked',
+    ];
+
+    public function transport()
+    {
+        return $this->belongsTo(Transport::class);
+    }
+}

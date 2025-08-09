@@ -33,7 +33,7 @@ class BusBookingController extends Controller
             $buses = $query->get();
         }
 
-        return view('bus.search', compact('buses'));
+        return view('transports.bus', compact('buses'));
     }
 
     public function book(Request $request)

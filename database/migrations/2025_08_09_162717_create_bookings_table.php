@@ -9,23 +9,25 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('bus_bookings', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->foreignId('bus_id')->constrained('buses')->onDelete('cascade');
+            $table->foreignId('transport_id')->constrained('transports')->onDelete('cascade');
+            $table->string('passenger_name');
+            $table->string('passenger_email');
+            $table->string('passenger_phone');
             $table->integer('seats_booked');
-            $table->string('status')->default('Confirmed');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('bus_bookings');
+        Schema::dropIfExists('bookings');
     }
 };
