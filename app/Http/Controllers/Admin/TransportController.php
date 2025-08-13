@@ -3,64 +3,44 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Transport;
 use Illuminate\Http\Request;
+use App\Models\Transport;
 
 class TransportController extends Controller
 {
-    public function index()
+    public function addBus()
     {
-        $transports = Transport::latest()->paginate(10);
-        return view('admin.transports.index', compact('transports'));
+        return view('admin.transports.addbus');
     }
 
-    public function create()
-    {
-        return view('admin.transports.create');
-    }
-
-    public function store(Request $request)
+    public function storeBus(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'type' => 'required|in:bus,train',
-            'route_from' => 'required',
-            'route_to' => 'required',
+            'name' => 'required|string|max:255',
+            'route_from' => 'required|string|max:255',
+            'route_to' => 'required|string|max:255',
             'departure_time' => 'required',
             'price' => 'required|numeric',
             'total_seats' => 'required|integer',
         ]);
 
-        Transport::create($request->all());
-
-        return redirect()->route('admin.transports.index')->with('success', 'Transport added successfully!');
-    }
-
-    public function edit(Transport $transport)
-    {
-        return view('admin.transports.edit', compact('transport'));
-    }
-
-    public function update(Request $request, Transport $transport)
-    {
-        $request->validate([
-            'name' => 'required',
-            'type' => 'required|in:bus,train',
-            'route_from' => 'required',
-            'route_to' => 'required',
-            'departure_time' => 'required',
-            'price' => 'required|numeric',
-            'total_seats' => 'required|integer',
+        Transport::create([
+            'name' => $request->name,
+            'type' => 'bus',
+            'route_from' => $request->route_from,
+            'route_to' => $request->route_to,
+            'departure_time' => $request->departure_time,
+            'price' => $request->price,
+            'total_seats' => $request->total_seats,
         ]);
 
-        $transport->update($request->all());
-
-        return redirect()->route('admin.transports.index')->with('success', 'Transport updated successfully!');
+        return response()->json(['success' => true,
+        'message' => 'Bus added successfully'], 200);
     }
 
-    public function destroy(Transport $transport)
+    public function viewBus()
     {
-        $transport->delete();
-        return redirect()->route('admin.transports.index')->with('success', 'Transport deleted successfully!');
+        $buses = Transport::where('type', 'bus')->get();
+        return view('admin.transports.viewbus', compact('buses'));
     }
 }

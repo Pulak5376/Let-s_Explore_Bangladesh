@@ -4,10 +4,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\TransportController;
+use App\Http\Controllers\TransportController as X;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Admin\TransportController as Y;
 
 Route::get('/', function () {
     return view('1stScreen');
@@ -58,16 +59,16 @@ Route::get('/bus', function () {
     return view('transports.bus');
 })->name('bus.page');
 
-Route::post('/bus/search', [TransportController::class, 'search'])->name('bus.search');
+Route::post('/bus/search', [X::class, 'search'])->name('bus.search');
 
-Route::post('/bus/book', [TransportController::class, 'book'])->name('bus.book');
+Route::post('/bus/book', [X::class, 'book'])->name('bus.book');
 
 Route::get('/train', function () {
     return view('transports.train');
 })->name('train.page');
 
-Route::post('/train/search', [TransportController::class, 'search'])->name('train.search');
-Route::post('/{type}/book', [TransportController::class, 'book'])->name('transport.book');
+Route::post('/train/search', [X::class, 'search'])->name('train.search');
+Route::post('/{type}/book', [X::class, 'book'])->name('transport.book');
 
 
 
@@ -83,7 +84,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
     Route::post('/admin/logout', function () {
-    Auth::logout();
-    return redirect('/admin/login');
-})->name('admin.logout');
+        Auth::logout();
+        return redirect('/admin/login');
+    })->name('admin.logout');
+
+    
+    Route::get('/transports/addbus', [Y::class, 'addBus'])->name('admin.transports.addbus');
+    Route::post('/transports/addbus', [Y::class, 'storeBus'])->name('admin.transports.storebus');
+    Route::get('/transports/viewbus', [Y::class, 'viewBus'])->name('admin.transports.viewbus');
+
 });
