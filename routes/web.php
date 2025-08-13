@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\BusBookingController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TransportController;
+use App\Http\Controllers\Auth\AdminLoginController;
 
 Route::get('/', function () {
     return view('1stScreen');
@@ -23,9 +23,12 @@ Route::get('/contact', [CartController::class, 'contact'])->name('contact');
 Route::get('/weather', function () {
     return view('weather');
 })->name('weather');
-Route::get('/login', function () {
-    return view('login');
-});
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register.form');
+Route::post('/register', [RegisterController::class, 'store'])->name('register');
+
 Route::get('/hotelbook', function () {
     return view('hotelbook');
 })->name('hotelbook');
@@ -39,9 +42,7 @@ Route::get('/welcome', function () {
 Route::post('/welcome', function () {
     return view('welcome');
 });
-Route::get('/register', function () {
-    return view('register');
-});
+
 
 Route::get('/Convert', function () {
     return view('Convert');
@@ -49,9 +50,7 @@ Route::get('/Convert', function () {
 
 Route::view('/package', 'package');
 
-Route::post('/signup', [RegisterController::class, 'store']);
 
-Route::post('/dologin', [LoginController::class, 'authenticate']);
 
 
 Route::get('/bus', function () {
@@ -73,3 +72,13 @@ Route::post('/{type}/book', [TransportController::class, 'book'])->name('transpo
 
 Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+
+
+Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login.form');
+Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin.login');
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+});

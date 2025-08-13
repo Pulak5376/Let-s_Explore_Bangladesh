@@ -1,16 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Dashboard')
+@section('header', 'Welcome Admin')
 
 @section('content')
 <div class="dashboard-container">
     <h1>Welcome, {{ Auth::user()->name }}!</h1>
     <p>Your email: {{ Auth::user()->email }}</p>
 
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
+    <p>Last login: {{ Auth::user()->last_login_at ? Auth::user()->last_login_at->format('d M Y, H:i') : 'Never' }}</p>
 </div>
 
 <style>
