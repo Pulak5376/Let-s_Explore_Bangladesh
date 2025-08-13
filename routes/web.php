@@ -1,11 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TransportController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\AdminLoginController;
 
 Route::get('/', function () {
@@ -81,4 +82,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
+    Route::post('/admin/logout', function () {
+    Auth::logout();
+    return redirect('/admin/login');
+})->name('admin.logout');
 });
