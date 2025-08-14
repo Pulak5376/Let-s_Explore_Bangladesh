@@ -93,4 +93,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/transports/addbus', [Y::class, 'storeBus'])->name('admin.transports.storebus');
     Route::get('/transports/viewbus', [Y::class, 'viewBus'])->name('admin.transports.viewbus');
 
+    Route::get('/transports/addtrain', [Y::class, 'addTrain'])->name('admin.transports.addtrain');
+    Route::post('/transports/addtrain', [Y::class, 'storeTrain'])->name('admin.transports.storetrain');
+    Route::get('/transports/viewtrain', [Y::class, 'viewTrain'])->name('admin.transports.viewtrain');
+
 });
