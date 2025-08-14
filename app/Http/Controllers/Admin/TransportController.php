@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Transport;
+use Illuminate\Support\Facades\DB;
 
 class TransportController extends Controller
 {
@@ -84,8 +85,43 @@ class TransportController extends Controller
         return view('admin.transports.viewtrain', compact('trains'));
     }
 
+
+    public function viewTransports()
+    {
+        $transports = Transport::all();
+        return view('admin.transports.viewtransports', compact('transports'));
+    }
+
     public function destroy($id)
     {
-        Transport::destroy($id);
+        $transport = Transport::findOrFail($id);
+        $transport->delete();
+        return redirect()->route('admin.transports.viewtransports')->with('success', 'Transport deleted successfully');
+    }
+
+    public function edit($id)
+    {
+        $transport = Transport::findOrFail($id);
+        return view('admin.transports.edittransports', compact('transport'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $transport = Transport::findOrFail($id);
+
+        $updateData = $request->only([
+            'name',
+            'route_from',
+            'route_to',
+            'departure_time',
+            'price',
+            'total_seats'
+        ]);
+
+        $updateData = array_filter($updateData, fn($value) => $value !== null && $value !== '');
+        $transport->update($updateData);
+
+        return redirect()->route('admin.transports.viewtransports')
+            ->with('success', 'Transport updated successfully');
     }
 }

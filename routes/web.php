@@ -88,7 +88,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
         return redirect('/admin/login');
     })->name('admin.logout');
 
-    
+
     Route::get('/transports/addbus', [Y::class, 'addBus'])->name('admin.transports.addbus');
     Route::post('/transports/addbus', [Y::class, 'storeBus'])->name('admin.transports.storebus');
     Route::get('/transports/viewbus', [Y::class, 'viewBus'])->name('admin.transports.viewbus');
@@ -97,4 +97,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/transports/addtrain', [Y::class, 'storeTrain'])->name('admin.transports.storetrain');
     Route::get('/transports/viewtrain', [Y::class, 'viewTrain'])->name('admin.transports.viewtrain');
 
+    Route::get('/transports/viewtransports', [Y::class, 'viewTransports'])->name('admin.transports.viewtransports');
+    Route::delete('/transports/{id}', [Y::class, 'destroy'])->name('admin.transports.destroy');
+    Route::get('/transports/{id}/edit', [Y::class, 'edit'])->name('admin.transports.edit');
+    Route::put('/transports/{id}', [Y::class, 'update'])->name('admin.transports.update');
 });

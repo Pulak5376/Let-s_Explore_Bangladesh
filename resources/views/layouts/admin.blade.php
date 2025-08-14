@@ -16,23 +16,17 @@
         <a href="{{ route('admin.dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
         <a href="#"><i class="fas fa-users"></i> Users</a>
 
-        <button class="dropdown-btn"><i class="fas fa-book"></i> Bookings <i class="fas fa-chevron-down"
-                style="margin-left:auto;"></i></button>
+        <button class="dropdown-btn"><i class="fas fa-bus"></i> Transport Management<i
+                class="fas fa-chevron-down"></i></button>
         <div class="dropdown-container">
-            <button class="dropdown-btn"><i class="fas fa-bus"></i> Transports <i class="fas fa-chevron-down"
-                    style="margin-left:auto;"></i></button>
-            <div class="dropdown-container">
-                <a href="{{ route('admin.transports.addbus') }}"><i class="fas fa-plus"></i> Add Bus</a>
-                <a href="{{ route('admin.transports.viewbus') }}"><i class="fas fa-eye"></i> View Buses</a>
-                <a href="{{ route('admin.transports.addtrain') }}"><i class="fas fa-plus"></i> Add Train</a>
-                <a href="{{ route('admin.transports.viewtrain') }}"><i class="fas fa-eye"></i> View Trains</a>
-            </div>
+            <a href="{{ route('admin.transports.addbus') }}"><i class="fas fa-plus"></i> Add Bus</a>
+            <a href="{{ route('admin.transports.addtrain') }}"><i class="fas fa-plus"></i> Add Train</a>
+            <a href="{{ route('admin.transports.viewtransports') }}"><i class="fas fa-eye"></i> View Transports</a>
         </div>
 
         <a href="#"><i class="fas fa-map"></i> Add Places</a>
         <a href="#"><i class="fas fa-pen-nib"></i> Stories</a>
         <a href="#"><i class="fas fa-images"></i> Galleries</a>
-        <a href="#"><i class="fas fa-cog"></i> Settings</a>
 
         <form action="{{ route('admin.logout') }}" method="POST">
             @csrf
@@ -94,10 +88,10 @@
 
     .sidebar h2 {
         text-align: center;
-        padding: 1rem;
+        padding: 30px;
         margin: 0;
-        font-size: 1.4rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 25px;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
     }
 
     .sidebar a,
@@ -106,7 +100,7 @@
         text-decoration: none;
         padding: 0.9rem 1.2rem;
         display: flex;
-        align-items: center;
+        align-items: centerL;
         gap: 0.8rem;
         background: none;
         border: none;
@@ -114,6 +108,9 @@
         font-weight: 500;
         cursor: pointer;
         transition: all 0.3s ease;
+        justify-content: flex-start;
+        gap: 0.8rem;
+        text-align: left;
     }
 
     .sidebar a:hover,
