@@ -23,6 +23,11 @@
             <a href="{{ route('admin.transports.addtrain') }}"><i class="fas fa-plus"></i> Add Train</a>
             <a href="{{ route('admin.transports.viewtransports') }}"><i class="fas fa-eye"></i> View Transports</a>
         </div>
+        <button class="dropdown-btn"><i class="fas fa-bus"></i> Booking Management<i
+                class="fas fa-chevron-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{{ route('admin.bookings.transports.viewlist') }}"><i class="fas fa-eye"></i> View Bookings</a>
+        </div>
 
         <a href="#"><i class="fas fa-map"></i> Add Places</a>
         <a href="#"><i class="fas fa-pen-nib"></i> Stories</a>
@@ -68,22 +73,34 @@
 
 </body>
 <style>
-    body {
+    * {
         margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html, body {
+        height: 100%;
         font-family: 'Inter', sans-serif;
+        background-color: #f4f6f9;
+    }
+
+    body {
         display: flex;
         min-height: 100vh;
-        background-color: #f4f6f9;
     }
 
     .sidebar {
         width: 250px;
+        min-width: 250px;
         background: linear-gradient(145deg, #1c5873, #14445a);
         color: #fff;
         display: flex;
         flex-direction: column;
-        padding-top: 1rem;
         box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        height: 100vh;
+        overflow-y: auto;
     }
 
     .sidebar h2 {
@@ -100,7 +117,7 @@
         text-decoration: none;
         padding: 0.9rem 1.2rem;
         display: flex;
-        align-items: centerL;
+        align-items: center;
         gap: 0.8rem;
         background: none;
         border: none;
@@ -109,8 +126,8 @@
         cursor: pointer;
         transition: all 0.3s ease;
         justify-content: flex-start;
-        gap: 0.8rem;
         text-align: left;
+        width: 100%;
     }
 
     .sidebar a:hover,
@@ -164,20 +181,34 @@
     }
 
     .main-content {
+        margin-left: 250px;
         flex: 1;
         display: flex;
         flex-direction: column;
+        min-height: 100vh;
+        width: calc(100% - 250px);
     }
 
     .header {
         background-color: #fff;
         padding: 1rem 2rem;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .header h1 {
+        color: #1c5873;
+        font-size: 1.8rem;
+        font-weight: 600;
     }
 
     .content {
         flex: 1;
         padding: 2rem;
+        min-height: calc(100vh - 120px);
+        overflow-y: auto;
     }
 
     .footer {
@@ -185,6 +216,33 @@
         color: #fff;
         text-align: center;
         padding: 1rem;
+        margin-top: auto;
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .sidebar {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .main-content {
+            margin-left: 0;
+            width: 100%;
+        }
+
+        .header {
+            position: relative;
+        }
+
+        .content {
+            padding: 1rem;
+        }
     }
 </style>
 </head>

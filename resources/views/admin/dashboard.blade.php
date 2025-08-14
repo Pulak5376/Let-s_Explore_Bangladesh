@@ -8,7 +8,6 @@
     <h1>Welcome, {{ Auth::user()->name }}!</h1>
     <p>Your email: {{ Auth::user()->email }}</p>
 
-    <p>Last login: {{ Auth::user()->last_login_at ? Auth::user()->last_login_at->format('d M Y, H:i') : 'Never' }}</p>
 </div>
 
 <style>

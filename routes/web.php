@@ -61,8 +61,6 @@ Route::get('/bus', function () {
 
 Route::post('/bus/search', [X::class, 'search'])->name('bus.search');
 
-Route::post('/bus/book', [X::class, 'book'])->name('bus.book');
-
 Route::get('/train', function () {
     return view('transports.train');
 })->name('train.page');
@@ -101,4 +99,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::delete('/transports/{id}', [Y::class, 'destroy'])->name('admin.transports.destroy');
     Route::get('/transports/{id}/edit', [Y::class, 'edit'])->name('admin.transports.edit');
     Route::put('/transports/{id}', [Y::class, 'update'])->name('admin.transports.update');
+    Route::get('/transports/search', [Y::class, 'searchTransport'])->name('admin.transports.search');
+
+    Route::get('/bookings/transports', [Y::class, 'viewList'])->name('admin.bookings.transports.viewlist');
+    Route::delete('/bookings/transports/{id}', [Y::class, 'destroyBooking'])->name('admin.bookings.transports.destroy');
+    Route::get('/bookings/transports/search', [Y::class, 'searchBookings'])->name('admin.transports.searchbookings');
 });

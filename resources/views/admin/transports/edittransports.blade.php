@@ -4,75 +4,368 @@
 @section('header', 'Edit Transport')
 
 @section('content')
-<form action="{{ route('admin.transports.update', $transport->id) }}" method="POST">
-    @csrf
-    @method('PUT')
-    <label>Name:</label>
-    <input type="text" name="name" value="{{ $transport->name }}"><br><br>
+    <div class="edit-transport-wrapper">
+        <div class="form-container">
+            <div class="form-header">
+                <h2><i class="fas fa-edit"></i> Edit Transport</h2>
+                <p>Update transport information below</p>
+            </div>
 
-    <label>Route From:</label>
-    <input type="text" name="route_from" value="{{ $transport->route_from }}"><br><br>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-    <label>Route To:</label>
-    <input type="text" name="route_to" value="{{ $transport->route_to }}"><br><br>
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
 
+            <form action="{{ route('admin.transports.update', $transport->id) }}" method="POST" class="transport-form">
+                @csrf
+                @method('PUT')
 
-    <label>Departure Time:</label>
-    <input type="time" name="departure_time" value="{{ $transport->departure_time }}"><br><br>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-bus"></i> Transport Name</label>
+                        <input type="text" id="name" name="name" value="{{ old('name', $transport->name) }}"
+                            required>
+                    </div>
 
-    <label>Price:</label>
-    <input type="number" name="price" value="{{ $transport->price }}" required><br><br>
+                    <div class="form-group">
+                        <label for="type"><i class="fas fa-tags"></i> Transport Type</label>
+                        <select id="type" name="type" required>
+                            <option value="bus" {{ $transport->type == 'bus' ? 'selected' : '' }}>Bus</option>
+                            <option value="train" {{ $transport->type == 'train' ? 'selected' : '' }}>Train</option>
+                        </select>
+                    </div>
+                </div>
 
-    <label>Total Seats:</label>
-    <input type="number" name="total_seats" value="{{ $transport->total_seats }}" required><br><br>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="route_from"><i class="fas fa-map-marker-alt"></i> Route From</label>
+                        <input type="text" id="route_from" name="route_from"
+                            value="{{ old('route_from', $transport->route_from) }}" required>
+                    </div>
 
-    <button type="submit">Update</button>
-</form>
+                    <div class="form-group">
+                        <label for="route_to"><i class="fas fa-map-marker-alt"></i> Route To</label>
+                        <input type="text" id="route_to" name="route_to"
+                            value="{{ old('route_to', $transport->route_to) }}" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="departure_time"><i class="fas fa-clock"></i> Departure Time</label>
+                        <input type="time" id="departure_time" name="departure_time"
+                            value="{{ old('departure_time', $transport->departure_time) }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price"><i class="fas fa-dollar-sign"></i> Price</label>
+                        <input type="number" id="price" name="price" value="{{ old('price', $transport->price) }}"
+                            step="0.01" min="0" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="total_seats"><i class="fas fa-chair"></i> Total Seats</label>
+                        <input type="number" id="total_seats" name="total_seats"
+                            value="{{ old('total_seats', $transport->total_seats) }}" min="1" required>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-update">
+                        <i class="fas fa-save"></i> Update Transport
+                    </button>
+                    <a href="{{ route('admin.transports.viewtransports') }}" class="btn-cancel">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 <style>
-    form {
-        max-width: 600px;
-        margin: 2rem auto;
+    .edit-transport-wrapper {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(28, 88, 115, 0.1);
+        position: relative;
+    }
+
+    .form-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #1c5873, #36a2eb, #1c5873);
+    }
+
+    .form-header {
+        background: linear-gradient(135deg, #1c5873 0%, #2d6b84 50%, #36a2eb 100%);
+        color: white;
         padding: 2rem;
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 4px 24px rgba(28, 88, 115, 0.10);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
     }
-    label {
+
+    .form-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+
+        0%,
+        100% {
+            transform: rotate(0deg);
+        }
+
+        50% {
+            transform: rotate(180deg);
+        }
+    }
+
+    .form-header h2 {
+        margin: 0 0 0.5rem 0;
+        font-size: 2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .form-header p {
+        margin: 0;
+        opacity: 0.9;
+        font-size: 1.1rem;
+    }
+
+    .transport-form {
+        padding: 2.5rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .form-row:last-of-type {
+        grid-template-columns: 1fr;
+        max-width: 50%;
+    }
+
+    .form-group {
+        position: relative;
+    }
+
+    .form-group label {
         display: block;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        color: #1c5873;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
-    input {
-        width: calc(100% - 1rem);
-        padding: 0.5rem;
-        margin-bottom: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
+
+    .form-group label i {
+        color: #36a2eb;
+        width: 20px;
     }
-    button {
-        padding: 0.5rem 1rem;
-        background-color: #1c5873;
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: #1c5873;
+        box-shadow: 0 0 0 4px rgba(28, 88, 115, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .form-group input:hover,
+    .form-group select:hover {
+        border-color: #36a2eb;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-actions {
+        margin-top: 3rem;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-update {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
         color: white;
         border: none;
-        border-radius: 4px;
+        padding: 1rem 2rem;
+        border-radius: 25px;
+        font-size: 1.1rem;
+        font-weight: 600;
         cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
-    button:hover {
-        background-color: #155a74;
+
+    .btn-update:hover {
+        background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
     }
-    body {
-        background-color: #f4f4f4;
-        font-family: Arial, sans-serif;
+
+    .btn-cancel {
+        background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+        color: white;
+        text-decoration: none;
+        padding: 1rem 2rem;
+        border-radius: 25px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
-    @media (min-width: 768px) {
-        form {
-            max-width: 800px;
+
+    .btn-cancel:hover {
+        background: linear-gradient(135deg, #5a6268 0%, #495057 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(108, 117, 125, 0.4);
+        text-decoration: none;
+        color: white;
+    }
+
+    .alert {
+        margin: 1.5rem 2.5rem;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        border-left: 5px solid;
+    }
+
+    .alert-danger {
+        background: linear-gradient(135deg, #f8d7da 0%, #f5c2c7 100%);
+        border-left-color: #dc3545;
+        color: #721c24;
+    }
+
+    .alert-success {
+        background: linear-gradient(135deg, #d1edff 0%, #b3d9ff 100%);
+        border-left-color: #28a745;
+        color: #0f5132;
+    }
+
+    .alert ul {
+        margin: 0;
+        padding-left: 1.5rem;
+    }
+
+    .alert li {
+        margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .edit-transport-wrapper {
+            padding: 1rem;
         }
-        body {
-            display: flex;
+
+        .form-container {
+            margin: 0;
+            border-radius: 15px;
+        }
+
+        .form-header {
+            padding: 1.5rem;
+        }
+
+        .form-header h2 {
+            font-size: 1.5rem;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .transport-form {
+            padding: 1.5rem;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row:last-of-type {
+            max-width: 100%;
+        }
+
+        .form-actions {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .btn-update,
+        .btn-cancel {
+            width: 100%;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            padding: 1.25rem 2rem;
+        }
+
+        .alert {
+            margin: 1rem;
         }
     }
 </style>

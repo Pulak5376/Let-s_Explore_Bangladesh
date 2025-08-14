@@ -3,514 +3,206 @@
 @section('title', 'Bus Ticket Booking')
 
 @section('content')
-<div class="bus-booking-wrapper">
-  <div class="bus-booking-container">
-    <h1><i class="ph-bus"></i> Bus Ticket Booking</h1>
-
-    {{-- Bus Search Form --}}
-    <div class="search-form-container">
-      <form action="{{ route('bus.search') }}" method="POST">
-        @csrf
-        <input type="hidden" name="type" value="bus">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="from">From</label>
-            <input type="text" id="from" name="from" value="{{ old('from') }}" placeholder="e.g. Dhaka" required>
-          </div>
-          <div class="form-group">
-            <label for="to">To</label>
-            <input type="text" id="to" name="to" value="{{ old('to') }}" placeholder="e.g. Chittagong" required>
-          </div>
-          <div class="form-group">
-            <label for="date">Date</label>
-            <input type="date" id="date" name="date" value="{{ old('date') }}" placeholder="e.g. 2023-12-31" required>
-          </div>
+<div class="booking-wrapper">
+    <div class="booking-container">
+        <div class="header">
+            <h1><i class="fas fa-bus"></i> Bus Ticket Booking</h1>
+            <p>Find and book your bus tickets easily</p>
         </div>
-        <button type="submit" class="search-btn">Search Buses</button>
-      </form>
-    </div>
 
-    {{-- Show Search Results --}}
-    @isset($transports)
-    <div class="results-container">
-      <h2>Available Buses</h2>
-
-      @if ($transports->isEmpty())
-      <div class="no-results">
-        <p>No buses found for your search criteria.</p>
-      </div>
-      @else
-      <div class="bus-results">
-        @foreach ($transports as $bus)
-        <div class="bus-card">
-          <div class="bus-header">
-            <span class="operator">{{ $bus->name ?? 'Bus Service' }}</span>
-            <span class="bus-type">{{ ucfirst($bus->type) }}</span>
-          </div>
-          <div class="journey-details">
-            <div class="route">
-              <span class="from">{{ $bus->route_from }}</span>
-              <span class="route-arrow">→</span>
-              <span class="to">{{ $bus->route_to }}</span>
-            </div>
-            <div class="schedule">
-              <span class="time">Departure: {{ $bus->departure_time }}</span>
-            </div>
-          </div>
-          <div class="bus-footer">
-            <div class="bus-info">
-              <span class="fare">৳{{ $bus->price }}</span>
-              <span class="seats">{{ $bus->total_seats }} seats available</span>
-            </div>
-            <form action="{{ url($bus->type.'/book') }}" method="POST" style="width:100%;" class="bus-book-form">
-              @csrf
-              <input type="hidden" name="transport_id" value="{{ $bus->id }}">
-              <div class="booking-controls">
-                <div class="seat-selection">
-                  <label for="seats_{{ $bus->id }}">Seats:</label>
-                  <input type="number" id="seats_{{ $bus->id }}" name="seats_booked" value="1" min="1" max="{{ $bus->total_seats }}">
+        <form action="{{ route('bus.search') }}" method="POST" class="search-form">
+            @csrf
+            <input type="hidden" name="type" value="bus">
+            
+            <div class="search-grid">
+                <div class="input-group">
+                    <label for="from">From</label>
+                    <input type="text" id="from" name="from" value="{{ old('from') }}" placeholder="Departure city" required>
                 </div>
-                <button type="button" class="book-btn show-passenger-btn">Book Now</button>
-              </div>
-              <div class="passenger-info" style="display:none; margin-top:0.7rem;">
-                <input type="text" name="passenger_name" placeholder="Name" required>
-                <input type="email" name="passenger_email" placeholder="Email" required>
-                <input type="text" name="passenger_phone" placeholder="Phone" required>
-                <button type="submit" class="book-btn" style="margin-left:0.5rem;">Confirm Booking</button>
-              </div>
-            </form>
-          </div>
-        </div>
-        @endforeach
-      </div>
-      @endif
-    </div>
-    @endisset
+                <div class="input-group">
+                    <label for="to">To</label>
+                    <input type="text" id="to" name="to" value="{{ old('to') }}" placeholder="Destination city" required>
+                </div>
+                <div class="input-group">
+                    <label for="booking_date">Date</label>
+                    <input type="date" id="booking_date" name="booking_date" value="{{ old('booking_date') }}" required>
+                </div>
+            </div>
+            <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i> Search Buses
+            </button>
+        </form>
 
-    @if(session('success'))
-    <div id="msg-box" class="{{ session('success') ? 'success show' : '' }} {{ session('error') ? 'error show' : '' }}">
-      {{ session('success') ?? session('error') }}
+        @isset($transports)
+            <div class="results">
+                <h2><i class="fas fa-list"></i> Available Buses ({{ $transports->count() }})</h2>
+                
+                @forelse ($transports as $bus)
+                    <div class="transport-card">
+                        <div class="card-header">
+                            <div class="transport-name">
+                                <i class="fas fa-bus"></i>
+                                <span>{{ $bus->name ?? 'Bus Service' }}</span>
+                            </div>
+                            <span class="transport-type">{{ ucfirst($bus->type) }}</span>
+                        </div>
+                        
+                        <div class="card-body">
+                            <div class="route-info">
+                                <div class="route">
+                                    <span class="station">{{ $bus->route_from }}</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                    <span class="station">{{ $bus->route_to }}</span>
+                                </div>
+                                <div class="time">
+                                    <i class="fas fa-clock"></i>
+                                    Departure: {{ $bus->departure_time }}
+                                </div>
+                            </div>
+                            
+                            <div class="pricing">
+                                <div class="price">৳{{ $bus->price }}</div>
+                                <div class="seats">{{ $bus->total_seats }} seats</div>
+                            </div>
+                        </div>
+                        
+                        <form action="{{ url($bus->type . '/book') }}" method="POST" class="booking-form">
+                            @csrf
+                            <input type="hidden" name="transport_id" value="{{ $bus->id }}">
+                            @isset($searchDate)
+                                <input type="hidden" name="booking_date" value="{{ $searchDate }}">
+                            @endisset
+                            
+                            <div class="booking-controls">
+                                <div class="seat-selector">
+                                    <label>Seats:</label>
+                                    <input type="number" name="seats_booked" value="1" min="1" max="{{ $bus->total_seats }}">
+                                </div>
+                                <button type="button" class="book-btn" onclick="togglePassenger(this)">
+                                    <i class="fas fa-ticket-alt"></i> Book Now
+                                </button>
+                            </div>
+                            
+                            <div class="passenger-form" style="display:none;">
+                                <input type="text" name="passenger_name" placeholder="Full Name" required>
+                                <input type="email" name="passenger_email" placeholder="Email Address" required>
+                                <input type="tel" name="passenger_phone" placeholder="Phone Number" required>
+                                <button type="submit" class="confirm-btn">
+                                    <i class="fas fa-check"></i> Confirm Booking
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                @empty
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No buses found</h3>
+                        <p>Try different cities or dates</p>
+                    </div>
+                @endforelse
+            </div>
+        @endisset
+
+        @if(session('success') || session('error'))
+            <div class="alert {{ session('success') ? 'success' : 'error' }}">
+                <i class="fas fa-{{ session('success') ? 'check-circle' : 'exclamation-circle' }}"></i>
+                {{ session('success') ?? session('error') }}
+            </div>
+        @endif
     </div>
-    @endif
-  </div>
 </div>
-@endsection
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const msgBox = document.getElementById('msg-box');
-    if (msgBox && msgBox.classList.contains('show')) {
-      setTimeout(() => {
-        msgBox.classList.remove('show');
-      }, 4000);
-    }
-
-    // Book Now button logic
-    document.querySelectorAll('.bus-book-form').forEach(function(form) {
-      var showBtn = form.querySelector('.show-passenger-btn');
-      var passengerInfo = form.querySelector('.passenger-info');
-      if (showBtn && passengerInfo) {
-        showBtn.addEventListener('click', function(e) {
-          // Hide all other passenger-info forms
-          document.querySelectorAll('.bus-book-form .passenger-info').forEach(function(pi) {
-            if (pi !== passengerInfo) pi.style.display = 'none';
-          });
-          // Show this one
-          if (passengerInfo.style.display === 'none' || passengerInfo.style.display === '') {
-            passengerInfo.style.display = 'flex';
-          } else {
-            passengerInfo.style.display = 'none';
-          }
-        });
-      }
+function togglePassenger(btn) {
+    const form = btn.closest('.booking-form');
+    const passengerForm = form.querySelector('.passenger-form');
+    
+    document.querySelectorAll('.passenger-form').forEach(pf => {
+        if (pf !== passengerForm) pf.style.display = 'none';
     });
-  });
+    
+    passengerForm.style.display = passengerForm.style.display === 'none' ? 'flex' : 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const alert = document.querySelector('.alert');
+    if (alert) {
+        setTimeout(() => alert.classList.add('fade-out'), 3000);
+        setTimeout(() => alert.remove(), 3500);
+    }
+});
 </script>
 
 <style>
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', sans-serif;
-    background: #f5f7fa;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-  .bus-booking-wrapper {
-    min-height: 100vh;
-    width: 100%;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    padding: 2rem 1rem;
-    box-sizing: border-box;
-  }
+body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
 
-  .bus-booking-container {
-    background: white;
-    width: 100%;
-    max-width: 1000px;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  }
+.booking-wrapper { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
 
-  h1 {
-    text-align: center;
-    color: #1c5873;
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
-  }
+.booking-container { background: white; width: 100%; max-width: 900px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); overflow: hidden; }
 
-  h2 {
-    color: #1c5873;
-    margin: 1rem 0;
-    font-size: 1.5rem;
-    border-bottom: 2px solid #eaeaea;
-    padding-bottom: 0.5rem;
-  }
+.header { background: linear-gradient(135deg, #1c5873 0%, #2d6b84 100%); color: white; padding: 2rem; text-align: center; }
+.header h1 { font-size: 2rem; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+.header p { opacity: 0.9; font-size: 1.1rem; }
 
-  .search-form-container {
-    background: #f8fafc;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    border: 1px solid #e0e7ee;
-    margin-bottom: 2rem;
-  }
+.search-form { padding: 2rem; background: #f8fafc; }
+.search-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+.input-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151; }
+.input-group input { width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.3s; }
+.input-group input:focus { outline: none; border-color: #1c5873; box-shadow: 0 0 0 3px rgba(28,88,115,0.1); }
 
-  .form-row {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
+.search-btn { width: 100%; background: linear-gradient(135deg, #1c5873 0%, #2d6b84 100%); color: white; border: none; padding: 1rem; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: transform 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+.search-btn:hover { transform: translateY(-2px); }
 
-  .form-group {
-    flex: 1;
-  }
+.results { padding: 2rem; }
+.results h2 { color: #1c5873; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
 
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #333;
-    font-weight: 500;
-  }
+.transport-card { background: white; border: 2px solid #e5e7eb; border-radius: 15px; margin-bottom: 1rem; overflow: hidden; transition: all 0.3s; }
+.transport-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-color: #1c5873; }
 
-  input[type="text"],
-  input[type="date"],
-  select,
-  input[type="number"] {
-    width: 100%;
-    padding: 0.75rem;
-    border-radius: 0.375rem;
-    border: 1px solid #d1d5db;
-    font-size: 1rem;
-    box-sizing: border-box;
-    background-color: white;
-  }
+.card-header { background: linear-gradient(135deg, #1c5873 0%, #2d6b84 100%); color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+.transport-name { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 1.1rem; }
+.transport-type { background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; }
 
-  input:focus,
-  select:focus {
-    outline: none;
-    border-color: #1c5873;
-    box-shadow: 0 0 0 3px rgba(28, 88, 115, 0.1);
-  }
+.card-body { padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+.route { display: flex; align-items: center; gap: 1rem; font-size: 1.2rem; font-weight: 600; }
+.station { color: #1c5873; }
+.route i { color: #6b7280; }
+.time { color: #6b7280; font-size: 0.9rem; margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
 
-  .search-btn {
-    background-color: #1c5873;
-    color: white;
-    padding: 0.75rem 1rem;
-    border-radius: 0.375rem;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    font-size: 1rem;
-    font-weight: 500;
-    margin-top: 0.5rem;
-    transition: background-color 0.2s;
-  }
+.pricing { text-align: right; }
+.price { font-size: 1.5rem; font-weight: 700; color: #1c5873; }
+.seats { color: #6b7280; font-size: 0.9rem; }
 
-  .search-btn:hover {
-    background-color: #164963;
-  }
+.booking-form { padding: 0 1.5rem 1.5rem; }
+.booking-controls { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.seat-selector { display: flex; align-items: center; gap: 0.5rem; }
+.seat-selector input { width: 60px; padding: 0.5rem; border: 2px solid #e5e7eb; border-radius: 8px; text-align: center; }
 
-  .results-container {
-    margin-top: 2rem;
-  }
+.book-btn { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; }
+.book-btn:hover { transform: translateY(-2px); }
 
-  .no-results {
-    text-align: center;
-    padding: 2rem;
-    background: #f8fafc;
-    border-radius: 0.5rem;
-    color: #4b5563;
-  }
+.passenger-form { display: flex; gap: 1rem; padding: 1rem; background: #f9fafb; border-radius: 10px; }
+.passenger-form input { flex: 1; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; }
+.confirm-btn { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
 
-  .bus-results {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+.no-results { text-align: center; padding: 3rem; color: #6b7280; }
+.no-results i { font-size: 3rem; margin-bottom: 1rem; }
+.no-results h3 { margin-bottom: 0.5rem; }
 
-  .bus-card {
-    background: #f8fafc;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e0e7ee;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
+.alert { position: fixed; top: 2rem; right: 2rem; padding: 1rem 1.5rem; border-radius: 10px; font-weight: 600; z-index: 1000; transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; }
+.alert.success { background: #d1fae5; border: 2px solid #10b981; color: #065f46; }
+.alert.error { background: #fee2e2; border: 2px solid #ef4444; color: #991b1b; }
+.alert.fade-out { opacity: 0; transform: translateX(100%); }
 
-  .bus-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .bus-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    background: #1c5873;
-    color: white;
-  }
-
-  .operator {
-    font-weight: 600;
-    font-size: 1.1rem;
-  }
-
-  .bus-type {
-    font-size: 0.85rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 50px;
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-
-  .journey-details {
-    padding: 1rem;
-    border-bottom: 1px solid #e0e7ee;
-  }
-
-  .route {
-    display: flex;
-    align-items: center;
-    font-size: 1.2rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .route-arrow {
-    margin: 0 0.5rem;
-    color: #64748b;
-  }
-
-  .from,
-  .to {
-    font-weight: 500;
-  }
-
-  .schedule {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    color: #64748b;
-  }
-
-  .bus-footer {
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .bus-info {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .fare {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #1c5873;
-  }
-
-  .seats {
-    font-size: 0.85rem;
-    color: #64748b;
-  }
-
-  .booking-controls {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .seat-selection {
-    display: flex;
-    align-items: center;
-  }
-
-  .seat-selection label {
-    margin: 0 0.5rem 0 0;
-  }
-
-  .seat-selection input {
-    width: 60px;
-    text-align: center;
-  }
-
-  .book-btn {
-    background-color: #16a34a;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    border: none;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
-  }
-
-  .book-btn:hover {
-    background-color: #15803d;
-  }
-
-  .passenger-info {
-    display: flex;
-    flex-direction: row;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    width: 100%;
-  }
-
-  .passenger-info input[type="text"],
-  .passenger-info input[type="email"] {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.375rem;
-    border: 1px solid #d1d5db;
-    font-size: 1rem;
-    background-color: #f9fafb;
-    margin: 0;
-  }
-
-  .passenger-info input:focus {
-    outline: none;
-    border-color: #1c5873;
-    box-shadow: 0 0 0 2px rgba(28, 88, 115, 0.08);
-    background-color: #fff;
-  }
-
-  #msg-box {
-    position: fixed;
-    top: 32px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-40px);
-    min-width: 320px;
-    max-width: 90vw;
-    z-index: 9999;
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    font-size: 1.08rem;
-    font-weight: 600;
-    text-align: center;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.4s, transform 0.4s;
-    box-shadow: 0 4px 18px rgba(44, 62, 80, 0.10);
-    letter-spacing: 0.01em;
-  }
-
-  #msg-box.show {
-    display: block;
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  #msg-box.success {
-    background: linear-gradient(90deg, #e6f9ed 80%, #b2f7cc 100%);
-    color: #20734c;
-    border: 2px solid #4caf50;
-    box-shadow: 0 2px 12px rgba(76, 175, 80, 0.10);
-  }
-
-  #msg-box.success::before {
-    content: "✔ ";
-    font-size: 1.2em;
-    color: #43a047;
-    margin-right: 0.5em;
-  }
-
-  #msg-box.error {
-    background: linear-gradient(90deg, #ffeaea 80%, #ffd6d6 100%);
-    color: #b71c1c;
-    border: 2px solid #e53935;
-    box-shadow: 0 2px 12px rgba(229, 57, 53, 0.10);
-  }
-
-  #msg-box.error::before {
-    content: "✖ ";
-    font-size: 1.2em;
-    color: #e53935;
-    margin-right: 0.5em;
-  }
-
-
-  @media (max-width: 768px) {
-    .form-row {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .bus-booking-container {
-      padding: 1rem;
-    }
-
-    .bus-footer {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 1rem;
-    }
-
-    .booking-controls {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .seat-selection {
-      margin-bottom: 0.5rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-
-    .journey-details,
-    .bus-header,
-    .bus-footer {
-      padding: 0.75rem;
-    }
-
-    .route {
-      font-size: 1rem;
-    }
-
-    .fare {
-      font-size: 1.1rem;
-    }
-
-    h1 {
-      font-size: 1.5rem;
-    }
-
-    .passenger-info {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    h2 {
-      font-size: 1.2rem;
-    }
-  }
+@media (max-width: 768px) {
+    .booking-container { margin: 0; border-radius: 0; }
+    .search-grid { grid-template-columns: 1fr; }
+    .card-body { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .pricing { text-align: left; }
+    .passenger-form { flex-direction: column; }
+    .booking-controls { flex-direction: column; align-items: stretch; }
+}
 </style>
+@endsection

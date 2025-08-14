@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Transport;
 use Illuminate\Support\Facades\DB;
+use App\Models\Booking;
 
 class TransportController extends Controller
 {
@@ -86,9 +87,16 @@ class TransportController extends Controller
     }
 
 
-    public function viewTransports()
+    public function viewTransports(Request $request)
     {
-        $transports = Transport::all();
+        $query = Transport::query();
+        
+        // Handle type filtering from URL parameters
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
+        
+        $transports = $query->get();
         return view('admin.transports.viewtransports', compact('transports'));
     }
 
@@ -123,5 +131,66 @@ class TransportController extends Controller
 
         return redirect()->route('admin.transports.viewtransports')
             ->with('success', 'Transport updated successfully');
+    }
+
+    public function searchTransport(Request $request)
+    {
+        $query = Transport::query();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('id', $search)
+                    ->orWhere('name', 'like', "%$search%")
+                    ->orWhere('type', 'like', "%$search%")
+                    ->orWhere('route_from', 'like', "%$search%")
+                    ->orWhere('route_to', 'like', "%$search%");
+            });
+        }
+
+        // Handle type filtering from URL parameters
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
+
+        $transports = $query->get();
+        $searchTerm = $request->search;
+
+        return view('admin.transports.viewtransports', compact('transports', 'searchTerm'));
+    }
+
+    public function viewList(Request $request)
+    {
+        $transportType = $request->get('transport_type');
+        
+        if ($transportType) {
+            $bookings = Booking::with(['transport'])
+                ->where('transport_type', $transportType)
+                ->get();
+        } else {
+            $bookings = Booking::with(['transport'])->get();
+        }
+        
+        return view('admin.bookings.transports.viewlist', compact('bookings'));
+    }
+
+    public function destroyBooking($id)
+    {
+        $booking = Booking::findOrFail($id);
+        $booking->delete();
+        return redirect()->route('admin.bookings.transports.viewlist')->with('success', 'Booking deleted successfully');
+    }
+
+    public function searchBookings(Request $request)
+    {
+        $query = $request->input('search');
+
+        $bookings = Booking::where('id', 'like', "%{$query}%")
+            ->orWhere('transport_type', 'like', "%{$query}%")
+            ->orWhere('passenger_name', 'like', "%{$query}%")
+            ->orWhere('seats_booked', 'like', "%{$query}%")
+            ->get();
+
+        return view('admin.bookings.transports.viewlist', compact('bookings'));
     }
 }

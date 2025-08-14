@@ -14,6 +14,7 @@ class TransportController extends Controller
             'type' => 'required|in:bus,train',
             'from' => 'required|string',
             'to' => 'required|string',
+            'booking_date' => 'required|date',
         ]);
 
         $transports = Transport::where('type', $request->type)
@@ -21,16 +22,18 @@ class TransportController extends Controller
             ->where('route_to', 'LIKE', '%' . $request->to . '%')
             ->get();
 
-        return view('transports.' . $request->type, compact('transports'));
+        $searchDate = $request->booking_date;
+
+        return view('transports.' . $request->type, compact('transports', 'searchDate'));
     }
 
 
-    // Booking handler
     public function book(Request $request)
     {
         $request->validate([
             'transport_id' => 'required|exists:transports,id',
             'seats_booked' => 'required|integer|min:1',
+            'booking_date' => 'required|date',
             'passenger_name' => 'required|string|max:255',
             'passenger_email' => 'required|email|max:255',
             'passenger_phone' => 'required|string|max:20',
@@ -47,7 +50,8 @@ class TransportController extends Controller
 
         Booking::create([
             'transport_id' => $transport->id,
-            'transport_type' => $transport->type,  // ekhane type add korchi
+            'transport_type' => $transport->type,
+            'booking_date' => $request->booking_date,
             'passenger_name' => $request->passenger_name,
             'passenger_email' => $request->passenger_email,
             'passenger_phone' => $request->passenger_phone,
