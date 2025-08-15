@@ -108,7 +108,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::delete('/bookings/transports/{id}', [Y::class, 'destroyBooking'])->name('admin.bookings.transports.destroy');
     Route::get('/bookings/transports/search', [Y::class, 'searchBookings'])->name('admin.transports.searchbookings');
 
-    Route::get('/transports/addflight', [FlightsController::class, 'addflight'])->name('admin.transports.addflight');
-    Route::post('/transports/addflight', [FlightsController::class, 'storeFlight'])->name('admin.transports.storeflight');
+    Route::get('/transports/addflight', [FlightsController::class, 'addFlight'])->name('admin.transports.addflight');
+    Route::post('/transports/addflight', [FlightsController::class, 'storeflight'])->name('admin.transports.storeflight');
+    Route::get('/transports/viewflights', [FlightsController::class, 'viewFlights'])->name('admin.transports.viewflights');
+    Route::get('/bookings/transports/viewflightbooking', [FlightsController::class, 'viewFlightBookings'])->name('admin.bookings.transports.viewflightbooking');
     
 });

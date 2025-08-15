@@ -29,12 +29,12 @@
             <a href="{{ route('admin.bookings.transports.viewlist') }}"><i class="fas fa-eye"></i> Transport Bookings</a>
         </div>
         
-        <button class="dropdown-btn"><i class="fas fa-plane"></i> Flights<i
-                class="fas fa-chevron-down"></i></button>
+
+        <button class="dropdown-btn"><i class="fas fa-plane"></i> Flights<i class="fas fa-chevron-down"></i></button>
         <div class="dropdown-container">
             <a href="{{ route('admin.transports.addflight') }}"><i class="fas fa-plus"></i> Add New Flight</a>
-            <a href="{{ route('admin.bookings.transports.viewlist') }}"><i class="fas fa-eye"></i> Flight List</a>
-            <a href="{{ route('admin.bookings.transports.viewlist') }}"><i class="fas fa-eye"></i> View Bookings</a>
+            <a href="{{ route('admin.transports.viewflights') }}"><i class="fas fa-eye"></i> Flight List</a>
+            <a href="{{ route('admin.bookings.transports.viewflightbooking') }}"><i class="fas fa-eye"></i> View Bookings</a>
         </div>
 
         <a href="#"><i class="fas fa-map"></i> Add Places</a>
