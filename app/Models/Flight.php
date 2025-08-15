@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Flight extends Model
+{
+    use HasFactory;
+
+    protected $table = 'flights';
+
+    protected $fillable = [
+        'flight_number',
+        'airline',
+        'from',
+        'to',
+        'departure_date',
+        'arrival_date',
+        'class',
+        'seats_available',
+        'price',
+    ];
+}

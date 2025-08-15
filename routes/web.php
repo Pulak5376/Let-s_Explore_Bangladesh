@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\TransportController as Y;
+use App\Http\Controllers\FlightBookingController;
 
 Route::get('/', function () {
     return view('1stScreen');
@@ -34,9 +35,10 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register')
 Route::get('/hotelbook', function () {
     return view('hotelbook');
 })->name('hotelbook');
-Route::get('/flightbook', function () {
-    return view('flightbook');
-});
+
+
+Route::get('/flightbook', [FlightBookingController::class, 'create'])->name('flightbook');
+Route::post('/flightbook', [FlightBookingController::class, 'store'])->name('flightbook.store');
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');

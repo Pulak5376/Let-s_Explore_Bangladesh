@@ -16,6 +16,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TransportSeeder::class,
         ]);
+        $this->call([
+            FlightsSeeder::class,
+        ]);
        $this->call(AdminUserSeeder::class);
+       
     }
 }
