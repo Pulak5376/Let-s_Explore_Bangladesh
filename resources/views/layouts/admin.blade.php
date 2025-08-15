@@ -26,6 +26,14 @@
         <button class="dropdown-btn"><i class="fas fa-bus"></i> Booking Management<i
                 class="fas fa-chevron-down"></i></button>
         <div class="dropdown-container">
+            <a href="{{ route('admin.bookings.transports.viewlist') }}"><i class="fas fa-eye"></i> Transport Bookings</a>
+        </div>
+        
+        <button class="dropdown-btn"><i class="fas fa-plane"></i> Flights<i
+                class="fas fa-chevron-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{{ route('admin.transports.addflight') }}"><i class="fas fa-plus"></i> Add New Flight</a>
+            <a href="{{ route('admin.bookings.transports.viewlist') }}"><i class="fas fa-eye"></i> Flight List</a>
             <a href="{{ route('admin.bookings.transports.viewlist') }}"><i class="fas fa-eye"></i> View Bookings</a>
         </div>
 

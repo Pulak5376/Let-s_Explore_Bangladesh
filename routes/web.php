@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\TransportController as Y;
 use App\Http\Controllers\FlightBookingController;
+use App\Http\Controllers\Admin\FlightsController;  
 
 Route::get('/', function () {
     return view('1stScreen');
@@ -106,4 +107,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/bookings/transports', [Y::class, 'viewList'])->name('admin.bookings.transports.viewlist');
     Route::delete('/bookings/transports/{id}', [Y::class, 'destroyBooking'])->name('admin.bookings.transports.destroy');
     Route::get('/bookings/transports/search', [Y::class, 'searchBookings'])->name('admin.transports.searchbookings');
+
+    Route::get('/transports/addflight', [FlightsController::class, 'addflight'])->name('admin.transports.addflight');
+    Route::post('/transports/addflight', [FlightsController::class, 'storeFlight'])->name('admin.transports.storeflight');
+    
 });
