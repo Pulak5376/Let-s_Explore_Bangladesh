@@ -16,80 +16,21 @@
     <div class="hero-overlay"></div>
   </div>
   
-  <div class="hero-content">
-    <div class="hero-badge">
-      <span class="badge-pulse"></span>
-      <span>🌍 Travel Stories</span>
-    </div>
-    <h1 class="hero-title">
-      <span class="title-word" data-delay="0">Discover</span>
-      <span class="title-word" data-delay="0.2">Bangladesh</span>
-      <span class="title-word gradient-text" data-delay="0.4">Adventures</span>
-    </h1>
-    <p class="hero-subtitle">
-      <span class="subtitle-line" data-delay="0.6">Share your journey, inspire others</span>
-      <span class="subtitle-line" data-delay="0.8">Connect with fellow travelers worldwide</span>
-    </p>
-    <div class="hero-stats">
-      <div class="stat-item" data-delay="1.0">
-        <span class="stat-number" data-count="1247">0</span>
-        <span class="stat-label">Stories Shared</span>
-      </div>
-      <div class="stat-item" data-delay="1.2">
-        <span class="stat-number" data-count="89">0</span>
-        <span class="stat-label">Destinations</span>
-      </div>
-      <div class="stat-item" data-delay="1.4">
-        <span class="stat-number" data-count="15642">0</span>
-        <span class="stat-label">Adventures</span>
-      </div>
-    </div>
-    <div class="hero-cta" data-delay="1.6">
-      <button class="cta-primary">
-        <span>Share Your Story</span>
-        <i class="cta-arrow">→</i>
-      </button>
-      <button class="cta-secondary">
-        <span>Explore Stories</span>
-        <i class="cta-play">▶</i>
-      </button>
-    </div>
-  </div>
-  
-  <div class="scroll-indicator">
-    <div class="scroll-mouse">
-      <div class="scroll-wheel"></div>
-    </div>
-    <span>Scroll to explore</span>
-  </div>
-  
-  <div class="floating-particles">
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-  </div>
-</section>
 
-<section class="stories-section" style="padding: 20px; background: linear-gradient(135deg, #f8fffe 0%, #e8f5e8 50%, #f8fffe 100%); min-height: 100vh;">
-  <style>
-    /* Hero Section Styles */
-    .hero-stories {
-      position: relative;
-      height: 100vh;
-      min-height: 800px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: #000;
-    }
+    <!-- Story Create Form -->
+    <div class="story-form-container" style="margin-bottom: 40px;">
+      <form method="POST" action="{{ route('stories.store') }}">
+        @csrf
+        <div>
+          <input type="text" name="title" placeholder="Title" required style="width: 100%; padding: 8px; margin-bottom: 8px;" />
+        </div>
+        <div>
+          <textarea name="content" placeholder="Share your story..." required style="width: 100%; padding: 8px; margin-bottom: 8px;"></textarea>
+        </div>
+        <button type="submit" style="padding: 8px 16px; background: #2ecc40; color: #fff; border: none; border-radius: 4px;">Post Story</button>
+      </form>
+    </div>
 
-    .hero-background {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
     }
 
     .hero-slides {
@@ -956,47 +897,29 @@
     @endphp
 
 
-    @foreach ($stories as $index => $story)
+    @foreach ($stories as $story)
       <div class="story-card">
         <!-- Post Header -->
         <div class="post-header">
-          <div class="avatar">{{ $story['avatar'] }}</div>
+          <div class="avatar">{{ $story->user->name[0] ?? '?' }}</div>
           <div class="post-info">
-            <h3>{{ $story['author'] }}</h3>
-            <div class="post-time">{{ $story['time'] }}</div>
+            <h3>{{ $story->user->name ?? 'Anonymous' }}</h3>
+            <div class="post-time">{{ $story->created_at->diffForHumans() }}</div>
           </div>
         </div>
 
         <!-- Post Content -->
         <div class="post-content">
-          <p class="post-text">{{ $story['text'] }}</p>
-          <span class="location-tag">
-            📍 {{ $story['location'] }}
-          </span>
-          <img src="{{ $story['img'] }}" alt="{{ $story['title'] }}" class="post-image" />
+          <p class="post-text">{{ $story->content }}</p>
         </div>
 
         <!-- Post Actions -->
         <div class="post-actions">
-          <div class="action-buttons">
-            <button class="action-btn" data-action="like" data-index="{{ $index }}">
-              <span class="like-icon">❤️</span>
-              <span class="like-text">Like</span>
-            </button>
-            <button class="action-btn" data-action="comment" data-index="{{ $index }}">
-              <span>💬</span>
-              <span>Comment</span>
-            </button>
-            <button class="action-btn" data-action="share" data-index="{{ $index }}">
-              <span>📤</span>
-              <span>Share</span>
-            </button>
-            <button class="action-btn" data-action="save" data-index="{{ $index }}">
-              <span class="save-icon">🔖</span>
-              <span class="save-text">Save</span>
-            </button>
-          </div>
-          <div class="likes-count" id="likes-{{ $index }}">{{ $story['likes'] }} likes</div>
+          <form method="POST" action="{{ route('stories.destroy', $story->id) }}" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="action-btn" style="color: #e74c3c;">Delete</button>
+          </form>
         </div>
       </div>
     @endforeach

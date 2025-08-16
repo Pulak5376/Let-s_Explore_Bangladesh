@@ -8,14 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class StoryController extends Controller
 {
-    // Show all stories
-    public function index()
+    // Show all stories (web and API)
+    public function index(Request $request)
     {
         $stories = Story::with('user')->latest()->get();
-        return response()->json($stories);
+        if ($request->wantsJson()) {
+            return response()->json($stories);
+        }
+        return view('stories', compact('stories'));
     }
 
-    // Store a new story
+    // Store a new story (web and API)
     public function store(Request $request)
     {
         $request->validate([
@@ -24,20 +27,25 @@ class StoryController extends Controller
         ]);
 
         $story = Story::create([
-            'user_id' => Auth::id() ?? $request->user_id, // fallback for unauthenticated
+            'user_id' => Auth::id() ?? 1, // fallback to user 1 if not logged in
             'title' => $request->title,
             'content' => $request->content,
         ]);
 
-        return response()->json($story, 201);
+        if ($request->wantsJson()) {
+            return response()->json($story, 201);
+        }
+        return redirect()->route('stories.index');
     }
 
-    // Delete a story
-    public function destroy($id)
+    // Delete a story (web and API)
+    public function destroy(Request $request, $id)
     {
         $story = Story::findOrFail($id);
-        // Allow delete if owner or admin, or for demo allow anyone
         $story->delete();
-        return response()->json(['message' => 'Story deleted']);
+        if ($request->wantsJson()) {
+            return response()->json(['message' => 'Story deleted']);
+        }
+        return redirect()->route('stories.index');
     }
 }

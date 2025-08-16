@@ -1,3 +1,8 @@
+use App\Http\Controllers\StoryController;
+
+Route::get('/stories', [StoryController::class, 'index'])->name('stories.index');
+Route::post('/stories', [StoryController::class, 'store'])->name('stories.store');
+Route::delete('/stories/{id}', [StoryController::class, 'destroy'])->name('stories.destroy');
 <?php
 
 use Illuminate\Support\Facades\Auth;
