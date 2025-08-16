@@ -317,18 +317,6 @@
         }
       }
 
-      /* Scroll indicator */
-      .scroll-indicator {
-        position: absolute;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        color: rgba(255, 255, 255, 0.8);
-        animation: bounce 2s infinite;
-        font-size: 1.5rem;
-        z-index: 2;
-      }
-
       @keyframes bounce {
         0%, 20%, 50%, 80%, 100% {
           transform: translateX(-50%) translateY(0);
@@ -378,10 +366,6 @@
         </div>
       </div>
 
-      <!-- Scroll indicator -->
-      <div class="scroll-indicator">
-        ↓
-      </div>
     </header>
   </body>
 </html>

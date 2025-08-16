@@ -37,7 +37,7 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn-primary" id="login-btn">Login as Admin</button>
+                <button type="submit" class="btn-primary" id="login-btn">Login</button>
 
             </form>
 

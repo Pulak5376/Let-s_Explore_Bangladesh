@@ -64,18 +64,25 @@
             button.addEventListener('click', () => {
                 const container = button.nextElementSibling;
                 const isOpen = container.style.display === 'flex';
+                
+                document.querySelectorAll('.dropdown-container').forEach(otherContainer => {
+                    if (otherContainer !== container) {
+                        otherContainer.style.display = 'none';
+                    }
+                });
+                
                 container.style.display = isOpen ? 'none' : 'flex';
-                localStorage.setItem(button.textContent.trim(), !isOpen);
+                
+                sessionStorage.setItem(button.textContent.trim(), !isOpen);
             });
         });
+
         document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll('.dropdown-btn').forEach(button => {
-                const container = button.nextElementSibling;
-                const savedState = localStorage.getItem(button.textContent.trim());
-                if (savedState === "true") {
-                    container.style.display = 'flex';
-                }
+            document.querySelectorAll('.dropdown-container').forEach(container => {
+                container.style.display = 'none';
             });
+            
+            sessionStorage.clear();
         });
     </script>
 

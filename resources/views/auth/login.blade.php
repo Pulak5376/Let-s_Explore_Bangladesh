@@ -33,6 +33,8 @@
                 Don't have an account?
                 <a href="/register" class="register-link">Sign up here</a>
             </p>
+            <p class="register-text">
+                <a href="/admin/login" class="register-link">Log in as ADMIN</a>
         </section>
     </main>
 
