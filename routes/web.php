@@ -1,8 +1,5 @@
-use App\Http\Controllers\StoryController;
 
-Route::get('/stories', [StoryController::class, 'index'])->name('stories.index');
-Route::post('/stories', [StoryController::class, 'store'])->name('stories.store');
-Route::delete('/stories/{id}', [StoryController::class, 'destroy'])->name('stories.destroy');
+
 <?php
 
 use Illuminate\Support\Facades\Auth;
@@ -15,8 +12,11 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\TransportController as Y;
 use App\Http\Controllers\FlightBookingController;
-use App\Http\Controllers\Admin\FlightsController;  
+use App\Http\Controllers\Admin\FlightsController;
 
+Route::get('/stories', function () {
+    return view('stories');
+})->name('stories');
 Route::get('/', function () {
     return view('1stScreen');
 });
@@ -25,7 +25,7 @@ Route::get('/places', [CartController::class, 'places'])->name('places');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
-Route::get('/stories', [CartController::class, 'stories'])->name('stories');
+
 Route::get('/about', [CartController::class, 'about'])->name('about');
 Route::get('/gallery', [CartController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [CartController::class, 'contact'])->name('contact');
