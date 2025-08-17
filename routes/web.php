@@ -94,6 +94,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
         return redirect('/admin/login');
     })->name('admin.logout');
 
+    // Places management
+    Route::get('/places/add', [\App\Http\Controllers\Admin\PlacesController::class, 'create'])->name('admin.places.add');
+    Route::post('/places/add', [\App\Http\Controllers\Admin\PlacesController::class, 'store'])->name('admin.places.store');
+    Route::get('/places/view', [\App\Http\Controllers\Admin\PlacesController::class, 'index'])->name('admin.places.view');
+
 
     Route::get('/transports/addbus', [Y::class, 'addBus'])->name('admin.transports.addbus');
     Route::post('/transports/addbus', [Y::class, 'storeBus'])->name('admin.transports.storebus');
