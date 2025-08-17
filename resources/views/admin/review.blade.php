@@ -160,12 +160,12 @@
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const star = btn.getAttribute('data-star');
-            // Reset all rows
+           
             reviewRows.forEach(row => row.style.display = (star === 'all' ? '' : (row.getAttribute('data-rating') === star ? '' : 'none')));
 
-            // Show/hide filtered names table
+          
             if (star !== 'all') {
-                // Collect names for this star
+            
                 const filtered = reviewRows.filter(row => row.getAttribute('data-rating') === star);
                 filteredNamesBody.innerHTML = '';
                 filtered.forEach((row, idx) => {

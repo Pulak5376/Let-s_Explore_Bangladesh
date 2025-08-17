@@ -7,17 +7,17 @@ use App\Models\Review;
 
 class ReviewController extends Controller
 {
-    // GET /reviews
+
     public function index()
     {
-        // সব রিভিউ নতুন থেকে পুরোনো করে নেওয়া হচ্ছে
+      
         $reviews = Review::latest()->get();
 
-        // view-এ $reviews পাঠানো হচ্ছে
+      
         return view('reviews.create', compact('reviews'));
     }
 
-    // POST /reviews
+    
     public function store(Request $request)
     {
         $request->validate([

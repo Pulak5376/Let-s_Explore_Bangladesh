@@ -6,7 +6,7 @@ use App\Models\Story;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class StoryController extends Controller
+class StoriesController extends Controller
 {
     // Show all stories (web and API)
     public function index(Request $request)
@@ -24,11 +24,18 @@ class StoryController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg|max:2048',
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('stories', 'public');
+        }
 
         $story = Story::create([
             'user_id' => Auth::id() ?? 1, // fallback to user 1 if not logged in
             'title' => $request->title,
+            'image' => $imagePath,
             'content' => $request->content,
         ]);
 

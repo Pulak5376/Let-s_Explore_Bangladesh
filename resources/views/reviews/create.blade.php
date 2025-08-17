@@ -15,7 +15,6 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
-  /* Heading */
   h2 {
     text-align: center;
     color: #22d81fff;
@@ -23,7 +22,6 @@
     font-weight: 600;
   }
 
-  /* Star rating container */
   .rating-stars {
     text-align: center;
     font-size: 28px;
@@ -35,7 +33,6 @@
     color: #FFD700;
   }
 
-  /* Textarea */
   textarea {
     width: 100%;
     padding: 12px 15px;
@@ -53,7 +50,6 @@
     box-shadow: 0 0 6px rgba(0,123,255,0.4);
   }
 
-  /* Input name */
   input[type="text"] {
     width: 100%;
     padding: 12px 15px;
@@ -69,7 +65,6 @@
     box-shadow: 0 0 6px rgba(0,123,255,0.4);
   }
 
-  /* Submit button */
   button {
     width: 100%;
     background-color: rgba(42, 197, 60, 1);
@@ -102,7 +97,6 @@
     box-shadow: 0 3px 12px rgba(0,0,0,0.05);
   }
 
-  /* Avatar circle with initial */
   .avatar {
     min-width: 50px;
     min-height: 50px;

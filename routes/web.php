@@ -14,9 +14,11 @@ use App\Http\Controllers\Admin\TransportController as Y;
 use App\Http\Controllers\FlightBookingController;
 use App\Http\Controllers\Admin\FlightsController;
 
-Route::get('/stories', function () {
-    return view('stories');
-})->name('stories');
+use App\Http\Controllers\StoriesController;
+
+Route::get('/stories', [StoriesController::class, 'index'])->name('stories.index');
+Route::post('/stories', [StoriesController::class, 'store'])->name('stories.store');
+Route::delete('/stories/{id}', [StoriesController::class, 'destroy'])->name('stories.destroy');
 Route::get('/', function () {
     return view('1stScreen');
 });
@@ -113,11 +115,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::delete('/bookings/transports/{id}', [Y::class, 'destroyBooking'])->name('admin.bookings.transports.destroy');
     Route::get('/bookings/transports/search', [Y::class, 'searchBookings'])->name('admin.transports.searchbookings');
 
+    Route::get('/stories', [\App\Http\Controllers\Admin\StoriesController::class, 'index'])->name('admin.stories.index');
+    Route::delete('/stories/{id}', [\App\Http\Controllers\Admin\StoriesController::class, 'destroy'])->name('admin.stories.destroy');
     Route::get('/transports/addflight', [FlightsController::class, 'addFlight'])->name('admin.transports.addflight');
     Route::post('/transports/addflight', [FlightsController::class, 'storeflight'])->name('admin.transports.storeflight');
     Route::get('/transports/viewflights', [FlightsController::class, 'viewFlights'])->name('admin.transports.viewflights');
     Route::get('/bookings/transports/viewflightbooking', [FlightsController::class, 'viewFlightBookings'])->name('admin.bookings.transports.viewflightbooking');
-    
+
     Route::get('/admin/reviews', [\App\Http\Controllers\Admin\ReviewController::class, 'index'])->name('admin.review');
     Route::delete('/admin/reviews/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'destroy'])->name('admin.review.destroy');
 });
