@@ -41,13 +41,14 @@ class TransportController extends Controller
 
         $transport = Transport::findOrFail($request->transport_id);
 
-        $totalBookedSeats = Booking::where('transport_id', $transport->id)->sum('seats_booked');
-        $availableSeats = $transport->total_seats - $totalBookedSeats;
-
-        if ($request->seats_booked > $availableSeats) {
-            return back()->withErrors(['seats_booked' => 'Not enough seats available. Only ' . $availableSeats . ' seats left.'])->withInput();
+        // Check if enough seats are available
+        if ($request->seats_booked > $transport->available_seats) {
+            return back()->withErrors([
+                'seats_booked' => 'Not enough seats available. Only ' . $transport->available_seats . ' seats left.'
+            ])->withInput();
         }
 
+        // Create booking
         Booking::create([
             'transport_id' => $transport->id,
             'transport_type' => $transport->type,
@@ -58,11 +59,15 @@ class TransportController extends Controller
             'seats_booked' => $request->seats_booked,
         ]);
 
+        // Update available seats
+        $transport->available_seats -= $request->seats_booked;
+        $transport->save();
+
 
         if ($transport->type == 'bus') {
-            return redirect()->route('bus.page')->with('success', 'Booking successful!');
+            return redirect()->route('bus.page')->with('success', 'Booking successful! ' . $request->seats_booked . ' seats booked.');
         } else {
-            return redirect()->route('train.page')->with('success', 'Booking successful!');
+            return redirect()->route('train.page')->with('success', 'Booking successful! ' . $request->seats_booked . ' seats booked.');
         }
     }
 }

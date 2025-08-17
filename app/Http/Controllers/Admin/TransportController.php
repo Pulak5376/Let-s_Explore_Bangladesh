@@ -34,6 +34,7 @@ class TransportController extends Controller
             'departure_time' => $request->departure_time,
             'price' => $request->price,
             'total_seats' => $request->total_seats,
+            'available_seats' => $request->total_seats,
         ]);
 
         return response()->json([
@@ -72,6 +73,7 @@ class TransportController extends Controller
             'departure_time' => $request->departure_time,
             'price' => $request->price,
             'total_seats' => $request->total_seats,
+            'available_seats' => $request->total_seats,
         ]);
 
         return response()->json([
@@ -91,7 +93,6 @@ class TransportController extends Controller
     {
         $query = Transport::query();
         
-        // Handle type filtering from URL parameters
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
@@ -117,13 +118,24 @@ class TransportController extends Controller
     {
         $transport = Transport::findOrFail($id);
 
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'route_from' => 'required|string|max:255',
+            'route_to' => 'required|string|max:255',
+            'departure_time' => 'required',
+            'price' => 'required|numeric',
+            'total_seats' => 'required|integer|min:1',
+            'available_seats' => 'required|integer|min:0|max:' . $request->total_seats,
+        ]);
+
         $updateData = $request->only([
             'name',
             'route_from',
             'route_to',
             'departure_time',
             'price',
-            'total_seats'
+            'total_seats',
+            'available_seats'
         ]);
 
         $updateData = array_filter($updateData, fn($value) => $value !== null && $value !== '');
@@ -148,7 +160,6 @@ class TransportController extends Controller
             });
         }
 
-        // Handle type filtering from URL parameters
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
@@ -177,8 +188,15 @@ class TransportController extends Controller
     public function destroyBooking($id)
     {
         $booking = Booking::findOrFail($id);
+        $transport = Transport::findOrFail($booking->transport_id);
+        
+        $transport->available_seats += $booking->seats_booked;
+        $transport->save();
+        
         $booking->delete();
-        return redirect()->route('admin.bookings.transports.viewlist')->with('success', 'Booking deleted successfully');
+        
+        return redirect()->route('admin.bookings.transports.viewlist')
+            ->with('success', 'Booking deleted successfully. ' . $booking->seats_booked . ' seats restored.');
     }
 
     public function searchBookings(Request $request)

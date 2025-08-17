@@ -13,6 +13,7 @@ class Transport extends Model
         'route_to',
         'departure_time',
         'price',
-        'total_seats'
+        'total_seats',
+        'available_seats'
     ];
 }

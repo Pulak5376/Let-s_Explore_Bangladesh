@@ -81,6 +81,14 @@
                         <input type="number" id="total_seats" name="total_seats"
                             value="{{ old('total_seats', $transport->total_seats) }}" min="1" required>
                     </div>
+
+                    <div class="form-group">
+                        <label for="available_seats"><i class="fas fa-check-circle"></i> Available Seats</label>
+                        <input type="number" id="available_seats" name="available_seats"
+                            value="{{ old('available_seats', $transport->available_seats ?? $transport->total_seats) }}" 
+                            min="0" max="{{ $transport->total_seats }}" required>
+                        <small class="field-hint">Available seats cannot exceed total seats ({{ $transport->total_seats }})</small>
+                    </div>
                 </div>
 
                 <div class="form-actions">
@@ -94,6 +102,43 @@
             </form>
         </div>
     </div>
+
+    <script>
+      
+        document.getElementById('total_seats').addEventListener('input', function() {
+            const totalSeats = parseInt(this.value) || 0;
+            const availableSeatsInput = document.getElementById('available_seats');
+            const currentAvailable = parseInt(availableSeatsInput.value) || 0;
+            
+           
+            availableSeatsInput.setAttribute('max', totalSeats);
+            
+          
+            if (currentAvailable > totalSeats) {
+                availableSeatsInput.value = totalSeats;
+            }
+            
+     
+            const hint = availableSeatsInput.nextElementSibling;
+            hint.textContent = `Available seats cannot exceed total seats (${totalSeats})`;
+        });
+
+ 
+        document.getElementById('available_seats').addEventListener('input', function() {
+            const totalSeats = parseInt(document.getElementById('total_seats').value) || 0;
+            const availableSeats = parseInt(this.value) || 0;
+            
+            if (availableSeats > totalSeats) {
+                this.value = totalSeats;
+                alert(`Available seats cannot exceed total seats (${totalSeats})`);
+            }
+            
+            if (availableSeats < 0) {
+                this.value = 0;
+                alert('Available seats cannot be negative');
+            }
+        });
+    </script>
 @endsection
 <style>
     .edit-transport-wrapper {
@@ -231,6 +276,14 @@
     .form-group select:hover {
         border-color: #36a2eb;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .field-hint {
+        display: block;
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: #6c757d;
+        font-style: italic;
     }
 
     .form-actions {
