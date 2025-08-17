@@ -118,4 +118,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/transports/viewflights', [FlightsController::class, 'viewFlights'])->name('admin.transports.viewflights');
     Route::get('/bookings/transports/viewflightbooking', [FlightsController::class, 'viewFlightBookings'])->name('admin.bookings.transports.viewflightbooking');
     
+    Route::get('/admin/reviews', [\App\Http\Controllers\Admin\ReviewController::class, 'index'])->name('admin.review');
+    Route::delete('/admin/reviews/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'destroy'])->name('admin.review.destroy');
 });

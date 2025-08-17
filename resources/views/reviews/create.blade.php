@@ -4,7 +4,7 @@
 
 @section('content')
 <style>
-  /* Container */
+
   .container {
     max-width: 700px;
     margin: 40px auto;
@@ -18,7 +18,7 @@
   /* Heading */
   h2 {
     text-align: center;
-    color: #007bff;
+    color: #22d81fff;
     margin-bottom: 20px;
     font-weight: 600;
   }
@@ -72,7 +72,7 @@
   /* Submit button */
   button {
     width: 100%;
-    background-color: #007bff;
+    background-color: rgba(42, 197, 60, 1);
     border: none;
     padding: 12px;
     color: white;
@@ -177,12 +177,7 @@
   <form action="{{ route('reviews.store') }}" method="POST">
     @csrf
 
-    <input 
-      type="text" 
-      name="name" 
-      placeholder="Your Name" 
-      value="{{ old('name') }}" 
-      required>
+  
 
     <div class="rating-stars" id="starRating">
       @for ($i = 1; $i <= 5; $i++)
@@ -190,7 +185,12 @@
       @endfor
     </div>
     <input type="hidden" name="rating" id="ratingValue" value="{{ old('rating', 0) }}" required>
-
+ <input 
+      type="text" 
+      name="name" 
+      placeholder="Your Name" 
+      value="{{ old('name') }}" 
+      required>
     <textarea 
       name="review" 
       placeholder="Share your experience with this place..." 
@@ -203,7 +203,7 @@
     <h3>All Reviews</h3>
 
     @if(isset($reviews) && $reviews->count() > 0)
-      @foreach($reviews as $review)
+      @foreach($reviews->sortByDesc('created_at')->take(2) as $review)
         <div class="review">
           <div class="avatar">{{ strtoupper(substr($review->name, 0, 1)) }}</div>
           <div class="review-content">

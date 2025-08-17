@@ -38,6 +38,7 @@
         </div>
 
         <a href="#"><i class="fas fa-map"></i> Add Places</a>
+        <a href="{{ route('admin.review') }}"><i class="fas fa-star"></i> Reviews</a>
         <a href="#"><i class="fas fa-pen-nib"></i> Stories</a>
         <a href="#"><i class="fas fa-images"></i> Galleries</a>
 
