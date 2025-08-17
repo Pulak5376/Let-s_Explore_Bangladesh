@@ -62,7 +62,12 @@
                             
                             <div class="pricing">
                                 <div class="price">৳{{ $train->price }}</div>
-                                <div class="seats">{{ $train->total_seats }} seats</div>
+                                <div class="seats">
+                                    {{ $train->available_seats ?? $train->total_seats }} available / {{ $train->total_seats }} total seats
+                                    @if(($train->available_seats ?? $train->total_seats) == 0)
+                                        <span style="color: #ef4444; font-weight: bold;"> (FULL)</span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         
@@ -76,10 +81,13 @@
                             <div class="booking-controls">
                                 <div class="seat-selector">
                                     <label>Seats:</label>
-                                    <input type="number" name="seats_booked" value="1" min="1" max="{{ $train->total_seats }}">
+                                    <input type="number" name="seats_booked" value="1" min="1" max="{{ $train->available_seats ?? $train->total_seats }}" 
+                                           {{ ($train->available_seats ?? $train->total_seats) == 0 ? 'disabled' : '' }}>
                                 </div>
-                                <button type="button" class="book-btn" onclick="togglePassenger(this)">
-                                    <i class="fas fa-ticket-alt"></i> Book Now
+                                <button type="button" class="book-btn" onclick="togglePassenger(this)" 
+                                        {{ ($train->available_seats ?? $train->total_seats) == 0 ? 'disabled style=background:#ccc;cursor:not-allowed;' : '' }}>
+                                    <i class="fas fa-train"></i> 
+                                    {{ ($train->available_seats ?? $train->total_seats) == 0 ? 'Fully Booked' : 'Book Now' }}
                                 </button>
                             </div>
                             

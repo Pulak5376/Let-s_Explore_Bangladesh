@@ -33,6 +33,7 @@
                     <th>Departure</th>
                     <th>Price</th>
                     <th>Total Seats</th>
+                    <th>Available</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -48,6 +49,11 @@
                         <td data-label="Departure">{{ $transport->departure_time }}</td>
                         <td data-label="Price">৳{{ $transport->price }}</td>
                         <td data-label="Total Seats">{{ $transport->total_seats }}</td>
+                        <td data-label="Available">
+                            <span style="color: {{ ($transport->available_seats ?? $transport->total_seats) > 0 ? '#28a745' : '#dc3545' }}; font-weight: bold;">
+                                {{ $transport->available_seats ?? $transport->total_seats }}
+                            </span>
+                        </td>
                         <td data-label="Edit">
                             <a href="{{ route('admin.transports.edit', $transport->id) }}" class="edit-btn">
                                 <i class="fas fa-edit"></i>
