@@ -37,6 +37,13 @@
             <a href="{{ route('admin.bookings.transports.viewflightbooking') }}"><i class="fas fa-eye"></i> View Bookings</a>
         </div>
 
+        <button class="dropdown-btn"><i class="fas fa-plane"></i> Places<i class="fas fa-chevron-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{{ route('admin.places.add') }}"><i class="fas fa-plus"></i> Add New Place</a>
+            <a href="{{ route('admin.places.view') }}"><i class="fas fa-eye"></i> Place List</a>
+            
+        </div>
+
         <a href="#"><i class="fas fa-map"></i> Add Places</a>
         <a href="{{ route('admin.review') }}"><i class="fas fa-star"></i> Reviews</a>
     <a href="{{ route('admin.stories.index') }}"><i class="fas fa-pen-nib"></i> Stories</a>
