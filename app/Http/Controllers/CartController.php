@@ -36,7 +36,22 @@ class CartController extends Controller
 	public function cart()
 	{
 		$cart = session('cart', []);
-		return view('cart', compact('cart'));
+		// Ensure every cart item has a quantity
+		foreach ($cart as $k => $item) {
+			if (!isset($cart[$k]['quantity'])) {
+				$cart[$k]['quantity'] = 1;
+			}
+		}
+		session(['cart' => $cart]);
+
+		// Calculate total
+		$total = 0;
+		foreach ($cart as $item) {
+			$qty = isset($item['quantity']) ? $item['quantity'] : 1;
+			$total += ((float) $item['price']) * $qty;
+		}
+
+		return view('cart', compact('cart', 'total'));
 	}
 
 	// Add to cart
@@ -46,7 +61,16 @@ class CartController extends Controller
 		$place = Places::find($id);
 		if ($place) {
 			$cart = session('cart', []);
-			$cart[$id] = $place->toArray();
+			if (isset($cart[$id])) {
+				if (isset($cart[$id]['quantity'])) {
+					$cart[$id]['quantity'] += 1;
+				} else {
+					$cart[$id]['quantity'] = 2; // Already in cart, so set to 2
+				}
+			} else {
+				$cart[$id] = $place->toArray();
+				$cart[$id]['quantity'] = 1;
+			}
 			session(['cart' => $cart]);
 		}
 		return redirect()->route('cart');

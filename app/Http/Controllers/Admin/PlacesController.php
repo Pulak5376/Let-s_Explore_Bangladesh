@@ -19,7 +19,7 @@ class PlacesController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'image_path' => 'required|string|max:255',
+            'image_path' => 'required|string',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
             'day' => 'required|string',
