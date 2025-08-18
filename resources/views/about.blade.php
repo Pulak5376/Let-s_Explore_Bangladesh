@@ -481,7 +481,7 @@
     <div class="team-grid">
       <div class="team-card" data-aos="fade-up" data-aos-delay="100">
         <div class="team-avatar">👨‍💼</div>
-        <h3 class="team-name">Pulok</h3>
+        <h3 class="team-name">Pulak</h3>
         <p class="team-role">Founder & CEO</p>
         <p class="team-bio">
           Visionary leader passionate about showcasing Bangladesh's beauty and cultural heritage to the world.
