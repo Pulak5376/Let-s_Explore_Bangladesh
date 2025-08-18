@@ -15,11 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             TransportSeeder::class,
-        ]);
-        $this->call([
             FlightsSeeder::class,
+            AdminUserSeeder::class,
+            HotelSeeder::class,
         ]);
-       $this->call(AdminUserSeeder::class);
        
     }
 }

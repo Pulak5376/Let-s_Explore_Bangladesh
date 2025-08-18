@@ -246,96 +246,47 @@
 
 <section class="search-section">
   <h2>Find Your Perfect Hotel</h2>
-  <form class="search-form" action="#" method="GET">
-    <input type="text" name="destination" placeholder="Enter Destination" required />
-    <input type="date" name="checkin" required />
-    <input type="date" name="checkout" required />
-    <input type="number" name="guests" placeholder="Guests" min="1" required />
+  <form class="search-form" action="{{ route('hotel.search') }}" method="GET">
+    <input type="text" name="destination" placeholder="Enter Destination" value="{{ request('destination') }}" required />
+    <input type="date" name="checkin" value="{{ request('checkin') }}" required />
+    <input type="date" name="checkout" value="{{ request('checkout') }}" required />
+    <input type="number" name="guests" placeholder="Guests" min="1" value="{{ request('guests') }}" required />
     <button type="submit">Search</button>
   </form>
 </section>
 
-<section class="hotel-listings">
-  <div class="hotel-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/d/db/Saint_Martins_Island_with_boats_in_foreground.jpg" alt="Hotel Seaside" />
-    <div class="hotel-info">
-      <h3>Hotel Seaside</h3>
-      <p>📍 Cox's Bazar</p>
-      <p>⭐ 4.5 | BDT 2500 per night</p>
-      <button>Book Now</button>
+  <section class="hotel-listings">
+    @foreach($hotels as $hotel)
+    <div class="hotel-card">
+      <img src="{{ $hotel->image_url }}" alt="{{ $hotel->name }}" />
+      <div class="hotel-info">
+        <h3>{{ $hotel->name }}</h3>
+        <p>📍 {{ $hotel->location }}</p>
+        <p>⭐ {{ $hotel->rating }} | BDT {{ number_format($hotel->price_per_night) }} per night</p>
+        <p class="text-sm">{{ $hotel->description }}</p>
+        <form action="{{ route('hotel.book', $hotel) }}" method="POST">
+          @csrf
+          <input type="hidden" name="check_in" value="{{ request('checkin') }}">
+          <input type="hidden" name="check_out" value="{{ request('checkout') }}">
+          <input type="hidden" name="guests" value="{{ request('guests') }}">
+          <button type="submit" @if(!auth()->check()) onclick="alert('Please login first!'); return false;" @endif>
+            Book Now ({{ $hotel->available_rooms }} rooms left)
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
+    @endforeach
 
-  <div class="hotel-card">
-    <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrfKrjXKId8O-EqVuAurYfalgeAHOBT4iwE3HysRUhaPPb_o35nrpRfoPTVOjwZwzwvtr6JzxtWShTdeP1uXaQwvyHbRbtooQ67bwWtlOgCP13sSh_XuGYRtJVRuY1syKC62EAA=s680-w680-h510-rw" alt="Mountain View Inn" />
-    <div class="hotel-info">
-      <h3>Mountain View Inn</h3>
-      <p>📍 Bandarban</p>
-      <p>⭐ 4.7 | BDT 2000 per night</p>
-      <button>Book Now</button>
+    @if($hotels->isEmpty())
+    <div class="no-results">
+      <p>No hotels found for your search criteria. Please try different dates or location.</p>
     </div>
-  </div>
+    @endif
+  </section>
 
-  <div class="hotel-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Sreemangal_tea_garden_2017-08-20.jpg" alt="Grand Sultan" />
-    <div class="hotel-info">
-      <h3>Grand Sultan</h3>
-      <p>📍 Sreemangal</p>
-      <p>⭐ 4.5 | BDT 2500 per night</p>
-      <button>Book Now</button>
-    </div>
+  @if(session('success'))
+  <div class="alert alert-success" role="alert">
+    {{ session('success') }}
   </div>
-
-  <div class="hotel-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Sajek_Valley_Bangladesh.jpg/800px-Sajek_Valley_Bangladesh.jpg" alt="Hotel Paraside" />
-    <div class="hotel-info">
-      <h3>Hotel Paraside</h3>
-      <p>📍 Sajek Valley</p>
-      <p>⭐ 4.5 | BDT 2500 per night</p>
-      <button>Book Now</button>
-    </div>
-  </div>
-
-  <!-- New Hotel Entries -->
-  <div class="hotel-card">
-    <img src="{{ asset('images/kuakataresort.jpg') }}" alt="Hotel Ocean Breeze Kuakata" />
-    <div class="hotel-info">
-      <h3>Ocean Breeze Resort</h3>
-      <p>📍 Kuakata</p>
-      <p>⭐ 4.3 | BDT 2200 per night</p>
-      <button>Book Now</button>
-    </div>
-  </div>
-
-  <div class="hotel-card">
-    <img src="{{ asset('images/sylhetresort.jpg') }}" alt="Sylhet Hill View Resort" />
-    <div class="hotel-info">
-      <h3>Hill View Resort</h3>
-      <p>📍 Sylhet</p>
-      <p>⭐ 4.6 | BDT 2700 per night</p>
-      <button>Book Now</button>
-    </div>
-  </div>
-
-  <div class="hotel-card">
-    <img src="{{ asset('images/mirinjaresort.jpg') }}" alt="Mirinja View Resort" />
-    <div class="hotel-info">
-      <h3>Mirinja View Resort</h3>
-      <p>📍 Mirinja, Bandarban</p>
-      <p>⭐ 4.4 | BDT 2400 per night</p>
-      <button>Book Now</button>
-    </div>
-  </div>
-
-  <div class="hotel-card">
-    <img src="{{ asset('images/alikadamresort.jpg') }}" alt="Alikadam Valley Inn" />
-    <div class="hotel-info">
-      <h3>Alikadam Valley Inn</h3>
-      <p>📍 Alikadam</p>
-      <p>⭐ 4.2 | BDT 2100 per night</p>
-      <button>Book Now</button>
-    </div>
-  </div>
-</section>
-
+  @endif
 @endsection

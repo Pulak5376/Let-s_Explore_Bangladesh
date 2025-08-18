@@ -40,9 +40,10 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
 
-Route::get('/hotelbook', function () {
-    return view('hotelbook');
-})->name('hotelbook');
+use App\Http\Controllers\HotelController;
+
+Route::get('/hotelbook', [HotelController::class, 'index'])->name('hotel.search');
+Route::post('/hotel/{hotel}/book', [HotelController::class, 'book'])->name('hotel.book');
 
 
 Route::get('/flightbook', [FlightBookingController::class, 'create'])->name('flightbook');
@@ -142,4 +143,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     Route::get('/admin/reviews', [\App\Http\Controllers\Admin\ReviewController::class, 'index'])->name('admin.review');
     Route::delete('/admin/reviews/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'destroy'])->name('admin.review.destroy');
+
+    // Hotel Management Routes
+    Route::get('/hotels/create', [\App\Http\Controllers\Admin\HotelController::class, 'create'])->name('admin.hotels.create');
+    Route::post('/hotels', [\App\Http\Controllers\Admin\HotelController::class, 'store'])->name('admin.hotels.store');
+    Route::get('/hotels/bookings', [\App\Http\Controllers\Admin\HotelController::class, 'bookings'])->name('admin.hotels.bookings');
 });

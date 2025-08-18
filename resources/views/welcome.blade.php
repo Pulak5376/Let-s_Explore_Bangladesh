@@ -172,7 +172,7 @@
         <div class="service-icon">🏨</div>
         <h3>Hotel Booking</h3>
         <p>Find and book comfortable accommodations nationwide</p>
-        <a href="{{ route('hotelbook') }}" class="service-link">Book Now →</a>
+        <a href="{{ route('hotel.search') }}" class="service-link">Book Now →</a>
       </div>
       <div class="service-card" data-aos="zoom-in" data-aos-delay="300">
         <div class="service-icon">🚌</div>
@@ -460,7 +460,7 @@
               <span class="price-amount">৳25,000</span>
               <span class="price-unit">per person</span>
             </div>
-            <a href="{{ route('hotelbook') }}" class="package-btn">
+            <a href="{{ route('hotel.search') }}" class="package-btn">
               <span>Book Now</span>
               <i class="fas fa-arrow-right"></i>
             </a>
@@ -508,7 +508,7 @@
               <span class="price-amount">৳18,500</span>
               <span class="price-unit">per person</span>
             </div>
-            <a href="{{ route('hotelbook') }}" class="package-btn">
+            <a href="{{ route('hotel.search') }}" class="package-btn">
               <span>Book Now</span>
               <i class="fas fa-arrow-right"></i>
             </a>
@@ -556,7 +556,7 @@
               <span class="price-amount">৳15,000</span>
               <span class="price-unit">per person</span>
             </div>
-            <a href="{{ route('hotelbook') }}" class="package-btn">
+            <a href="{{ route('hotel.search') }}" class="package-btn">
               <span>Book Now</span>
               <i class="fas fa-arrow-right"></i>
             </a>
