@@ -46,8 +46,14 @@
 
         <a href="#"><i class="fas fa-map"></i> Add Places</a>
         <a href="{{ route('admin.review') }}"><i class="fas fa-star"></i> Reviews</a>
-    <a href="{{ route('admin.stories.index') }}"><i class="fas fa-pen-nib"></i> Stories</a>
-        <a href="#"><i class="fas fa-images"></i> Galleries</a>
+        <a href="{{ route('admin.stories.index') }}"><i class="fas fa-pen-nib"></i> Stories</a>
+        <a href="{{ route('admin.contacts.index') }}"><i class="fas fa-envelope"></i> Contact Messages</a>
+        
+        <button class="dropdown-btn"><i class="fas fa-images"></i> Gallery Management<i class="fas fa-chevron-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{{ route('admin.galleries.add') }}"><i class="fas fa-plus"></i> Add Gallery</a>
+            <a href="{{ route('admin.galleries.index') }}"><i class="fas fa-eye"></i> View Galleries</a>
+        </div>
 
         <form action="{{ route('admin.logout') }}" method="POST">
             @csrf
