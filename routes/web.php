@@ -86,6 +86,12 @@ use App\Http\Controllers\GalleryController;
 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
+use App\Http\Controllers\ContactController;
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+
 
 Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
