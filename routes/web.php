@@ -82,6 +82,9 @@ Route::post('/{type}/book', [X::class, 'book'])->name('transport.book');
 Route::get('/{type}/bookings', [X::class, 'myBookings'])->name('transport.bookings');
 Route::post('/payment/initiate', [X::class, 'initiatePayment'])->name('payment.initiate');
 
+use App\Http\Controllers\GalleryController;
+
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 
 Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
