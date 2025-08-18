@@ -27,4 +27,20 @@ class ContactController extends Controller
 
         return redirect()->back()->with('success', 'Your message has been sent successfully!');
     }
+
+    // Admin: View all contact messages
+    public function adminIndex()
+    {
+        $contacts = Contact::orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.contact', compact('contacts'));
+    }
+
+    // Admin: Delete contact message
+    public function destroy($id)
+    {
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
+
+        return redirect()->back()->with('success', 'Contact message deleted successfully!');
+    }
 }

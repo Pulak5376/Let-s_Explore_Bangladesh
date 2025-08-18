@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             HotelSeeder::class,
         ]);
+       $this->call(AdminUserSeeder::class);
        
     }
 }
