@@ -14,6 +14,7 @@ class Booking extends Model
         'passenger_email',
         'passenger_phone',
         'seats_booked',
+        'payment_status',
     ];
 
     public function transport()

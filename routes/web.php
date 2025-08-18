@@ -78,6 +78,10 @@ Route::get('/train', function () {
 Route::post('/train/search', [X::class, 'search'])->name('train.search');
 Route::post('/{type}/book', [X::class, 'book'])->name('transport.book');
 
+// Booking and Payment routes
+Route::get('/{type}/bookings', [X::class, 'myBookings'])->name('transport.bookings');
+Route::post('/payment/initiate', [X::class, 'initiatePayment'])->name('payment.initiate');
+
 
 
 Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');

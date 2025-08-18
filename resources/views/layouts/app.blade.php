@@ -47,6 +47,15 @@
       background: rgba(129, 199, 132, 0.1) !important;
     }
 
+    body.dark-mode .dropdown-toggle {
+      color: #e8f5e8 !important;
+    }
+
+    body.dark-mode .dropdown-toggle:hover {
+      color: #81c784 !important;
+      background: rgba(129, 199, 132, 0.1) !important;
+    }
+
     body.dark-mode .dropdown-content {
       background: linear-gradient(135deg, #2c2c2c, #3a3a3a) !important;
       border: 1px solid rgba(102, 187, 106, 0.3) !important;
@@ -96,7 +105,7 @@
     }
 
     nav ul li a {
-      color: rgb(0, 0, 0);
+      color: rgb(0, 0, 0) !important;
       text-decoration: none;
       font-weight: 500;
       padding: 8px 12px;
@@ -106,11 +115,12 @@
 
     nav ul li a.active,
     nav ul li a:hover {
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.2) !important;
+      color: white !important;
     }
 
     .dropdown-toggle {
-      color: rgb(0, 0, 0);
+      color: rgb(0, 0, 0) !important;
       font-weight: 600;
       cursor: pointer;
       display: inline-block;
@@ -118,7 +128,8 @@
     }
 
     .dropdown-toggle:hover {
-      color: white;
+      color: white !important;
+      background-color: rgba(255, 255, 255, 0.2);
     }
 
     .dropdown-menu {
@@ -137,14 +148,14 @@
     .dropdown-menu li a {
       display: block;
       padding: 10px 16px;
-      color: rgb(0, 0, 0);
+      color: rgb(0, 0, 0) !important;
       font-size: 14px;
       text-decoration: none;
     }
 
     .dropdown-menu li a:hover {
-      background-color: #eaf4ff;
-      color: rgb(23, 111, 226);
+      background-color: #eaf4ff !important;
+      color: rgb(23, 111, 226) !important;
     }
 
     .rotate-up {
@@ -436,6 +447,7 @@
             <li><a href="{{ url('/bus') }}">Bus Ticket</a></li>
             <li><a href="{{ url('/train') }}">Train Ticket</a></li>
             <li><a href="{{ url('/flightbook') }}">Flight Ticket</a></li>
+            <li><a href="{{ route('transport.bookings', 'all') }}">My Bookings</a></li>
           </ul>
         </li>
 

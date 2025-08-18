@@ -57,6 +57,7 @@ class TransportController extends Controller
             'passenger_email' => $request->passenger_email,
             'passenger_phone' => $request->passenger_phone,
             'seats_booked' => $request->seats_booked,
+            'payment_status' => 'pending',
         ]);
 
         // Update available seats
@@ -69,5 +70,42 @@ class TransportController extends Controller
         } else {
             return redirect()->route('train.page')->with('success', 'Booking successful! ' . $request->seats_booked . ' seats booked.');
         }
+    }
+
+    public function myBookings($type)
+    {
+        // For now, we'll get all bookings of the specified type
+        // In a real app, you'd filter by authenticated user
+        if ($type === 'all') {
+            $bookings = Booking::with('transport')
+                ->whereIn('transport_type', ['bus', 'train'])
+                ->get();
+        } else {
+            $bookings = Booking::with('transport')
+                ->where('transport_type', $type)
+                ->get();
+        }
+
+        return view('transports.bookings', compact('bookings', 'type'));
+    }
+
+    public function initiatePayment(Request $request)
+    {
+        $request->validate([
+            'booking_id' => 'required|exists:bookings,id'
+        ]);
+
+        $booking = Booking::with('transport')->findOrFail($request->booking_id);
+
+        if ($booking->payment_status === 'paid') {
+            return redirect()->back()->with('error', 'This booking is already paid.');
+        }
+
+        // Simulate payment processing
+        $booking->update([
+            'payment_status' => 'paid'
+        ]);
+
+        return redirect()->back()->with('success', 'Payment successful! Your booking is confirmed.');
     }
 }

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('transports', function (Blueprint $table) {
-            $table->integer('available_seats')->default(0)->after('total_seats');
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->enum('payment_status', ['pending', 'paid'])->default('pending');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('transports', function (Blueprint $table) {
-            $table->dropColumn('available_seats');
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->dropColumn('payment_status');
         });
     }
 };
