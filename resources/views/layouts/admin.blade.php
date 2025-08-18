@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Panel')</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -37,7 +40,7 @@
             <a href="{{ route('admin.bookings.transports.viewflightbooking') }}"><i class="fas fa-eye"></i> View Bookings</a>
         </div>
 
-        <button class="dropdown-btn"><i class="fas fa-plane"></i> Places<i class="fas fa-chevron-down"></i></button>
+        <button class="dropdown-btn"><i class="fas fa-map"></i> Places<i class="fas fa-chevron-down"></i></button>
         <div class="dropdown-container">
             <a href="{{ route('admin.places.add') }}"><i class="fas fa-plus"></i> Add New Place</a>
             <a href="{{ route('admin.places.view') }}"><i class="fas fa-eye"></i> Place List</a>
@@ -46,8 +49,14 @@
 
         <a href="#"><i class="fas fa-map"></i> Add Places</a>
         <a href="{{ route('admin.review') }}"><i class="fas fa-star"></i> Reviews</a>
-    <a href="{{ route('admin.stories.index') }}"><i class="fas fa-pen-nib"></i> Stories</a>
-        <a href="#"><i class="fas fa-images"></i> Galleries</a>
+        <a href="{{ route('admin.stories.index') }}"><i class="fas fa-pen-nib"></i> Stories</a>
+        <a href="{{ route('admin.contacts.index') }}"><i class="fas fa-envelope"></i> Contact Messages</a>
+        
+        <button class="dropdown-btn"><i class="fas fa-images"></i> Gallery Management<i class="fas fa-chevron-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{{ route('admin.galleries.add') }}"><i class="fas fa-plus"></i> Add Gallery</a>
+            <a href="{{ route('admin.galleries.index') }}"><i class="fas fa-eye"></i> View Galleries</a>
+        </div>
 
         <form action="{{ route('admin.logout') }}" method="POST">
             @csrf
@@ -93,6 +102,9 @@
             sessionStorage.clear();
         });
     </script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 <style>

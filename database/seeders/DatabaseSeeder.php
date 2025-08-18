@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             FlightsSeeder::class,
         ]);
        $this->call(AdminUserSeeder::class);
+       $this->call(GallerySeeder::class);
        
     }
 }

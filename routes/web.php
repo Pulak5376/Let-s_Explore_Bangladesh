@@ -142,4 +142,16 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     Route::get('/admin/reviews', [\App\Http\Controllers\Admin\ReviewController::class, 'index'])->name('admin.review');
     Route::delete('/admin/reviews/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'destroy'])->name('admin.review.destroy');
+
+    // Gallery management
+    Route::get('/galleries', [\App\Http\Controllers\Admin\GalleryController::class, 'index'])->name('admin.galleries.index');
+    Route::get('/galleries/add', [\App\Http\Controllers\Admin\GalleryController::class, 'create'])->name('admin.galleries.add');
+    Route::post('/galleries/add', [\App\Http\Controllers\Admin\GalleryController::class, 'store'])->name('admin.galleries.store');
+    Route::get('/galleries/{id}/edit', [\App\Http\Controllers\Admin\GalleryController::class, 'edit'])->name('admin.galleries.edit');
+    Route::put('/galleries/{id}', [\App\Http\Controllers\Admin\GalleryController::class, 'update'])->name('admin.galleries.update');
+    Route::delete('/galleries/{id}', [\App\Http\Controllers\Admin\GalleryController::class, 'destroy'])->name('admin.galleries.destroy');
+
+    // Contact management
+    Route::get('/contacts', [ContactController::class, 'adminIndex'])->name('admin.contacts.index');
+    Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('admin.contacts.destroy');
 });
