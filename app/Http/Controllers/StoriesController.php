@@ -33,8 +33,7 @@ class StoriesController extends Controller
         }
 
         $story = Story::create([
-            'user_id' => Auth::id() ?? 1, // fallback to user 1 if not logged in
-            'title' => $request->title,
+            'user_id' => Auth::id() ?? 1,
             'image' => $imagePath,
             'content' => $request->content,
         ]);

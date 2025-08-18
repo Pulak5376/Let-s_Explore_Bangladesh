@@ -58,6 +58,46 @@
                 <div class="stat-number">{{ \App\Models\User::where('role', 'user')->count() }}</div>
             </div>
         </div>
+
+        <div class="stat-card">
+            <div class="stat-icon places">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Total Places</h3>
+                <div class="stat-number">{{ \App\Models\Places::count() }}</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon contacts">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Contact Messages</h3>
+                <div class="stat-number">{{ \App\Models\Contact::count() }}</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon reviews">
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Total Reviews</h3>
+                <div class="stat-number">{{ \App\Models\Review::count() }}</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon galleries">
+                <i class="fas fa-images"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Gallery Items</h3>
+                <div class="stat-number">{{ \App\Models\Gallery::count() }}</div>
+            </div>
+        </div>
     </div>
 
     <div class="booking-stats">
@@ -261,7 +301,7 @@
 
     .stats-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 1.5rem;
         margin-bottom: 1rem;
     }
@@ -298,6 +338,10 @@
     .stat-icon.train { background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%); }
     .stat-icon.flight { background: linear-gradient(135deg, #45b7d1 0%, #96c93d 100%); }
     .stat-icon.users { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+    .stat-icon.places { background: linear-gradient(135deg, #fd7e14 0%, #e55100 100%); }
+    .stat-icon.contacts { background: linear-gradient(135deg, #6f42c1 0%, #5a28a3 100%); }
+    .stat-icon.reviews { background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%); }
+    .stat-icon.galleries { background: linear-gradient(135deg, #20c997 0%, #0f9b7a 100%); }
 
     .stat-content h3 {
         color: #333;

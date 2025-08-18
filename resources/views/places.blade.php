@@ -75,6 +75,26 @@
 		background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
 		min-height: 100vh;
 	}
+
+	.alert {
+		padding: 15px 20px;
+		border-radius: 10px;
+		margin-bottom: 30px;
+		border: none;
+		font-weight: 500;
+		animation: alertSlideIn 0.5s ease-out;
+	}
+
+	.alert-success {
+		background: linear-gradient(135deg, #d4edda, #c3e6cb);
+		color: #155724;
+		box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+	}
+
+	@keyframes alertSlideIn {
+		0% { opacity: 0; transform: translateY(-20px); }
+		100% { opacity: 1; transform: translateY(0); }
+	}
 	.places-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
@@ -154,6 +174,34 @@
 		padding: 4px 12px;
 		font-size: 0.95rem;
 	}
+
+	.add-cart-btn {
+		width: 100%;
+		background: linear-gradient(135deg, #006a4e, #4caf50);
+		color: white;
+		border: none;
+		padding: 0.75rem 1rem;
+		border-radius: 12px;
+		font-size: 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+
+	.add-cart-btn:hover {
+		background: linear-gradient(135deg, #4caf50, #2e7d32);
+		transform: translateY(-2px);
+		box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+	}
+
+	.add-cart-btn:active {
+		transform: translateY(0);
+		box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+	}
 </style>
 
 <!-- Hero Section -->
@@ -165,6 +213,12 @@
 </section>
 
 <div class="places-container">
+	@if(session('success'))
+		<div class="alert alert-success">
+			<i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+		</div>
+	@endif
+
 	<div class="places-grid">
 		@foreach($places as $place)
 			<div class="place-card" data-aos="fade-up">
@@ -180,7 +234,9 @@
 								<form method="POST" action="{{ route('cart.add') }}" style="margin-top:18px;">
 									@csrf
 									<input type="hidden" name="id" value="{{ $place['id'] ?? $place->id ?? '' }}">
-									<button type="submit" class="add-cart-btn" style="width:100%;background:linear-gradient(135deg,#006a4e,#4caf50);color:white;border:none;padding:0.7rem 0;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s;">Add to Cart</button>
+									<button type="submit" class="add-cart-btn">
+										<i class="fas fa-shopping-cart me-2"></i>Add to Cart
+									</button>
 								</form>
 				</div>
 			</div>

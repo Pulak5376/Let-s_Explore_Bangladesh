@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Panel')</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -14,7 +17,7 @@
         <h2><i class="fas fa-cogs"></i> Admin Panel</h2>
 
         <a href="{{ route('admin.dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-        <a href="#"><i class="fas fa-users"></i> Users</a>
+        <a href="{{ route('admin.users') }}"><i class="fas fa-users"></i> Users</a>
 
         <button class="dropdown-btn"><i class="fas fa-bus"></i> Transport Management<i
                 class="fas fa-chevron-down"></i></button>
@@ -26,30 +29,37 @@
         <button class="dropdown-btn"><i class="fas fa-bus"></i> Booking Management<i
                 class="fas fa-chevron-down"></i></button>
         <div class="dropdown-container">
-            <a href="{{ route('admin.bookings.transports.viewlist') }}"><i class="fas fa-eye"></i> Transport Bookings</a>
+            <a href="{{ route('admin.bookings.transports.viewlist') }}"><i class="fas fa-eye"></i> Transport
+                Bookings</a>
         </div>
-        
+
 
         <button class="dropdown-btn"><i class="fas fa-plane"></i> Flights<i class="fas fa-chevron-down"></i></button>
         <div class="dropdown-container">
             <a href="{{ route('admin.transports.addflight') }}"><i class="fas fa-plus"></i> Add New Flight</a>
             <a href="{{ route('admin.transports.viewflights') }}"><i class="fas fa-eye"></i> Flight List</a>
-            <a href="{{ route('admin.bookings.transports.viewflightbooking') }}"><i class="fas fa-eye"></i> View Bookings</a>
+            <a href="{{ route('admin.bookings.transports.viewflightbooking') }}"><i class="fas fa-eye"></i> View
+                Bookings</a>
         </div>
 
-        <button class="dropdown-btn"><i class="fas fa-plane"></i> Places<i class="fas fa-chevron-down"></i></button>
+        <button class="dropdown-btn"><i class="fas fa-map"></i> Places<i class="fas fa-chevron-down"></i></button>
         <div class="dropdown-container">
             <a href="{{ route('admin.places.add') }}"><i class="fas fa-plus"></i> Add New Place</a>
             <a href="{{ route('admin.places.view') }}"><i class="fas fa-eye"></i> Place List</a>
-            
         </div>
 
-        <a href="#"><i class="fas fa-map"></i> Add Places</a>
+        <button class="dropdown-btn"><i class="fas fa-hotel"></i> Hotels<i class="fas fa-chevron-down"></i></button>
+        <div class="dropdown-container">
+            <a href="{{ route('admin.hotels.create') }}"><i class="fas fa-plus"></i> Add Hotel</a>
+            <a href="{{ route('admin.hotels.bookings') }}"><i class="fas fa-list"></i> View Bookings</a>
+        </div>
+
         <a href="{{ route('admin.review') }}"><i class="fas fa-star"></i> Reviews</a>
         <a href="{{ route('admin.stories.index') }}"><i class="fas fa-pen-nib"></i> Stories</a>
         <a href="{{ route('admin.contacts.index') }}"><i class="fas fa-envelope"></i> Contact Messages</a>
-        
-        <button class="dropdown-btn"><i class="fas fa-images"></i> Gallery Management<i class="fas fa-chevron-down"></i></button>
+
+        <button class="dropdown-btn"><i class="fas fa-images"></i> Gallery Management<i
+                class="fas fa-chevron-down"></i></button>
         <div class="dropdown-container">
             <a href="{{ route('admin.galleries.add') }}"><i class="fas fa-plus"></i> Add Gallery</a>
             <a href="{{ route('admin.galleries.index') }}"><i class="fas fa-eye"></i> View Galleries</a>
@@ -74,31 +84,59 @@
     </div>
 
     <script>
-        document.querySelectorAll('.dropdown-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const container = button.nextElementSibling;
-                const isOpen = container.style.display === 'flex';
-                
-                document.querySelectorAll('.dropdown-container').forEach(otherContainer => {
-                    if (otherContainer !== container) {
-                        otherContainer.style.display = 'none';
-                    }
-                });
-                
-                container.style.display = isOpen ? 'none' : 'flex';
-                
-                sessionStorage.setItem(button.textContent.trim(), !isOpen);
-            });
-        });
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log('Admin layout JavaScript loaded');
 
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll('.dropdown-container').forEach(container => {
+            const dropdownContainers = document.querySelectorAll('.dropdown-container');
+            console.log('Found dropdown containers:', dropdownContainers.length);
+
+            dropdownContainers.forEach(container => {
                 container.style.display = 'none';
             });
-            
-            sessionStorage.clear();
+
+            const dropdownButtons = document.querySelectorAll('.dropdown-btn');
+            console.log('Found dropdown buttons:', dropdownButtons.length);
+
+            dropdownButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    console.log('Dropdown button clicked:', this.textContent.trim());
+
+                    const container = this.nextElementSibling;
+                    if (!container || !container.classList.contains('dropdown-container')) {
+                        console.error('No dropdown container found for button');
+                        return;
+                    }
+
+                    const isCurrentlyOpen = container.style.display === 'flex';
+                    console.log('Container currently open:', isCurrentlyOpen);
+
+                    document.querySelectorAll('.dropdown-container').forEach(otherContainer => {
+                        if (otherContainer !== container) {
+                            otherContainer.style.display = 'none';
+                        }
+                    });
+
+                    container.style.display = isCurrentlyOpen ? 'none' : 'flex';
+                    console.log('Container now set to:', container.style.display);
+                });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dropdown-btn') && !e.target.closest('.dropdown-container')) {
+                    document.querySelectorAll('.dropdown-container').forEach(container => {
+                        container.style.display = 'none';
+                    });
+                }
+            });
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    @yield('scripts')
 
 </body>
 <style>
@@ -108,7 +146,8 @@
         box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
         height: 100%;
         font-family: 'Inter', sans-serif;
         background-color: #f4f6f9;
@@ -130,6 +169,7 @@
         position: fixed;
         height: 100vh;
         overflow-y: auto;
+        z-index: 1050;
     }
 
     .sidebar h2 {
@@ -171,6 +211,8 @@
         background-color: rgba(0, 0, 0, 0.1);
         margin-left: 1rem;
         border-left: 2px solid rgba(255, 255, 255, 0.2);
+        z-index: 1000;
+        position: relative;
     }
 
     .dropdown-container a {

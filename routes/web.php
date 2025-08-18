@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\TransportController as Y;
 use App\Http\Controllers\FlightBookingController;
 use App\Http\Controllers\Admin\FlightsController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 use App\Http\Controllers\StoriesController;
 
@@ -27,6 +28,7 @@ Route::get('/places', [CartController::class, 'places'])->name('places');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
 Route::get('/about', [CartController::class, 'about'])->name('about');
 Route::get('/gallery', [CartController::class, 'gallery'])->name('gallery');
@@ -39,6 +41,11 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.for
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/')->with('success', 'You have been logged out successfully!');
+})->name('logout');
 
 use App\Http\Controllers\HotelController;
 
@@ -79,7 +86,6 @@ Route::get('/train', function () {
 Route::post('/train/search', [X::class, 'search'])->name('train.search');
 Route::post('/{type}/book', [X::class, 'book'])->name('transport.book');
 
-// Booking and Payment routes
 Route::get('/{type}/bookings', [X::class, 'myBookings'])->name('transport.bookings');
 Route::post('/payment/initiate', [X::class, 'initiatePayment'])->name('payment.initiate');
 
@@ -110,7 +116,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
         return redirect('/admin/login');
     })->name('admin.logout');
 
-    // Places management
     Route::get('/places/add', [\App\Http\Controllers\Admin\PlacesController::class, 'create'])->name('admin.places.add');
     Route::post('/places/add', [\App\Http\Controllers\Admin\PlacesController::class, 'store'])->name('admin.places.store');
     Route::get('/places/view', [\App\Http\Controllers\Admin\PlacesController::class, 'index'])->name('admin.places.view');
@@ -144,7 +149,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/admin/reviews', [\App\Http\Controllers\Admin\ReviewController::class, 'index'])->name('admin.review');
     Route::delete('/admin/reviews/{id}', [\App\Http\Controllers\Admin\ReviewController::class, 'destroy'])->name('admin.review.destroy');
 
-    // Gallery management
     Route::get('/galleries', [\App\Http\Controllers\Admin\GalleryController::class, 'index'])->name('admin.galleries.index');
     Route::get('/galleries/add', [\App\Http\Controllers\Admin\GalleryController::class, 'create'])->name('admin.galleries.add');
     Route::post('/galleries/add', [\App\Http\Controllers\Admin\GalleryController::class, 'store'])->name('admin.galleries.store');
@@ -152,7 +156,17 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::put('/galleries/{id}', [\App\Http\Controllers\Admin\GalleryController::class, 'update'])->name('admin.galleries.update');
     Route::delete('/galleries/{id}', [\App\Http\Controllers\Admin\GalleryController::class, 'destroy'])->name('admin.galleries.destroy');
 
-    // Contact management
     Route::get('/contacts', [ContactController::class, 'adminIndex'])->name('admin.contacts.index');
     Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('admin.contacts.destroy');
+
+    Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users');
+    Route::get('/users/{id}', [AdminUserController::class, 'show'])->name('admin.users.show');
+    Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/users/{id}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
+    Route::post('/users', [AdminUserController::class, 'store'])->name('admin.users.store');
+    Route::get('/users/export', [AdminUserController::class, 'export'])->name('admin.users.export');
+
+    Route::get('/hotels/create', [\App\Http\Controllers\Admin\HotelController::class, 'create'])->name('admin.hotels.create');
+    Route::post('/hotels', [\App\Http\Controllers\Admin\HotelController::class, 'store'])->name('admin.hotels.store');
+    Route::get('/hotels/bookings', [\App\Http\Controllers\Admin\HotelController::class, 'bookings'])->name('admin.hotels.bookings');
 });

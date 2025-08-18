@@ -7,6 +7,8 @@
   <title>@yield('title') - Let's Explore Bangladesh</title>
 
   <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script src="{{ asset('js/script.js') }}" defer></script>
   <style>
     :root {
@@ -201,6 +203,83 @@
       opacity: 0;
       width: 0;
       height: 0;
+    }
+
+    /* Cart Dropdown Styles */
+    .cart-dropdown-link {
+      position: relative;
+      display: flex !important;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cart-badge {
+      background: linear-gradient(135deg, #f44336, #d32f2f);
+      color: white;
+      border-radius: 10px;
+      padding: 2px 6px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      margin-left: auto;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .cart-dropdown-link:hover .cart-badge {
+      background: linear-gradient(135deg, #d32f2f, #b71c1c);
+    }
+
+    /* Dropdown Divider */
+    .dropdown-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #e0e0e0, transparent);
+      margin: 8px 0;
+      border: none;
+    }
+
+    /* Logout Form and Button */
+    .logout-form {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    .logout-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 10px 16px;
+      color: rgb(0, 0, 0);
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      text-align: left;
+    }
+
+    .logout-btn:hover {
+      background-color: #fee !important;
+      color: #dc3545 !important;
+    }
+
+    /* Dark mode styles */
+    body.dark-mode .dropdown-divider {
+      background: linear-gradient(90deg, transparent, #555, transparent);
+    }
+
+    body.dark-mode .logout-btn {
+      color: #ffffffbe;
+    }
+
+    body.dark-mode .logout-btn:hover {
+      background-color: rgba(220, 53, 69, 0.1) !important;
+      color: #ff6b6b !important;
     }
 
     .slider {
@@ -457,7 +536,30 @@
             <li><a href="{{ url('/hotelbook') }}">Hotel Booking</a></li>
             <li><a href="{{ url('/weather') }}">Weather Check</a></li>
             <li><a href="{{ url('/reviews') }}">Review</a></li>
-            <li><a href="{{ url('/cart') }}">View Cart</a></li>
+            <li>
+              <a href="{{ url('/cart') }}" class="cart-dropdown-link">
+                View Cart
+                @if(session('cart') && count(session('cart')) > 0)
+                  <span class="cart-badge">{{ count(session('cart')) }}</span>
+                @endif
+              </a>
+            </li>
+            
+            @auth
+              <li class="dropdown-divider"></li>
+              <li>
+                <form action="{{ route('logout') }}" method="POST" class="logout-form">
+                  @csrf
+                  <button type="submit" class="logout-btn">
+                    Logout
+                  </button>
+                </form>
+              </li>
+            @else
+              <li class="dropdown-divider"></li>
+              <li><a href="{{ route('login.form') }}"><i class="fas fa-sign-in-alt me-1"></i>Login</a></li>
+              <li><a href="{{ route('register.form') }}"><i class="fas fa-user-plus me-1"></i>Register</a></li>
+            @endauth
           </ul>
         </li>
 
